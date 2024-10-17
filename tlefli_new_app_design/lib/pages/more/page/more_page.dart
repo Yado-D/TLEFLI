@@ -3,7 +3,6 @@ import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/pages/more/widget/more_widgets.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
-
 Widget more_page(BuildContext context) {
   return ListView(
     children: [
@@ -107,6 +106,7 @@ Widget more_page(BuildContext context) {
               TextString: 'Our Future Partners',
               FontSize: 18,
               FromTop: 10,
+              FromBottom: 20,
               TextColor: const Color.fromARGB(255, 72, 72, 70),
               TextFontWeight: FontWeight.w600,
             ),
@@ -114,7 +114,7 @@ Widget more_page(BuildContext context) {
             SizedBox(
               height: 10,
             ),
-            partnersContainer('ALSA', 'AIROPORT_MOHAMMED'),
+            partnersContainer('alsa', 'AIROPORT_MOHAMMED'),
             SizedBox(
               height: 10,
             ),
@@ -142,6 +142,8 @@ Widget more_page(BuildContext context) {
             ReusableText(
               TextString: 'Join us on social medias',
               FontSize: 18,
+              FromTop: 10,
+              FromBottom: 10,
               TextColor: const Color.fromARGB(255, 72, 72, 70),
               TextFontWeight: FontWeight.w600,
             ),
@@ -154,7 +156,8 @@ Widget more_page(BuildContext context) {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage('assets/images/background.jpeg'),
+                        image: AssetImage(
+                            'assets/images/social_medias/telegram.jpeg'),
                         fit: BoxFit.fill),
                   ),
                 ),
@@ -164,7 +167,8 @@ Widget more_page(BuildContext context) {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage('assets/images/background.jpeg'),
+                        image: AssetImage(
+                            'assets/images/social_medias/instagram.jpeg'),
                         fit: BoxFit.fill),
                   ),
                 ),
@@ -174,7 +178,8 @@ Widget more_page(BuildContext context) {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage('assets/images/background.jpeg'),
+                        image: AssetImage(
+                            'assets/images/social_medias/tiktok.jpeg'),
                         fit: BoxFit.fill),
                   ),
                 ),
@@ -184,7 +189,8 @@ Widget more_page(BuildContext context) {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage('assets/images/background.jpeg'),
+                        image: AssetImage(
+                            'assets/images//social_medias/twitter.png'),
                         fit: BoxFit.fill),
                   ),
                 ),

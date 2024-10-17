@@ -7,7 +7,6 @@ import 'package:tlefli_new_app_design/common/CommonSnackBar.dart';
 import 'package:tlefli_new_app_design/pages/signup/bloc/signup_bloc.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
-
 class sign_up_page extends StatelessWidget {
   const sign_up_page({super.key});
 
@@ -21,7 +20,7 @@ class sign_up_page extends StatelessWidget {
             children: [
               const FullPageContainer(),
               Container(
-                margin: EdgeInsets.only(top: 250),
+                margin: EdgeInsets.only(top: 200.sp),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -271,7 +270,7 @@ class sign_up_page extends StatelessWidget {
               ),
               Center(
                 child: Container(
-                  margin: EdgeInsets.only(top: 20),
+                  margin: EdgeInsets.only(top: 0.sp),
                   height: 200,
                   width: 200,
                   decoration: BoxDecoration(
