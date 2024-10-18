@@ -43,6 +43,7 @@ dependencies:
   iconify_flutter:
   dotted_border:
   image_picker:
+  syncfusion_flutter_pdfviewer:
 
 dev_dependencies:
   flutter_test:

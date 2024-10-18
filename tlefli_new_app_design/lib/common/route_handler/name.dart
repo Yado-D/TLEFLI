@@ -19,19 +19,20 @@ class NamedRoutes {
 
   static const String REQUEST_PAGE = "/request_page";
 
-  static const String RESULT_PAGE = "/result_page";
+  static const String PARTNER_PAGE = "/partner_home";
 
-  static const String SEARCH_PAGE = "/search_page";
+  static const String ADMIN_HOME_PAGE = "/admin_home_page";
 
   static const String SETTINGS_PAGE = "/settings_page";
 
   static const String TUTORIAL_PAGE = "/tutorial_page";
 
-  static const String PAYMENT_PAGE = "/payment_page";
+  static const String VERIFIED_PAGE = "/verified_items_page";
 
-  static const String CHECKSCREENSHOOT_PAGE = "/sendscreenshot_page";
+  static const String PARTNER_REQUEST_DETAILS_PAGE =
+      "/partner_request_details_page";
 
-  static const String VERIFY_PAGE = "/verify_page";
+  static const String REJECTED_PAGE = "/rejected_items_page";
 
   static const String FAQ_PAGE = "/faq_page";
 
@@ -41,7 +42,11 @@ class NamedRoutes {
 
   static const String USERMANUAL_PAGE = "/user_manual_page";
 
-  static const String CONTACT_PAGE = "/contact_us_page";
+  static const String AGREEMENT_PAGE = "/agreement_page";
 
-  static const String ABOUT_PAGE = "/about_page";
+  static const String ADD_PARTNERS_PAGE = "/add_partners_page";
+
+  static const String REMOVE_PARTNERS_PAGE = "/remove_partners_page";
+
+  static const String FORGOT_PASSWORD_PAGE = "/forgot_password_page";
 }

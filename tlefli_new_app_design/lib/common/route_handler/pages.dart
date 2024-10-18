@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tlefli_new_app_design/admin_pages/add_partners/pages/add_partner_page.dart';
+import 'package:tlefli_new_app_design/admin_pages/home/pages/admin_home.dart';
+import 'package:tlefli_new_app_design/admin_pages/remove_partners/pages/remove_partners_page.dart';
 import 'package:tlefli_new_app_design/common/route_handler/name.dart';
-import 'package:tlefli_new_app_design/pages/Help/page/help_page.dart';
-import 'package:tlefli_new_app_design/pages/about%20us/page/about_us_page.dart';
-import 'package:tlefli_new_app_design/pages/contact_us/page/contact_us_page.dart';
-import 'package:tlefli_new_app_design/pages/faq/page/faq_page.dart';
-import 'package:tlefli_new_app_design/pages/home/bloc/home_bloc.dart';
-import 'package:tlefli_new_app_design/pages/home/page/home.dart';
-import 'package:tlefli_new_app_design/pages/i%20lost/bloc/i_lost_bloc.dart';
-import 'package:tlefli_new_app_design/pages/i%20lost/page/i_lost_page.dart';
-import 'package:tlefli_new_app_design/pages/language/page/language_page.dart';
-import 'package:tlefli_new_app_design/pages/request/page/request_page.dart';
-import 'package:tlefli_new_app_design/pages/setting/page/settings.dart';
-import 'package:tlefli_new_app_design/pages/signin/bloc/signin_bloc.dart';
-import 'package:tlefli_new_app_design/pages/signin/pages/sign_in_page.dart';
-import 'package:tlefli_new_app_design/pages/signup/bloc/signup_bloc.dart';
-import 'package:tlefli_new_app_design/pages/signup/page/sign_up_page.dart';
-import 'package:tlefli_new_app_design/pages/welcome/pages/welcome_page.dart';
+import 'package:tlefli_new_app_design/partners_pages/agreement/page/agreement_page.dart';
+import 'package:tlefli_new_app_design/partners_pages/home/pages/Partner_request_details.dart';
+import 'package:tlefli_new_app_design/partners_pages/home/pages/partners_home.dart';
+import 'package:tlefli_new_app_design/partners_pages/rejected/page/rejected_items.dart';
+import 'package:tlefli_new_app_design/partners_pages/verified_item/pages/verified_item.dart';
+import 'package:tlefli_new_app_design/user_pages/Help/page/help_page.dart';
+import 'package:tlefli_new_app_design/user_pages/about%20us/page/about_us_page.dart';
+import 'package:tlefli_new_app_design/user_pages/contact_us/page/contact_us_page.dart';
+import 'package:tlefli_new_app_design/user_pages/faq/page/faq_page.dart';
+import 'package:tlefli_new_app_design/user_pages/home/bloc/home_bloc.dart';
+import 'package:tlefli_new_app_design/user_pages/home/page/home.dart';
+import 'package:tlefli_new_app_design/user_pages/i%20lost/bloc/i_lost_bloc.dart';
+import 'package:tlefli_new_app_design/user_pages/i%20lost/page/i_lost_page.dart';
+import 'package:tlefli_new_app_design/user_pages/language/page/language_page.dart';
+import 'package:tlefli_new_app_design/user_pages/request/page/request_page.dart';
+import 'package:tlefli_new_app_design/user_pages/setting/page/settings.dart';
+import 'package:tlefli_new_app_design/user_pages/signin/bloc/signin_bloc.dart';
+import 'package:tlefli_new_app_design/user_pages/signin/pages/forgot_password.dart';
+import 'package:tlefli_new_app_design/user_pages/signin/pages/sign_in_page.dart';
+import 'package:tlefli_new_app_design/user_pages/signup/bloc/signup_bloc.dart';
+import 'package:tlefli_new_app_design/user_pages/signup/page/sign_up_page.dart';
+import 'package:tlefli_new_app_design/user_pages/welcome/pages/welcome_page.dart';
 
 class NamedRouteSettings {
   NamedRouteSettings({required BuildContext context});
@@ -87,10 +96,42 @@ class NamedRouteSettings {
         route: NamedRoutes.CONTACT_US_PAGE,
         page: ContactSupportSection(),
       ),
-      //   pageEntity(
-      //   route: NamedRoutes.CONTACT_US_PAGE,
-      //   page: ContactSupportSection(),
-      // ),
+      pageEntity(
+        route: NamedRoutes.PARTNER_PAGE,
+        page: partners_home(),
+      ),
+      pageEntity(
+        route: NamedRoutes.PARTNER_REQUEST_DETAILS_PAGE,
+        page: Partner_request_details(),
+      ),
+      pageEntity(
+        route: NamedRoutes.VERIFIED_PAGE,
+        page: verified_items(),
+      ),
+      pageEntity(
+        route: NamedRoutes.REJECTED_PAGE,
+        page: rejected_items_page(),
+      ),
+      pageEntity(
+        route: NamedRoutes.AGREEMENT_PAGE,
+        page: Agreement_page(),
+      ),
+      pageEntity(
+        route: NamedRoutes.ADD_PARTNERS_PAGE,
+        page: add_partners_page(),
+      ),
+      pageEntity(
+        route: NamedRoutes.REMOVE_PARTNERS_PAGE,
+        page: remove_partners_page(),
+      ),
+      pageEntity(
+        route: NamedRoutes.ADMIN_HOME_PAGE,
+        page: admin_home_page(),
+      ),
+      pageEntity(
+        route: NamedRoutes.FORGOT_PASSWORD_PAGE,
+        page: forgot_password_page(),
+      ),
     ];
   }
 
