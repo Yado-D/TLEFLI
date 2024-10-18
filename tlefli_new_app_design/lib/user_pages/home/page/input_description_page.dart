@@ -132,8 +132,8 @@ class input_description_page extends StatelessWidget {
               ],
             ),
             Positioned(
-              bottom: 10,
-              left: 30,
+              bottom: 20,
+              left: 10,
               child: GestureDetector(
                 onTap: () {
                   partner1.add(

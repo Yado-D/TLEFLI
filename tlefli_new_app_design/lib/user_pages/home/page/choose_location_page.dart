@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/Bottomsheets/widgets/map_of%20location.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
+import 'package:tlefli_new_app_design/user_pages/home/page/partner_location_choose_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/when_lost_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
@@ -13,11 +14,11 @@ class choose_location_page extends StatelessWidget {
     return Scaffold(
       appBar: SimpleAppBars(context, 'Add a new location'),
       body: Container(
+        padding: EdgeInsets.only(top: 40),
         color: ColorCollections.SecondaryColor,
         child: Stack(
           children: [
             Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -144,10 +145,13 @@ class choose_location_page extends StatelessWidget {
                   'Transport',
                   Icons.car_crash_outlined,
                   () {
-                    commonPartnerLocationClicked(
-                      context,
-                      'Location of Transportaion',
-                      transportaion,
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => partner_location_page_(
+                          type: 'Location of Transportaion',
+                          map: transportaion,
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -155,10 +159,13 @@ class choose_location_page extends StatelessWidget {
                   'Airport',
                   Icons.airport_shuttle,
                   () {
-                    commonPartnerLocationClicked(
-                      context,
-                      'Location of Airport',
-                      airport,
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => partner_location_page_(
+                          type: 'Location of Transportaion',
+                          map: transportaion,
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -166,10 +173,13 @@ class choose_location_page extends StatelessWidget {
                   'Town halls/Police',
                   Icons.two_mp_outlined,
                   () {
-                    commonPartnerLocationClicked(
-                      context,
-                      'Location of Town halls/Police',
-                      towns,
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => partner_location_page_(
+                          type: 'Location of Transportaion',
+                          map: transportaion,
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -177,18 +187,21 @@ class choose_location_page extends StatelessWidget {
                   'Shopping Centers',
                   Icons.abc_rounded,
                   () {
-                    commonPartnerLocationClicked(
-                      context,
-                      'Location of Shopping Centers',
-                      shopping,
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => partner_location_page_(
+                          type: 'Location of Transportaion',
+                          map: transportaion,
+                        ),
+                      ),
                     );
                   },
                 ),
               ],
             ),
             Positioned(
-              bottom: 10,
-              left: 35,
+              bottom: 30,
+              left: 20,
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(

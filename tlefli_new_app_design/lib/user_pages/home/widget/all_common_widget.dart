@@ -68,52 +68,52 @@ Widget common_main_catagory_container(
   );
 }
 
-commonPartnerLocationClicked(
+void commonPartnerLocationClicked(
   BuildContext context,
   String type,
   Map<String, dynamic> map,
 ) {
   showBottomSheet(
-      context: context,
-      builder: (context) {
-        return BottomSheet(
-            onClosing: () {},
-            builder: (context) {
-              return Container(
-                child: ListView(
-                  children: [
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                          ),
-                        ),
-                        ReusableText(
-                          FromLeft: 40,
-                          TextString: type,
-                          FontSize: 20,
-                          TextColor: ColorCollections.Black,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    LocationContainer(
-                        // 'AEROBOT_RABART_SALE',
-                        // 'AEROBOT RABART SALE',
-                        () {
+    context: context,
+    builder: (context) {
+      return Scaffold(
+        body: BottomSheet(
+          onClosing: () {},
+          builder: (context) {
+            return Container(
+              child: ListView(
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: Icon(Icons.arrow_back),
+                      ),
+                      ReusableText(
+                        FromLeft: 40,
+                        TextString: type,
+                        FontSize: 20,
+                        TextColor: ColorCollections.Black,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  LocationContainer(
+                    () {
                       Navigator.pop(context);
-                    }, map),
-                  ],
-                ),
-              );
-            });
-      });
+                    },
+                    map,
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    },
+  );
 }
 
 LocationContainer(VoidCallback ontap, Map<String, dynamic> map) {

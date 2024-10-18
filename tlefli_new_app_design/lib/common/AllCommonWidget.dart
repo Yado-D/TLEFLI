@@ -211,31 +211,35 @@ Widget reusableTextField({
 AppBar SimpleAppBars(BuildContext context, String title) {
   return AppBar(
     automaticallyImplyLeading: false,
-    title: Row(
-      children: [
-        IconButton(
-          onPressed: () {
-            if (Navigator.of(context).canPop()) {
-              Navigator.of(context).pop();
-            } else {
-              Navigator.of(context).pushNamed('/home_page');
-            }
-          },
-          icon: Icon(
-            Icons.arrow_back_ios,
-            size: 26,
+    title: Container(
+      margin: EdgeInsets.only(top: 20, bottom: 20),
+      padding: EdgeInsets.only(top: 20, bottom: 20),
+      child: Row(
+        children: [
+          IconButton(
+            onPressed: () {
+              if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();
+              } else {
+                Navigator.of(context).pushNamed('/home_page');
+              }
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 26,
+            ),
           ),
-        ),
-        Center(
-          child: ReusableText(
-            FromLeft: 80,
-            TextString: title,
-            FontSize: 26,
-            TextColor: ColorCollections.Black,
-            TextFontWeight: FontWeight.bold,
+          Center(
+            child: ReusableText(
+              FromLeft: 40,
+              TextString: title,
+              FontSize: 26,
+              TextColor: ColorCollections.Black,
+              TextFontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }

@@ -1,8 +1,13 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/choose_main_catagory_page.dart';
+import 'package:tlefli_new_app_design/user_pages/home/page/pickImages.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
 class choose_image_page extends StatefulWidget {
@@ -13,6 +18,7 @@ class choose_image_page extends StatefulWidget {
 }
 
 class _choose_image_pageState extends State<choose_image_page> {
+  File? pickedFile;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,40 +39,57 @@ class _choose_image_pageState extends State<choose_image_page> {
                     ),
                   ),
                 ),
-                Center(
-                  child: Container(
-                    margin: EdgeInsets.only(top: 20),
-                    height: 200,
-                    width: 320,
-                    decoration: BoxDecoration(
-                      color: ColorCollections.PrimaryColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Choose_image_widget(
-                            'image-gallery',
-                            'choose from gallery',
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Choose_image_widget(
-                            'take-a-photo',
-                            'Take a photo',
-                          ),
-                        ),
-                      ],
-                    ),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  height: 200,
+                  width: 320,
+                  decoration: BoxDecoration(
+                    color: ColorCollections.PrimaryColor,
+                    borderRadius: BorderRadius.circular(10),
                   ),
+                  child: pickedFile == null
+                      ? Container(
+                          height: 200,
+                          width: 320,
+                          child: Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () async {
+                                  pickedFile = await _pickedImageFromGallery(
+                                      ImageSource.gallery);
+                                },
+                                child: Choose_image_widget(
+                                  'image-gallery',
+                                  'choose from gallery',
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () async {
+                                  pickedFile = await _pickedImageFromGallery(
+                                      ImageSource.camera);
+                                },
+                                child: Choose_image_widget(
+                                  'take-a-photo',
+                                  'Take a photo',
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Container(
+                          height: 200,
+                          width: 300,
+                          child: Image.file(
+                            pickedFile!,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                 ),
               ],
             ),
             Positioned(
-              bottom: 10,
-              left: 70,
+              bottom: 30,
+              left: 50,
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -99,6 +122,14 @@ class _choose_image_pageState extends State<choose_image_page> {
         ),
       ),
     );
+  }
+
+  Future _pickedImageFromGallery(ImageSource source) async {
+    final filePicker = await ImagePicker().pickImage(source: source);
+    if (filePicker == null) return;
+    setState(() {
+      pickedFile = File(filePicker.path);
+    });
   }
 
   Widget Choose_image_widget(String icon, String text) {

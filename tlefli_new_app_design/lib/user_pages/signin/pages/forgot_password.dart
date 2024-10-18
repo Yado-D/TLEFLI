@@ -51,7 +51,7 @@ class forgot_password_page extends StatelessWidget {
                           ),
                           reusableTextField(
                             FromTop: 50,
-                            icon_name: 'icon_name',
+                            icon_name: 'mail',
                             hintText: 'type the email',
                             textType: 'email',
                             onchange: (onchange) {},

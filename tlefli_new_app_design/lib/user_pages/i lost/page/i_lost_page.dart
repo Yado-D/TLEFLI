@@ -1,13 +1,22 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/user_pages/i%20lost/bloc/i_lost_bloc.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
-class i_lost_page extends StatelessWidget {
+class i_lost_page extends StatefulWidget {
   const i_lost_page({super.key});
+
+  @override
+  State<i_lost_page> createState() => _i_lost_pageState();
+}
+
+class _i_lost_pageState extends State<i_lost_page> {
+  File? pickedFile;
 
   @override
   Widget build(BuildContext context) {
@@ -160,15 +169,22 @@ class i_lost_page extends StatelessWidget {
                         color: ColorCollections.PrimaryColor,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Center(
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.photo_camera_back_outlined,
-                            size: 30,
-                          ),
-                        ),
-                      ),
+                      child: pickedFile == null
+                          ? Center(
+                              child: IconButton(
+                                onPressed: () {
+                                  _pickedImageFromGallery(ImageSource.gallery);
+                                },
+                                icon: Icon(
+                                  Icons.photo_camera_back_outlined,
+                                  size: 30,
+                                ),
+                              ),
+                            )
+                          : Image.file(
+                              pickedFile!,
+                              fit: BoxFit.fill,
+                            ),
                     ),
                   ],
                 ),
@@ -201,5 +217,13 @@ class i_lost_page extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Future _pickedImageFromGallery(ImageSource source) async {
+    final filePicker = await ImagePicker().pickImage(source: source);
+    if (filePicker == null) return;
+    setState(() {
+      pickedFile = File(filePicker.path);
+    });
   }
 }
