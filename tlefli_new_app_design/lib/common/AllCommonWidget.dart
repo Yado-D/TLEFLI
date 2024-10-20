@@ -4,8 +4,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tlefli_new_app_design/main.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FullPageContainer extends StatelessWidget {
   const FullPageContainer({super.key});
@@ -60,8 +64,8 @@ class ReusableText extends StatelessWidget {
         bottom: FromBottom,
       ),
       child: Text(
-        TextString,
-        overflow: TextOverflow.visible,
+        TextString.tr,
+        overflow: TextOverflow.fade,
         style: GoogleFonts.quicksand(
           color: TextColor,
           fontSize: FontSize,
@@ -210,10 +214,11 @@ Widget reusableTextField({
 
 AppBar SimpleAppBars(BuildContext context, String title) {
   return AppBar(
+    backgroundColor: ColorCollections.TeritiaryColor,
     automaticallyImplyLeading: false,
-    title: Container(
-      margin: EdgeInsets.only(top: 20, bottom: 20),
-      padding: EdgeInsets.only(top: 20, bottom: 20),
+    flexibleSpace: Container(
+      height: 120,
+      padding: EdgeInsets.only(top: 35, left: 10),
       child: Row(
         children: [
           IconButton(
@@ -227,6 +232,7 @@ AppBar SimpleAppBars(BuildContext context, String title) {
             icon: Icon(
               Icons.arrow_back_ios,
               size: 26,
+              color: ColorCollections.PrimaryColor,
             ),
           ),
           Center(
@@ -234,7 +240,7 @@ AppBar SimpleAppBars(BuildContext context, String title) {
               FromLeft: 40,
               TextString: title,
               FontSize: 26,
-              TextColor: ColorCollections.Black,
+              TextColor: ColorCollections.PrimaryColor,
               TextFontWeight: FontWeight.bold,
             ),
           ),
@@ -251,7 +257,7 @@ AppBar ReusableAppBar(VoidCallback ontap, BuildContext context) {
     title: Container(
       margin: const EdgeInsets.only(left: 10, right: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           GestureDetector(
             onTap: ontap,
@@ -263,33 +269,14 @@ AppBar ReusableAppBar(VoidCallback ontap, BuildContext context) {
               ),
             ),
           ),
-          Row(
-            children: [
-              Text(
-                "T",
-                style: TextStyle(
-                  fontSize: 30.sp,
-                  color: ColorCollections.Black,
-                ),
-              ),
-              Text(
-                "LEFLI",
-                style: TextStyle(
-                  fontSize: 30.sp,
-                  color: ColorCollections.TeritiaryColor,
-                ),
-              ),
-            ],
-          ),
           GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed('/request_page');
-            },
+            onTap: () {},
             child: Container(
-              height: 30.h,
-              width: 30.w,
+              margin: const EdgeInsets.only(left: 80, right: 10),
+              height: 110.h,
+              width: 120.w,
               child: Image.asset(
-                'assets/icons/flat_icons/b_request.png',
+                'assets/logos/tlefli_app.png',
               ),
             ),
           ),
@@ -304,23 +291,25 @@ CustomShowDialoge(BuildContext context) {
     context: context,
     builder: (context) {
       return SimpleDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         backgroundColor: ColorCollections.PrimaryColor,
         children: [
           Container(
             height: 500,
-            width: 250,
+            width: 320,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
                   child: ReusableText(
-                    TextString: 'You have Successfully',
+                    TextString:
+                        AppLocalizations.of(context)!.youHaveSuccessfully,
                     FontSize: 20,
                   ),
                 ),
                 Center(
                   child: ReusableText(
-                    TextString: 'Submited!',
+                    TextString: AppLocalizations.of(context)!.submitted,
                     FontSize: 24,
                   ),
                 ),
@@ -331,7 +320,7 @@ CustomShowDialoge(BuildContext context) {
                   children: [
                     ReusableText(
                       FromLeft: 15,
-                      TextString: 'Catagory',
+                      TextString: AppLocalizations.of(context)!.category,
                       FontSize: 15,
                       TextColor: ColorCollections.Black,
                     ),
@@ -342,7 +331,9 @@ CustomShowDialoge(BuildContext context) {
                       decoration: BoxDecoration(
                           color: ColorCollections.SecondaryColor,
                           borderRadius: BorderRadius.circular(5)),
-                      child: ReusableText(TextString: 'Pets', FontSize: 16),
+                      child: ReusableText(
+                          TextString: AppLocalizations.of(context)!.pets,
+                          FontSize: 16),
                     )
                   ],
                 ),
@@ -353,7 +344,7 @@ CustomShowDialoge(BuildContext context) {
                   children: [
                     ReusableText(
                       FromLeft: 15,
-                      TextString: 'Item Name',
+                      TextString: AppLocalizations.of(context)!.itemName,
                       FontSize: 15,
                       TextColor: ColorCollections.Black,
                     ),
@@ -364,7 +355,9 @@ CustomShowDialoge(BuildContext context) {
                       decoration: BoxDecoration(
                           color: ColorCollections.SecondaryColor,
                           borderRadius: BorderRadius.circular(5)),
-                      child: ReusableText(TextString: 'Cat', FontSize: 16),
+                      child: ReusableText(
+                          TextString: AppLocalizations.of(context)!.cat,
+                          FontSize: 16),
                     )
                   ],
                 ),
@@ -376,13 +369,13 @@ CustomShowDialoge(BuildContext context) {
                   children: [
                     ReusableText(
                       FromLeft: 15,
-                      TextString: 'Discription',
+                      TextString: AppLocalizations.of(context)!.description,
                       FontSize: 15,
                       TextColor: ColorCollections.Black,
                     ),
                     ConstrainedBox(
                       constraints: BoxConstraints.fromViewConstraints(
-                          ViewConstraints(maxWidth: 150)),
+                          ViewConstraints(maxWidth: 180)),
                       child: Container(
                         margin: EdgeInsets.only(left: 15),
                         decoration: BoxDecoration(
@@ -405,7 +398,7 @@ CustomShowDialoge(BuildContext context) {
                   children: [
                     ReusableText(
                       FromLeft: 15,
-                      TextString: 'Photo',
+                      TextString: AppLocalizations.of(context)!.photo,
                       FontSize: 15,
                       TextColor: ColorCollections.Black,
                     ),
@@ -423,29 +416,60 @@ CustomShowDialoge(BuildContext context) {
                     )
                   ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/request_page', (route) => false);
-                  },
-                  child: Center(
-                    child: Container(
-                      margin: EdgeInsets.only(top: 30),
-                      height: 50,
-                      width: 180,
-                      decoration: BoxDecoration(
-                        color: ColorCollections.TeritiaryColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/request_page', (route) => false);
+                      },
                       child: Center(
-                        child: ReusableText(
-                          TextString: 'Go to Request',
-                          TextColor: ColorCollections.PrimaryColor,
-                          FontSize: 20,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 30, right: 10),
+                          height: 50,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            color: ColorCollections.SecondaryColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: ReusableText(
+                              TextString:
+                                  AppLocalizations.of(context)!.goToRequest,
+                              TextColor: ColorCollections.Black,
+                              FontSize: 20,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/home_page', (route) => false);
+                      },
+                      child: Center(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 30),
+                          height: 50,
+                          width: 130,
+                          decoration: BoxDecoration(
+                            color: ColorCollections.TeritiaryColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: ReusableText(
+                              TextString:
+                                  AppLocalizations.of(context)!.goToHome,
+                              TextColor: ColorCollections.PrimaryColor,
+                              FontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -456,7 +480,8 @@ CustomShowDialoge(BuildContext context) {
   );
 }
 
-Drawer CustomDrowerElement(VoidCallback ontap, BuildContext context) {
+Drawer CustomDrowerElement(
+    VoidCallback ontap, BuildContext context, Animation<Offset> animation) {
   return Drawer(
     child: Container(
       color: ColorCollections.SecondaryColor,
@@ -466,27 +491,35 @@ Drawer CustomDrowerElement(VoidCallback ontap, BuildContext context) {
         children: [
           Container(
             margin: EdgeInsets.only(left: 20, bottom: 100),
-            child: IconButton(
-              onPressed: ontap,
-              icon: Icon(
-                Icons.arrow_back_ios,
+            child: SlideTransition(
+              position: animation,
+              child: IconButton(
+                onPressed: ontap,
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                ),
               ),
             ),
           ),
           Container(
             child: Column(
               children: [
-                DrowerWidget(Icons.shopping_bag_rounded, 'Request', () {
+                DrowerWidget(Icons.shopping_bag_rounded,
+                    AppLocalizations.of(context)!.request, () {
                   Navigator.of(context).pushNamed('/request_page');
                 }),
-                DrowerWidget(Icons.language_outlined, 'Language', () {
+                DrowerWidget(Icons.language_outlined,
+                    AppLocalizations.of(context)!.language, () {
                   Navigator.of(context).pushNamed('/language_page');
                 }),
-                DrowerWidget(Icons.info, 'About Us', () {
+                DrowerWidget(Icons.info, AppLocalizations.of(context)!.aboutUs,
+                    () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       '/about_us_page', (route) => false);
                 }),
-                DrowerWidget(Icons.logout_outlined, 'Log Out', () {
+                DrowerWidget(
+                    Icons.logout_outlined, AppLocalizations.of(context)!.logOut,
+                    () {
                   LogoutShowDialogue(context);
                 }),
                 Container(

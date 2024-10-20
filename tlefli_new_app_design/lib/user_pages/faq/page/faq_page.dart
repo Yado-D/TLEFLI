@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class faq_page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorCollections.SecondaryColor,
-      appBar: SimpleAppBars(context, 'FAQ'),
+      appBar: SimpleAppBars(context, AppLocalizations.of(context)!.faq),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.all(16.0),
@@ -17,16 +17,18 @@ class faq_page extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FaqItem(
-                question: 'How do I create an account?',
-                answer: 'To create an account, go to the "Sign Up" page...',
+                question: AppLocalizations.of(context)!.howDoICreate,
+                answer: AppLocalizations.of(context)!.toCreateAnswer,
               ),
               FaqItem(
-                question: 'Is my personal information secure?',
-                answer: 'Yes, we take the security of your data seriously...',
+                question:
+                    AppLocalizations.of(context)!.isMyPersonalInformationSecure,
+                answer: AppLocalizations.of(context)!.yesWeTakeTheSecurity,
               ),
               FaqItem(
-                question: 'What payment methods are accepted?',
-                answer: 'We currently accept Visa, MasterCard, and PayPal...',
+                question:
+                    AppLocalizations.of(context)!.whatPaymentMethodsAreAccepted,
+                answer: AppLocalizations.of(context)!.weCurrentlyAcceptVisa,
               ),
               // Add more FAQ items as needed
             ],
@@ -87,60 +89,14 @@ class TutorialsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorCollections.SecondaryColor,
-      appBar: SimpleAppBars(context, 'Tutorials'),
+      appBar: SimpleAppBars(context, AppLocalizations.of(context)!.tutorials),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Card(
-                    child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: 16,
-                      right: 16,
-                    ),
-                    width: 350,
-                    height: 300,
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'How to Use Feature X:',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          '1. Open the app and navigate to the Home screen.',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          '2. Tap on the "Feature X" icon.',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          '3. Follow the on-screen instructions to complete the process.',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-              ),
-              // Your Tutorials content here
-
               SizedBox(height: 16),
-
               Center(
                 child: Card(
                     child: ClipRRect(
@@ -154,30 +110,33 @@ class TutorialsSection extends StatelessWidget {
                     height: 300,
                     color: Color.fromARGB(255, 255, 255, 255),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
                           height: 20,
                         ),
                         Text(
-                          'Troubleshooting Guide:',
+                          AppLocalizations.of(context)!.troubleshootingGuide,
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'If you encounter any issues with Feature X, follow these steps:',
+                          AppLocalizations.of(context)!.issuesFollowTheseSteps,
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
-                          '1. Close and reopen the app.',
+                          AppLocalizations.of(context)!.closeAndReopenTheApp,
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
-                          '2. Check your internet connection.',
+                          AppLocalizations.of(context)!
+                              .checkYourInternetConnection,
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
-                          '3. Contact support if the problem persists.',
+                          AppLocalizations.of(context)!
+                              .contactSupportIfTheProblemPersists,
                           style: TextStyle(fontSize: 16),
                         ),
                       ],
@@ -185,53 +144,7 @@ class TutorialsSection extends StatelessWidget {
                   ),
                 )),
               ),
-
               SizedBox(height: 16),
-
-              Center(
-                child: Card(
-                    child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: 16,
-                      right: 16,
-                    ),
-                    width: 350,
-                    height: 300,
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'Troubleshooting Guide:',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'If you encounter any issues with Feature X, follow these steps:',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        Text(
-                          '1. Close and reopen the app.',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        Text(
-                          '2. Check your internet connection.',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        Text(
-                          '3. Contact support if the problem persists.',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-              ),
             ],
           ),
         ),

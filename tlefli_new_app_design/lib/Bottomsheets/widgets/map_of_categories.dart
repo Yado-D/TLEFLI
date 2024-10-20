@@ -14,9 +14,9 @@ List<List<Map<String, dynamic>>> CategoriesList = [
         'hamster',
       ],
       'txt': [
-        'Pets',
-        'Electronics',
-        'Papers/ Documents',
+        'Cat',
+        'Dog',
+        'rabbit',
         'Parrots',
         'Hamster',
       ],

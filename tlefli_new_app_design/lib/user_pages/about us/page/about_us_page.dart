@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
-
 class about_us_page extends StatelessWidget {
   const about_us_page({super.key});
 
@@ -17,7 +16,7 @@ class about_us_page extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.only(top: 40),
               height: 250,
-              width: 400,
+              width: 350,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: ColorCollections.PrimaryColor),

@@ -6,6 +6,7 @@ import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/common/CommonSnackBar.dart';
 import 'package:tlefli_new_app_design/user_pages/signup/bloc/signup_bloc.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class sign_up_page extends StatelessWidget {
   const sign_up_page({super.key});
@@ -27,7 +28,7 @@ class sign_up_page extends StatelessWidget {
                   children: [
                     Center(
                       child: ReusableText(
-                        TextString: "Sign Up",
+                        TextString: AppLocalizations.of(context)!.signup,
                         FontSize: 28,
                         TextColor: ColorCollections.Black,
                         TextFontWeight: FontWeight.bold,
@@ -39,7 +40,7 @@ class sign_up_page extends StatelessWidget {
                         ReusableText(
                           FromTop: 20,
                           FromLeft: 45,
-                          TextString: "First Name",
+                          TextString: AppLocalizations.of(context)!.firstName,
                           FontSize: 13,
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
@@ -47,7 +48,8 @@ class sign_up_page extends StatelessWidget {
                         reusableTextField(
                           FromLeft: 20,
                           icon_name: 'b_user',
-                          hintText: 'type your first name',
+                          hintText:
+                              AppLocalizations.of(context)!.typeYourFirstName,
                           textType: 'first_name',
                           onchange: (onchange) {
                             context
@@ -58,7 +60,7 @@ class sign_up_page extends StatelessWidget {
                         ReusableText(
                           FromTop: 10,
                           FromLeft: 45,
-                          TextString: "Last Name",
+                          TextString: AppLocalizations.of(context)!.lastName,
                           FontSize: 13,
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
@@ -66,7 +68,8 @@ class sign_up_page extends StatelessWidget {
                         reusableTextField(
                           FromLeft: 20,
                           icon_name: 'b_user',
-                          hintText: 'type your last name',
+                          hintText:
+                              AppLocalizations.of(context)!.typeYourLastName,
                           textType: 'last_name',
                           onchange: (onchange) {
                             context
@@ -77,7 +80,7 @@ class sign_up_page extends StatelessWidget {
                         ReusableText(
                           FromTop: 10,
                           FromLeft: 45,
-                          TextString: "E-mail",
+                          TextString: AppLocalizations.of(context)!.email,
                           FontSize: 13,
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
@@ -85,7 +88,7 @@ class sign_up_page extends StatelessWidget {
                         reusableTextField(
                           FromLeft: 20,
                           icon_name: 'mail',
-                          hintText: 'type your email',
+                          hintText: AppLocalizations.of(context)!.typeEmail,
                           textType: 'email',
                           onchange: (onchange) {
                             context
@@ -96,7 +99,7 @@ class sign_up_page extends StatelessWidget {
                         ReusableText(
                           FromTop: 10,
                           FromLeft: 45,
-                          TextString: "Password",
+                          TextString: AppLocalizations.of(context)!.password,
                           FontSize: 13,
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
@@ -104,7 +107,7 @@ class sign_up_page extends StatelessWidget {
                         reusableTextField(
                           FromLeft: 20,
                           icon_name: 'lock',
-                          hintText: 'type your password',
+                          hintText: AppLocalizations.of(context)!.typePassword,
                           textType: 'password',
                           onchange: (onchange) {
                             context
@@ -115,7 +118,8 @@ class sign_up_page extends StatelessWidget {
                         ReusableText(
                           FromTop: 10,
                           FromLeft: 45,
-                          TextString: "Confirm Password",
+                          TextString:
+                              AppLocalizations.of(context)!.confirmPassword,
                           FontSize: 13,
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
@@ -123,7 +127,8 @@ class sign_up_page extends StatelessWidget {
                         reusableTextField(
                           FromLeft: 20,
                           icon_name: 'lock',
-                          hintText: 'confirm your password',
+                          hintText:
+                              AppLocalizations.of(context)!.confirmPassword,
                           textType: 'password',
                           onchange: (onchange) {
                             context
@@ -142,7 +147,7 @@ class sign_up_page extends StatelessWidget {
                         Container(
                           margin: const EdgeInsets.only(left: 53),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               BlocConsumer<SignupBloc, SignupState>(
                                 listener: (context, state) {
@@ -160,8 +165,8 @@ class sign_up_page extends StatelessWidget {
                                 },
                               ),
                               ReusableText(
-                                TextString:
-                                    "I agree to receive information and\n comertial offers from TLEFLI \n partners(email,text messages).",
+                                TextString: AppLocalizations.of(context)!
+                                    .iAgreeToReceive,
                                 FontSize: 14,
                                 TextColor: ColorCollections.Black,
                                 TextFontWeight: FontWeight.w500,
@@ -172,29 +177,33 @@ class sign_up_page extends StatelessWidget {
                         const SizedBox(
                           height: 13,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            BlocConsumer<SignupBloc, SignupState>(
-                              listener: (context, state) {},
-                              builder: (context, state) {
-                                return Checkbox(
-                                  value: state.acceptPrivacy,
-                                  onChanged: (onChanged) {
-                                    context
-                                        .read<SignupBloc>()
-                                        .add(AcceptPrivacyEvent(onChanged!));
-                                  },
-                                );
-                              },
-                            ),
-                            ReusableText(
-                              TextString: "Yes,i accept privacy policy",
-                              FontSize: 14,
-                              TextColor: ColorCollections.Black,
-                              TextFontWeight: FontWeight.w500,
-                            ),
-                          ],
+                        Container(
+                          margin: const EdgeInsets.only(left: 53),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              BlocConsumer<SignupBloc, SignupState>(
+                                listener: (context, state) {},
+                                builder: (context, state) {
+                                  return Checkbox(
+                                    value: state.acceptPrivacy,
+                                    onChanged: (onChanged) {
+                                      context
+                                          .read<SignupBloc>()
+                                          .add(AcceptPrivacyEvent(onChanged!));
+                                    },
+                                  );
+                                },
+                              ),
+                              ReusableText(
+                                TextString:
+                                    AppLocalizations.of(context)!.yesIAccept,
+                                FontSize: 14,
+                                TextColor: ColorCollections.Black,
+                                TextFontWeight: FontWeight.w500,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -231,7 +240,8 @@ class sign_up_page extends StatelessWidget {
                             ),
                             child: Center(
                               child: ReusableText(
-                                TextString: 'Sign Up',
+                                TextString:
+                                    AppLocalizations.of(context)!.signup,
                                 FontSize: 25,
                                 TextColor: ColorCollections.PrimaryColor,
                                 TextFontWeight: FontWeight.bold,
@@ -246,7 +256,8 @@ class sign_up_page extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ReusableText(
-                            TextString: 'Already have an account?',
+                            TextString: AppLocalizations.of(context)!
+                                .alreadyHaveAnAccount,
                             FontSize: 15,
                             TextColor: const Color.fromARGB(255, 147, 150, 147),
                             TextFontWeight: FontWeight.w500,
@@ -256,7 +267,7 @@ class sign_up_page extends StatelessWidget {
                               Navigator.of(context).pop();
                             },
                             child: ReusableText(
-                              TextString: 'Sign In',
+                              TextString: AppLocalizations.of(context)!.login,
                               FontSize: 18,
                               TextFontWeight: FontWeight.w900,
                               TextColor: ColorCollections.Black,

@@ -6,5 +6,5 @@ final class HomeInitial extends HomeState {}
 
 class BottomNavBarState extends HomeState {
   int SelectedIndex;
-  BottomNavBarState({this.SelectedIndex = 0});
+  BottomNavBarState({this.SelectedIndex = 2});
 }

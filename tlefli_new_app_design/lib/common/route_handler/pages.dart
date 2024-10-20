@@ -74,7 +74,7 @@ class NamedRouteSettings {
       ),
       pageEntity(
         route: NamedRoutes.LANGUAGE_PAGE,
-        page: const language_page(),
+        page: language_page(),
       ),
       pageEntity(
         route: NamedRoutes.ABOUT_US_PAGE,

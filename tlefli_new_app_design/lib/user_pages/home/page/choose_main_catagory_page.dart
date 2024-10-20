@@ -4,6 +4,7 @@ import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/nested_categorie_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class choose_main_catagory_page extends StatelessWidget {
   const choose_main_catagory_page({super.key});
@@ -12,7 +13,8 @@ class choose_main_catagory_page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorCollections.SecondaryColor,
-      appBar: SimpleAppBars(context, ''),
+      appBar:
+          SimpleAppBars(context, AppLocalizations.of(context)!.chooseCategory),
       body: ListView(
         children: [
           Container(

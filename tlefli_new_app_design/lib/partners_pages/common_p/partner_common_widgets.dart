@@ -7,7 +7,7 @@ AppBar PartnerReusableAppBar(
     VoidCallback ontap, BuildContext context, String title) {
   return AppBar(
     automaticallyImplyLeading: false,
-    backgroundColor: ColorCollections.PrimaryColor,
+    backgroundColor: ColorCollections.TeritiaryColor,
     title: Container(
       margin: const EdgeInsets.only(left: 10, right: 10),
       child: Row(
@@ -20,6 +20,7 @@ AppBar PartnerReusableAppBar(
               width: 35.w,
               child: Image.asset(
                 'assets/icons/flat_icons/menu-bar.png',
+                color: ColorCollections.PrimaryColor,
               ),
             ),
           ),
@@ -30,7 +31,7 @@ AppBar PartnerReusableAppBar(
                 FromLeft: 70,
                 TextString: title,
                 FontSize: 20,
-                TextColor: ColorCollections.Black,
+                TextColor: ColorCollections.PrimaryColor,
               )
             ],
           ),

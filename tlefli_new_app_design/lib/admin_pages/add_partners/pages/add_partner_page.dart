@@ -22,7 +22,7 @@ class _add_partners_pageState extends State<add_partners_page> {
     setState(() {
       for (int i = 0; i < 4; i++) {
         if (list_color[i] == ColorCollections.TeritiaryColor) {
-          list_color[i] = ColorCollections.SecondaryColor;
+          list_color[i] = ColorCollections.PrimaryColor;
         }
       }
 
@@ -91,7 +91,7 @@ class _add_partners_pageState extends State<add_partners_page> {
                 ),
                 ReusableText(
                   FromTop: 30,
-                  TextString: 'Type of partner',
+                  TextString: 'Choose the partner',
                   FontSize: 16,
                   TextColor: ColorCollections.Black,
                   TextFontWeight: FontWeight.w500,
@@ -106,6 +106,7 @@ class _add_partners_pageState extends State<add_partners_page> {
                           child: Container(
                             height: 60,
                             width: 150,
+                            margin: EdgeInsets.only(bottom: 5, top: 5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: list_color[index],
@@ -134,7 +135,7 @@ class _add_partners_pageState extends State<add_partners_page> {
                   },
                   child: Center(
                     child: Container(
-                      margin: EdgeInsets.only(top: 80),
+                      margin: EdgeInsets.only(top: 80, bottom: 20),
                       height: 50,
                       width: 150,
                       decoration: BoxDecoration(

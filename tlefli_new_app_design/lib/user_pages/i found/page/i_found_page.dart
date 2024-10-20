@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
+import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/user_pages/i%20lost/bloc/i_lost_bloc.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
@@ -71,77 +72,13 @@ class _i_found_pageState extends State<i_found_page> {
                       FontSize: 13,
                       TextColor: ColorCollections.Black,
                     ),
-                    Container(
-                      width: 200,
-                      decoration: BoxDecoration(
-                          color: ColorCollections.PrimaryColor,
-                          borderRadius: BorderRadius.circular(7)),
-                      // margin: EdgeInsets.only(left: 30),
-                      child: DropdownButtonFormField(
-                        padding: EdgeInsets.only(left: 15, right: 15),
-                        isExpanded: true,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          prefixIcon: Container(
-                            height: 25,
-                            width: 25,
-                            margin: EdgeInsets.only(right: 20),
-                            child: Image.asset(
-                                'assets/icons/flat_icons/categories.png'),
-                          ),
-                        ),
-                        focusColor: const Color.fromARGB(255, 237, 236, 236),
-                        style: TextStyle(color: ColorCollections.Black),
-                        value:
-                            state is ItemNameState ? state.itemName! : 'None',
-                        items: [
-                          DropdownMenuItem(
-                            value: 'None',
-                            child: ReusableText(
-                              FromTop: 0,
-                              FromBottom: 0,
-                              TextColor: ColorCollections.Black,
-                              TextString: 'None',
-                              FontSize: 16,
-                            ),
-                          ),
-                          DropdownMenuItem(
-                            value: 'Pets',
-                            child: ReusableText(
-                              FromTop: 0,
-                              FromBottom: 0,
-                              TextColor: ColorCollections.Black,
-                              TextString: 'Pets',
-                              FontSize: 16,
-                            ),
-                          ),
-                          DropdownMenuItem(
-                            value: 'Electronics',
-                            child: ReusableText(
-                              FromTop: 0,
-                              FromBottom: 0,
-                              TextColor: ColorCollections.Black,
-                              TextString: 'Electronics',
-                              FontSize: 16,
-                            ),
-                          ),
-                          DropdownMenuItem(
-                            value: 'Id',
-                            child: ReusableText(
-                              FromTop: 0,
-                              FromBottom: 0,
-                              TextColor: ColorCollections.Black,
-                              TextString: 'Id card',
-                              FontSize: 16,
-                            ),
-                          ),
-                        ],
-                        onChanged: (onChanged) {
-                          context
-                              .read<ILostBloc>()
-                              .add(ItemNameEvent(itemName: onChanged));
-                        },
-                      ),
+                    CommonDropdownButtons(
+                      items: item_list,
+                      onChanged: (onChanged) {
+                        context
+                            .read<ILostBloc>()
+                            .add(ItemNameEvent(itemName: onChanged));
+                      },
                     ),
                     ReusableText(
                       TextString: 'Desciption',
@@ -172,7 +109,7 @@ class _i_found_pageState extends State<i_found_page> {
                           ? Center(
                               child: IconButton(
                                 onPressed: () async {
-                                  pickedFile = await _pickedImageFromGallery(
+                                  await _pickedImageFromGallery(
                                       ImageSource.gallery);
                                 },
                                 icon: Icon(
@@ -226,4 +163,10 @@ class _i_found_pageState extends State<i_found_page> {
       pickedFile = File(filePicker.path);
     });
   }
+
+  List<String> item_list = [
+    'Electronics',
+    'Id Card',
+    'Pets',
+  ];
 }

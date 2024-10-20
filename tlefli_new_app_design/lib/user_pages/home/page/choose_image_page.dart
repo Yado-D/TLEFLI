@@ -9,6 +9,7 @@ import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/choose_main_catagory_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/pickImages.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class choose_image_page extends StatefulWidget {
   const choose_image_page({super.key});
@@ -19,11 +20,18 @@ class choose_image_page extends StatefulWidget {
 
 class _choose_image_pageState extends State<choose_image_page> {
   File? pickedFile;
+  Color _buttonColor = ColorCollections.PrimaryColor;
+  void _onMouseEnter(bool hover) {
+    setState(() {
+      _buttonColor = hover ? Colors.red : Colors.blue;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorCollections.SecondaryColor,
-      appBar: SimpleAppBars(context, 'Choose image'),
+      appBar: SimpleAppBars(context, AppLocalizations.of(context)!.chooseImage),
       body: Container(
         padding: EdgeInsets.only(top: 80),
         child: Stack(
@@ -33,57 +41,62 @@ class _choose_image_pageState extends State<choose_image_page> {
                 Center(
                   child: Container(
                     child: ReusableText(
-                      TextString: 'What have you lost/found ?',
+                      TextString:
+                          AppLocalizations.of(context)!.whatHaveYouLostFound,
                       FontSize: 20,
                       TextColor: ColorCollections.Black,
                     ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  height: 200,
-                  width: 320,
-                  decoration: BoxDecoration(
-                    color: ColorCollections.PrimaryColor,
-                    borderRadius: BorderRadius.circular(10),
+                Center(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 20),
+                    height: 200,
+                    width: 320,
+                    decoration: BoxDecoration(
+                      color: ColorCollections.PrimaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: pickedFile == null
+                        ? Container(
+                            height: 200,
+                            width: 320,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () async {
+                                    await _pickedImageFromGallery(
+                                        ImageSource.gallery);
+                                  },
+                                  child: Choose_image_widget(
+                                    'image-gallery',
+                                    AppLocalizations.of(context)!
+                                        .chooseFromGallery,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    await _pickedImageFromGallery(
+                                        ImageSource.camera);
+                                  },
+                                  child: Choose_image_widget(
+                                    'take-a-photo',
+                                    AppLocalizations.of(context)!.chooseImage,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : Container(
+                            height: 200,
+                            width: 300,
+                            child: Image.file(
+                              pickedFile!,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
                   ),
-                  child: pickedFile == null
-                      ? Container(
-                          height: 200,
-                          width: 320,
-                          child: Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () async {
-                                  pickedFile = await _pickedImageFromGallery(
-                                      ImageSource.gallery);
-                                },
-                                child: Choose_image_widget(
-                                  'image-gallery',
-                                  'choose from gallery',
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () async {
-                                  pickedFile = await _pickedImageFromGallery(
-                                      ImageSource.camera);
-                                },
-                                child: Choose_image_widget(
-                                  'take-a-photo',
-                                  'Take a photo',
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      : Container(
-                          height: 200,
-                          width: 300,
-                          child: Image.file(
-                            pickedFile!,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
                 ),
               ],
             ),
@@ -97,21 +110,25 @@ class _choose_image_pageState extends State<choose_image_page> {
                   ));
                 },
                 child: Center(
-                  child: Container(
-                    margin: EdgeInsets.only(
-                      top: 100,
-                    ),
-                    height: 50,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: ColorCollections.TeritiaryColor,
-                    ),
-                    child: Center(
-                      child: ReusableText(
-                        TextString: 'Next',
-                        FontSize: 26,
-                        TextColor: ColorCollections.PrimaryColor,
+                  child: MouseRegion(
+                    onEnter: (_) => _onMouseEnter(true),
+                    onExit: (_) => _onMouseEnter(false),
+                    child: Container(
+                      margin: EdgeInsets.only(
+                        top: 100,
+                      ),
+                      height: 50,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: _buttonColor,
+                      ),
+                      child: Center(
+                        child: ReusableText(
+                          TextString: AppLocalizations.of(context)!.next,
+                          FontSize: 26,
+                          TextColor: ColorCollections.Black,
+                        ),
                       ),
                     ),
                   ),

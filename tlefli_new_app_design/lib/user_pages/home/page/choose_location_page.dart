@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/Bottomsheets/widgets/map_of%20location.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/partner_location_choose_page.dart';
+import 'package:tlefli_new_app_design/user_pages/home/page/type_location.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/when_lost_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class choose_location_page extends StatelessWidget {
   const choose_location_page({super.key});
@@ -12,9 +14,10 @@ class choose_location_page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBars(context, 'Add a new location'),
+      appBar:
+          SimpleAppBars(context, AppLocalizations.of(context)!.addANewLocation),
       body: Container(
-        padding: EdgeInsets.only(top: 40),
+        padding: EdgeInsets.only(top: 30),
         color: ColorCollections.SecondaryColor,
         child: Stack(
           children: [
@@ -34,7 +37,8 @@ class choose_location_page extends StatelessWidget {
                     ),
                     ReusableText(
                       FromRight: 10,
-                      TextString: 'Indicate the loss area',
+                      TextString:
+                          AppLocalizations.of(context)!.indicateTheLossArea,
                       FontSize: 15,
                       TextColor: ColorCollections.Black,
                     ),
@@ -49,76 +53,35 @@ class choose_location_page extends StatelessWidget {
                     ReusableText(
                       FromLeft: 30,
                       FromRight: 30,
-                      TextString:
-                          'You can match with an individual\n or in one of our partner location',
+                      TextString: AppLocalizations.of(context)!.youCanMatchWith,
                       FontSize: 15,
                       TextColor: ColorCollections.Black,
                     ),
                   ],
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                  // width: 200,
-                  decoration: BoxDecoration(
-                      color: ColorCollections.PrimaryColor,
-                      borderRadius: BorderRadius.circular(7)),
-                  // margin: EdgeInsets.only(left: 30),
-                  child: DropdownButtonFormField(
-                    padding: EdgeInsets.only(left: 15, right: 15),
-                    isExpanded: true,
-                    decoration: InputDecoration(border: InputBorder.none),
-                    focusColor: const Color.fromARGB(255, 237, 236, 236),
-                    style: TextStyle(color: ColorCollections.Black),
-                    // value:
-                    //     state is ItemNameState ? state.itemName! : 'None',
-                    value: 'None',
-                    items: [
-                      DropdownMenuItem(
-                        value: 'None',
-                        child: ReusableText(
-                          FromTop: 0,
-                          FromBottom: 0,
-                          TextColor: ColorCollections.Black,
-                          TextString: 'None',
-                          FontSize: 16,
-                        ),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Hotel Le Six',
-                        child: ReusableText(
-                          FromTop: 0,
-                          FromBottom: 0,
-                          TextColor: ColorCollections.Black,
-                          TextString: 'Hotel Le Six',
-                          FontSize: 16,
-                        ),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Pullman Paris Tour Eiffel',
-                        child: ReusableText(
-                          FromTop: 0,
-                          FromBottom: 0,
-                          TextColor: ColorCollections.Black,
-                          TextString: 'Pullman Paris Tour Eiffel',
-                          FontSize: 16,
-                        ),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Trainline',
-                        child: ReusableText(
-                          FromTop: 0,
-                          FromBottom: 0,
-                          TextColor: ColorCollections.Black,
-                          TextString: 'Trainline',
-                          FontSize: 16,
-                        ),
-                      ),
-                    ],
-                    onChanged: (onChanged) {
-                      // context
-                      //     .read<ILostBloc>()
-                      //     .add(ItemNameEvent(itemName: onChanged));
-                    },
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => type_location_page()),
+                    );
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 290,
+                    margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                    // width: 200,
+                    decoration: BoxDecoration(
+                        color: ColorCollections.PrimaryColor,
+                        borderRadius: BorderRadius.circular(7)),
+                    // margin: EdgeInsets.only(left: 30),
+                    child: ReusableText(
+                      FromLeft: 20,
+                      FromTop: 15,
+                      TextString: AppLocalizations.of(context)!.typeTheLocation,
+                      FontSize: 16,
+                      TextColor: const Color.fromARGB(255, 104, 104, 103),
+                    ),
                   ),
                 ),
                 Row(
@@ -135,20 +98,20 @@ class choose_location_page extends StatelessWidget {
                     ),
                     ReusableText(
                       FromRight: 10,
-                      TextString: 'Select a partner location directly',
+                      TextString: AppLocalizations.of(context)!.selectAPartner,
                       FontSize: 15,
                       TextColor: ColorCollections.Black,
                     ),
                   ],
                 ),
                 common_partner_location(
-                  'Transport',
+                  AppLocalizations.of(context)!.transport,
                   Icons.car_crash_outlined,
                   () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
-                          type: 'Location of Transportaion',
+                          type: 'Transportaion',
                           map: transportaion,
                         ),
                       ),
@@ -156,13 +119,13 @@ class choose_location_page extends StatelessWidget {
                   },
                 ),
                 common_partner_location(
-                  'Airport',
+                  AppLocalizations.of(context)!.airport,
                   Icons.airport_shuttle,
                   () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
-                          type: 'Location of Transportaion',
+                          type: 'Airport',
                           map: transportaion,
                         ),
                       ),
@@ -170,13 +133,13 @@ class choose_location_page extends StatelessWidget {
                   },
                 ),
                 common_partner_location(
-                  'Town halls/Police',
+                  AppLocalizations.of(context)!.townhallsPolice,
                   Icons.two_mp_outlined,
                   () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
-                          type: 'Location of Transportaion',
+                          type: 'Town Halls',
                           map: transportaion,
                         ),
                       ),
@@ -184,13 +147,13 @@ class choose_location_page extends StatelessWidget {
                   },
                 ),
                 common_partner_location(
-                  'Shopping Centers',
+                  AppLocalizations.of(context)!.shoppingCenters,
                   Icons.abc_rounded,
                   () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
-                          type: 'Location of Transportaion',
+                          type: 'Shopping Centers',
                           map: transportaion,
                         ),
                       ),
@@ -218,7 +181,7 @@ class choose_location_page extends StatelessWidget {
                   ),
                   child: Center(
                     child: ReusableText(
-                      TextString: 'Next',
+                      TextString: AppLocalizations.of(context)!.next,
                       FontSize: 20,
                       TextColor: ColorCollections.Black,
                     ),
@@ -267,5 +230,27 @@ class choose_location_page extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  type_location(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            scrollable: true,
+            title: Scaffold(
+              body: ListView(
+                children: [
+                  Container(
+                    child: ReusableText(
+                      TextString: 'TextString',
+                      FontSize: 20,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

@@ -12,7 +12,7 @@ class nested_categorie_page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorCollections.SecondaryColor,
-      appBar: SimpleAppBars(context, ''),
+      appBar: SimpleAppBars(context, 'Choose Catagory'),
       body: Container(
         padding: EdgeInsets.only(top: 15),
         color: ColorCollections.SecondaryColor,

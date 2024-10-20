@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
-
 commonSnackBar(BuildContext context, String TextString) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Container(
-        height: 70,
+        height: 130,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: Colors.white,

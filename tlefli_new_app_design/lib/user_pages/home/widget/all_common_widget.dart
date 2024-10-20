@@ -272,3 +272,46 @@ CommonDropdownButton({
         onChanged: (String? newValue) => onChanged,
       ));
 }
+
+class CommonDropdownButtons extends StatelessWidget {
+  final List<String> items;
+  final void Function(String?)? onChanged;
+
+  CommonDropdownButtons({
+    required this.items,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 0, right: 30),
+      decoration: BoxDecoration(
+        color: Colors.white, // Replace with your actual color
+        borderRadius: BorderRadius.circular(7),
+        border: Border.all(color: const Color.fromARGB(255, 190, 190, 190)),
+      ),
+      child: DropdownButtonFormField<String>(
+        padding: EdgeInsets.only(left: 15, right: 15),
+        isExpanded: true,
+        decoration: InputDecoration(border: InputBorder.none),
+        focusColor: const Color.fromARGB(255, 237, 236, 236),
+        style: TextStyle(color: Colors.black), // Replace with your actual color
+        value: items.isNotEmpty ? items.first : null,
+        items: items.map((item) {
+          return DropdownMenuItem<String>(
+            value: item,
+            child: ReusableText(
+              FromTop: 0,
+              FromBottom: 0,
+              TextColor: Colors.black, // Replace with your actual color
+              TextString: item,
+              FontSize: 16,
+            ),
+          );
+        }).toList(),
+        onChanged: onChanged,
+      ),
+    );
+  }
+}

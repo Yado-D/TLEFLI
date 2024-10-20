@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:tlefli_new_app_design/auth/signinAuth/signin_auth.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/common/CommonSnackBar.dart';
 import 'package:tlefli_new_app_design/user_pages/signin/bloc/signin_bloc.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class sign_in_page extends StatelessWidget {
   const sign_in_page({super.key});
@@ -21,14 +23,14 @@ class sign_in_page extends StatelessWidget {
               children: [
                 const FullPageContainer(),
                 Container(
-                  margin: EdgeInsets.only(top: 200.sp),
+                  margin: EdgeInsets.only(top: 220),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Center(
                         child: ReusableText(
-                          TextString: "Login",
+                          TextString: AppLocalizations.of(context)!.login,
                           FontSize: 28,
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
@@ -40,7 +42,7 @@ class sign_in_page extends StatelessWidget {
                           ReusableText(
                             FromTop: 20,
                             FromLeft: 45,
-                            TextString: "E-mail",
+                            TextString: AppLocalizations.of(context)!.email,
                             FontSize: 13,
                             TextColor: ColorCollections.Black,
                             TextFontWeight: FontWeight.bold,
@@ -48,7 +50,7 @@ class sign_in_page extends StatelessWidget {
                           reusableTextField(
                             FromLeft: 20,
                             icon_name: 'mail',
-                            hintText: 'type your email',
+                            hintText: AppLocalizations.of(context)!.typeEmail,
                             textType: 'email',
                             onchange: (onchange) {
                               context
@@ -59,7 +61,7 @@ class sign_in_page extends StatelessWidget {
                           ReusableText(
                             FromTop: 20,
                             FromLeft: 45,
-                            TextString: "Password",
+                            TextString: AppLocalizations.of(context)!.password,
                             FontSize: 13,
                             TextColor: ColorCollections.Black,
                             TextFontWeight: FontWeight.bold,
@@ -67,7 +69,8 @@ class sign_in_page extends StatelessWidget {
                           reusableTextField(
                             FromLeft: 20,
                             icon_name: 'lock',
-                            hintText: 'type your password',
+                            hintText:
+                                AppLocalizations.of(context)!.typePassword,
                             textType: 'password',
                             onchange: (onchange) {
                               context
@@ -88,7 +91,8 @@ class sign_in_page extends StatelessWidget {
                             child: ReusableText(
                               FromTop: 20,
                               FromRight: 25,
-                              TextString: "Forgot password?",
+                              TextString:
+                                  AppLocalizations.of(context)!.forgotPassword,
                               FontSize: 16,
                               TextColor: ColorCollections.Black,
                               TextFontWeight: FontWeight.w500,
@@ -107,8 +111,8 @@ class sign_in_page extends StatelessWidget {
                                       email: state.email,
                                       password: state.password);
                               if (res == "welcome back my friend") {
-                                commonSnackBar(
-                                    context, 'welcome back my friend');
+                                commonSnackBar(context,
+                                    'Welcome to TLEFLI! 🎉 Where your lost treasures reunite with you.\n Let\'s make some happy endings happen together!');
                                 Navigator.of(context).pushNamedAndRemoveUntil(
                                     '/home_page', (route) => false);
                               } else {
@@ -125,7 +129,8 @@ class sign_in_page extends StatelessWidget {
                               ),
                               child: Center(
                                 child: ReusableText(
-                                  TextString: 'Log In',
+                                  TextString:
+                                      AppLocalizations.of(context)!.login,
                                   FontSize: 25,
                                   TextColor: ColorCollections.PrimaryColor,
                                   TextFontWeight: FontWeight.bold,
@@ -141,7 +146,8 @@ class sign_in_page extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ReusableText(
-                              TextString: 'Don\'t have an account?',
+                              TextString:
+                                  AppLocalizations.of(context)!.dontHaveAccount,
                               FontSize: 15,
                               TextColor:
                                   const Color.fromARGB(255, 147, 150, 147),
@@ -153,7 +159,8 @@ class sign_in_page extends StatelessWidget {
                                     .pushNamed('/sign_up_page');
                               },
                               child: ReusableText(
-                                TextString: 'Sign Up',
+                                TextString:
+                                    AppLocalizations.of(context)!.signup,
                                 FontSize: 18,
                                 TextFontWeight: FontWeight.w900,
                                 TextColor: ColorCollections.Black,
@@ -163,7 +170,7 @@ class sign_in_page extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 15),
+                        margin: EdgeInsets.only(top: 15, bottom: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

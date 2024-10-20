@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class forgot_password_page extends StatelessWidget {
   const forgot_password_page({super.key});
@@ -46,13 +47,14 @@ class forgot_password_page extends StatelessWidget {
                       child: Column(
                         children: [
                           ReusableText(
-                            TextString: 'Forgot Password',
+                            TextString:
+                                AppLocalizations.of(context)!.forgotPassword,
                             FontSize: 20,
                           ),
                           reusableTextField(
                             FromTop: 50,
                             icon_name: 'mail',
-                            hintText: 'type the email',
+                            hintText: AppLocalizations.of(context)!.typeEmail,
                             textType: 'email',
                             onchange: (onchange) {},
                           ),
@@ -68,7 +70,8 @@ class forgot_password_page extends StatelessWidget {
                               ),
                               child: Center(
                                 child: ReusableText(
-                                  TextString: 'Submit',
+                                  TextString:
+                                      AppLocalizations.of(context)!.submit,
                                   FontSize: 25,
                                   TextColor: ColorCollections.PrimaryColor,
                                   TextFontWeight: FontWeight.bold,

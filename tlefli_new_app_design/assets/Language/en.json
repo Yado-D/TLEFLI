@@ -1,0 +1,11 @@
+{
+    "login":"Login",
+    "signup":"Sign Up",
+    "email":"E-mail",
+    "type_email":"type your email",
+    "password":"password",
+    "type_password":"type your password",
+    "forgot_password":"Forgot password",
+    "Dont_have_account":"Don't have an account"
+
+}

@@ -3,6 +3,7 @@ import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/partners_pages/partner_darta/partners_data.dart';
 import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class input_description_page extends StatelessWidget {
   final String categorie;
@@ -15,10 +16,14 @@ class input_description_page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorCollections.SecondaryColor,
-      appBar: SimpleAppBars(context, ''),
+      appBar: SimpleAppBars(
+        context,
+        AppLocalizations.of(context)!.description,
+      ),
       body: Container(
-        padding: EdgeInsets.only(left: 20, right: 20, top: 30),
-        child: Stack(
+        height: MediaQuery.of(context).size.height,
+        padding: EdgeInsets.only(left: 5, right: 20, top: 30),
+        child: ListView(
           children: [
             Column(
               children: [
@@ -34,7 +39,7 @@ class input_description_page extends StatelessWidget {
                       Center(
                         child: ReusableText(
                           FromBottom: 20,
-                          TextString: 'Discription of object ',
+                          TextString: AppLocalizations.of(context)!.description,
                           FontSize: 20,
                           TextFontWeight: FontWeight.bold,
                           TextColor: ColorCollections.Black,
@@ -45,17 +50,16 @@ class input_description_page extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ReusableText(
-                                  TextString: 'Race',
+                                  TextString:
+                                      AppLocalizations.of(context)!.race,
                                   FontSize: 15,
                                   TextColor: ColorCollections.Black,
                                 ),
-                                CommonDropdownButton(
-                                  choice1: 'Golden Retriever',
-                                  choice2: 'Siberian Husky',
-                                  choice3: 'Dalmatian',
+                                CommonDropdownButtons(
+                                  items: race,
                                   // ignore: avoid_print
                                   onChanged: (value) => print(value),
-                                )
+                                ),
                               ],
                             )
                           : SizedBox(),
@@ -64,65 +68,50 @@ class input_description_page extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ReusableText(
-                                  TextString: 'Choose brand or model',
+                                  TextString: AppLocalizations.of(context)!
+                                      .chooseBrandOrModel,
                                   FontSize: 15,
                                   TextColor: ColorCollections.Black,
                                 ),
-                                CommonDropdownButton(
-                                  choice1: 'Apple',
-                                  choice2: 'Samsung',
-                                  choice3: 'Sony',
-                                  choice4: '  LG',
-                                  choice5: 'Dell',
-                                  choice6: 'HP',
-                                  choice7: 'Microsoft',
+                                CommonDropdownButtons(
+                                  items: electronics,
                                   // ignore: avoid_print
                                   onChanged: (value) => print(value),
-                                )
+                                ),
                               ],
                             )
                           : SizedBox(),
                       ReusableText(
-                        TextString: 'Name of the item',
+                        TextString: AppLocalizations.of(context)!.nameOfTheItem,
                         FontSize: 15,
                         TextColor: ColorCollections.Black,
                       ),
-                      CommonDropdownButton(
-                        choice1: 'Dog',
-                        choice2: 'Cat',
-                        choice3: 'Hamster',
-                        choice4: 'Horse',
-                        choice5: 'Rabbit',
-                        choice6: 'Mouse',
+                      CommonDropdownButtons(
+                        items: item_name,
                         // ignore: avoid_print
                         onChanged: (value) => print(value),
                       ),
                       ReusableText(
-                        TextString: 'Color of the item',
+                        TextString:
+                            AppLocalizations.of(context)!.colorOfTheItem,
                         FontSize: 15,
                         TextColor: ColorCollections.Black,
                       ),
-                      CommonDropdownButton(
-                        choice1: 'BLACK',
-                        choice2: 'BROWN',
-                        choice3: 'WHITE',
-                        choice4: 'GREEN',
-                        choice5: 'ORANGE',
-                        choice6: 'GREY',
-                        choice7: 'BLUE',
-
+                      CommonDropdownButtons(
+                        items: item_color,
                         // ignore: avoid_print
                         onChanged: (value) => print(value),
                       ),
                       ReusableText(
-                        TextString: 'Details',
+                        TextString: AppLocalizations.of(context)!.details,
                         FontSize: 15,
                         TextColor: ColorCollections.Black,
                       ),
                       reusableTextField(
                         FromLeft: 15,
                         icon_name: 'item_name',
-                        hintText: 'what the item looks like',
+                        hintText:
+                            AppLocalizations.of(context)!.whatTheItemLooksLike,
                         textType: 'text',
                         onchange: (onchange) {},
                       ),
@@ -131,44 +120,82 @@ class input_description_page extends StatelessWidget {
                 ),
               ],
             ),
-            Positioned(
-              bottom: 20,
-              left: 10,
-              child: GestureDetector(
-                onTap: () {
-                  partner1.add(
-                    partnerRequestModel(
-                      status: 'in delicery',
-                      image_url:
-                          'https://ultra-pet.co.za/wp-content/uploads/2020/08/socialising-800x630.jpg',
-                      item_name: 'dog',
-                      date: '22/12/2023',
-                      description: 'this is my dog',
-                    ),
-                  );
-                  CustomShowDialoge(context);
-                },
-                child: Container(
-                  margin: EdgeInsets.only(top: 150, left: 30, right: 30),
-                  height: 40,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    color: ColorCollections.PrimaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: ReusableText(
-                      TextString: 'Submit',
-                      FontSize: 20,
-                      TextColor: ColorCollections.Black,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Positioned(
+                  bottom: 20,
+                  left: 10,
+                  child: GestureDetector(
+                    onTap: () {
+                      partner1.add(
+                        partnerRequestModel(
+                          status: 'in delicery',
+                          image_url:
+                              'https://ultra-pet.co.za/wp-content/uploads/2020/08/socialising-800x630.jpg',
+                          item_name: 'dog',
+                          date: '22/12/2023',
+                          description: 'this is my dog',
+                        ),
+                      );
+                      CustomShowDialoge(context);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 150, left: 30, right: 30),
+                      height: 40,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        color: ColorCollections.PrimaryColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: ReusableText(
+                          TextString: AppLocalizations.of(context)!.submit,
+                          FontSize: 20,
+                          TextColor: ColorCollections.Black,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
       ),
     );
   }
+
+  List<String> race = [
+    'Golden Retriever',
+    'Siberian Husky',
+    'Dalmatian',
+  ];
+  List<String> electronics = [
+    'Apple',
+    'Samsung',
+    'Sony',
+    'LG',
+    'Dell',
+    'HP',
+    'Microsoft',
+  ];
+  List<String> item_name = [
+    'Dog',
+    'Cat',
+    'Hamster',
+    'Horse',
+    'Rabbit',
+    'HP',
+    'Mouse',
+  ];
+  List<String> item_color = [
+    'BLACK',
+    'BROWN',
+    'WHITE',
+    'GREEN',
+    'ORANGE',
+    'GREY',
+    'BLUE',
+  ];
 }

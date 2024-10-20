@@ -9,7 +9,7 @@ class Agreement_page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SimpleAppBars(context, 'Agreements'),
-      body: SfPdfViewer.asset('assets/agreement/test.pdf'),
+      body: SfPdfViewer.asset('assets/agreement/agreement.pdf'),
     );
   }
 }

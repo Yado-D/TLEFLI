@@ -3,15 +3,17 @@ import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/input_description_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class lost_when_page extends StatelessWidget {
-  const lost_when_page({super.key});
+  lost_when_page({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorCollections.SecondaryColor,
-      appBar: SimpleAppBars(context, ''),
+      appBar:
+          SimpleAppBars(context, AppLocalizations.of(context)!.chooseTheTime),
       body: Stack(
         children: [
           Container(
@@ -27,7 +29,8 @@ class lost_when_page extends StatelessWidget {
                     children: [
                       Center(
                         child: ReusableText(
-                          TextString: 'When do you lost?',
+                          TextString:
+                              AppLocalizations.of(context)!.whenDoYouLost,
                           FontSize: 20,
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
@@ -37,26 +40,22 @@ class lost_when_page extends StatelessWidget {
                   ),
                 ),
                 ReusableText(
-                  TextString: 'Choose The Date',
+                  TextString: AppLocalizations.of(context)!.chooseTheDate,
                   FontSize: 15,
                   TextColor: ColorCollections.Black,
                 ),
-                CommonDropdownButton(
-                  choice1: 'Dec,20,2021',
-                  choice2: 'Jan,20,2022',
-                  choice3: 'Oct,22,2021',
+                CommonDropdownButtons(
+                  items: date,
                   // ignore: avoid_print
                   onChanged: (value) => print(value),
                 ),
                 ReusableText(
-                  TextString: 'Choose The time',
+                  TextString: AppLocalizations.of(context)!.chooseTheTime,
                   FontSize: 15,
                   TextColor: ColorCollections.Black,
                 ),
-                CommonDropdownButton(
-                  choice1: '12:03',
-                  choice2: '34:56',
-                  choice3: '43:16',
+                CommonDropdownButtons(
+                  items: time,
                   // ignore: avoid_print
                   onChanged: (value) => print(value),
                 ),
@@ -64,8 +63,8 @@ class lost_when_page extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 10,
-            left: 35,
+            bottom: 20,
+            left: 25,
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).push(
@@ -85,7 +84,7 @@ class lost_when_page extends StatelessWidget {
                 ),
                 child: Center(
                   child: ReusableText(
-                    TextString: 'Next',
+                    TextString: AppLocalizations.of(context)!.next,
                     FontSize: 20,
                     TextColor: ColorCollections.Black,
                   ),
@@ -97,4 +96,19 @@ class lost_when_page extends StatelessWidget {
       ),
     );
   }
+
+  List<String> time = [
+    '23:3',
+    '23:2',
+    '23:4',
+    '23:5',
+    '23:6',
+  ];
+  List<String> date = [
+    'oct,30,2024',
+    'oct,30,2023',
+    'oct,30,2022',
+    'oct,30,2021',
+    'oct,30,2025',
+  ];
 }

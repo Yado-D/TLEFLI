@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/user_pages/more/widget/more_widgets.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Widget more_page(BuildContext context) {
   return ListView(
@@ -20,7 +21,7 @@ Widget more_page(BuildContext context) {
                     ),
                     ReusableText(
                       FromLeft: 40,
-                      TextString: 'Settings',
+                      TextString: AppLocalizations.of(context)!.settings,
                       FontSize: 20,
                       TextColor: ColorCollections.Black,
                     ),
@@ -46,10 +47,11 @@ Widget more_page(BuildContext context) {
                   children: [
                     Icon(
                       Icons.question_mark_outlined,
+                      size: 25,
                     ),
                     ReusableText(
                       FromLeft: 40,
-                      TextString: 'FAQ',
+                      TextString: AppLocalizations.of(context)!.aboutUs,
                       FontSize: 20,
                       TextColor: ColorCollections.Black,
                     ),
@@ -78,7 +80,7 @@ Widget more_page(BuildContext context) {
                     ),
                     ReusableText(
                       FromLeft: 40,
-                      TextString: 'Tutorials',
+                      TextString: AppLocalizations.of(context)!.tutorials,
                       FontSize: 20,
                       TextColor: ColorCollections.Black,
                     ),
@@ -103,7 +105,7 @@ Widget more_page(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ReusableText(
-              TextString: 'Our Future Partners',
+              TextString: AppLocalizations.of(context)!.ourFuturePartner,
               FontSize: 18,
               FromTop: 10,
               FromBottom: 20,
@@ -130,7 +132,7 @@ Widget more_page(BuildContext context) {
             SizedBox(
               height: 10,
             ),
-            partnersContainer('TRAM', 'background'),
+            partnersContainer('TRAM', 'defoult'),
           ],
         ),
       ),
@@ -140,7 +142,7 @@ Widget more_page(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ReusableText(
-              TextString: 'Join us on social medias',
+              TextString: AppLocalizations.of(context)!.joinUsOnSocialMedia,
               FontSize: 18,
               FromTop: 10,
               FromBottom: 10,
@@ -189,8 +191,7 @@ Widget more_page(BuildContext context) {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage(
-                            'assets/images//social_medias/twitter.png'),
+                        image: AssetImage('assets/icons/normals/send2.png'),
                         fit: BoxFit.fill),
                   ),
                 ),

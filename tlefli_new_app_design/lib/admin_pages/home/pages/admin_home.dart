@@ -93,8 +93,6 @@ class _admin_home_pageState extends State<admin_home_page> {
 
   Widget common_admin_Partner_container(
     Map<String, dynamic> map,
-    // VoidCallback ontap,
-    // int index,
   ) {
     return ConstrainedBox(
       constraints: BoxConstraints.fromViewConstraints(
@@ -125,17 +123,18 @@ class _admin_home_pageState extends State<admin_home_page> {
                     Container(
                       margin: EdgeInsets.only(left: 5),
                       height: 60,
-                      width: 90,
+                      width: 60,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
+                          fit: BoxFit.fill,
                           image: AssetImage(
                               'assets/images/partners/${image_name}.jpg'),
                         ),
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 50),
+                      margin: EdgeInsets.only(left: 30),
                       child: Center(
                         child: ReusableText(
                           TextColor: ColorCollections.Black,

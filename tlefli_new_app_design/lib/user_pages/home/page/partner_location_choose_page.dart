@@ -15,29 +15,12 @@ class partner_location_page_ extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: SimpleAppBars(context, type),
       backgroundColor: ColorCollections.SecondaryColor,
       body: Container(
         padding: EdgeInsets.only(top: 40),
         child: ListView(
           children: [
-            Container(
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icon(Icons.arrow_back),
-                  ),
-                  ReusableText(
-                    FromLeft: 40,
-                    TextString: type,
-                    FontSize: 20,
-                    TextColor: ColorCollections.Black,
-                  ),
-                ],
-              ),
-            ),
             SizedBox(height: 15),
             LocationContainer(
               () {
