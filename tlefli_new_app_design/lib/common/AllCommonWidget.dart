@@ -214,34 +214,41 @@ Widget reusableTextField({
 
 AppBar SimpleAppBars(BuildContext context, String title) {
   return AppBar(
-    backgroundColor: ColorCollections.TeritiaryColor,
+    leading: Container(
+      margin: EdgeInsets.only(left: 15, bottom: 10),
+      child: IconButton(
+        onPressed: () {
+          if (Navigator.of(context).canPop()) {
+            Navigator.of(context).pop();
+          } else {
+            Navigator.of(context).pushNamed('/home_page');
+          }
+        },
+        icon: Icon(
+          Icons.arrow_back_ios,
+          size: 26,
+          color: Colors.blue,
+        ),
+      ),
+    ),
+    // iconTheme: IconThemeData(color: ColorCollections.TeritiaryColor),
+    backgroundColor: ColorCollections.PrimaryColor,
     automaticallyImplyLeading: false,
     flexibleSpace: Container(
       height: 120,
-      padding: EdgeInsets.only(top: 35, left: 10),
+      padding: EdgeInsets.only(top: 35, left: 10, right: 30),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          IconButton(
-            onPressed: () {
-              if (Navigator.of(context).canPop()) {
-                Navigator.of(context).pop();
-              } else {
-                Navigator.of(context).pushNamed('/home_page');
-              }
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              size: 26,
-              color: ColorCollections.PrimaryColor,
-            ),
-          ),
           Center(
-            child: ReusableText(
-              FromLeft: 40,
-              TextString: title,
-              FontSize: 26,
-              TextColor: ColorCollections.PrimaryColor,
-              TextFontWeight: FontWeight.bold,
+            child: FittedBox(
+              child: ReusableText(
+                FromLeft: 40,
+                TextString: title,
+                FontSize: 26,
+                TextColor: Colors.blue,
+                TextFontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
@@ -273,10 +280,10 @@ AppBar ReusableAppBar(VoidCallback ontap, BuildContext context) {
             onTap: () {},
             child: Container(
               margin: const EdgeInsets.only(left: 80, right: 10),
-              height: 110.h,
-              width: 120.w,
+              height: 120.h,
+              width: 130.w,
               child: Image.asset(
-                'assets/logos/tlefli_app.png',
+                'assets/logos/tlefli_logo.png',
               ),
             ),
           ),
@@ -595,13 +602,14 @@ LogoutShowDialogue(BuildContext context) {
                       children: [
                         ReusableText(
                           TextColor: ColorCollections.Black,
-                          TextString: 'Log Out',
+                          TextString: AppLocalizations.of(context)!.logOut,
                           FontSize: 20,
                           TextFontWeight: FontWeight.w700,
                         ),
                         ReusableText(
                           TextColor: ColorCollections.Black,
-                          TextString: 'Are you sure you\n want to Logout ?',
+                          TextString:
+                              AppLocalizations.of(context)!.areYouSureLogout,
                           FontSize: 16,
                         ),
                       ],
@@ -625,7 +633,8 @@ LogoutShowDialogue(BuildContext context) {
                             ),
                             child: Center(
                               child: ReusableText(
-                                TextString: 'Comfirm',
+                                TextString:
+                                    AppLocalizations.of(context)!.confirm,
                                 FontSize: 18,
                               ),
                             ),
@@ -644,7 +653,8 @@ LogoutShowDialogue(BuildContext context) {
                             ),
                             child: Center(
                               child: ReusableText(
-                                TextString: 'Cancel',
+                                TextString:
+                                    AppLocalizations.of(context)!.cancel,
                                 FontSize: 18,
                                 TextColor: ColorCollections.PrimaryColor,
                               ),

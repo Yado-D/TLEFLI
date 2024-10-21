@@ -8,8 +8,8 @@
   "typeEmail": "type your email",
   "password": "password",
   "typePassword": "type your password",
-  "forgotPassword": "Forgot password",
-  "dontHaveAccount": "Don't have an account",
+  "forgotPassword": "Forgot password?",
+  "dontHaveAccount": "Don't have an account?",
   "alreadyHaveAnAccount": "Already have an account?",
   "firstName": "First Name",
   "typeYourFirstName": "type your first name",
@@ -110,6 +110,11 @@
   "request":"Request",
   "language":"Language",
   "ourFuturePartner":"Our future partners",
-  "joinUsOnSocialMedia":"Join us on social media"
+  "joinUsOnSocialMedia":"Join us on social media",
+  "signal":"Signal",
+  "found":"Found",
+  "apply":"Apply",
+  "areYouSureLogout":"Are you sure you\n want to log out ?"
+  
 
   }

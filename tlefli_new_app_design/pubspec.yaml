@@ -38,6 +38,7 @@ dependencies:
   get:
   shared_preferences:
   provider:
+  image_editor_plus:
 
 dev_dependencies:
   flutter_test:

@@ -21,7 +21,7 @@ class sign_up_page extends StatelessWidget {
             children: [
               const FullPageContainer(),
               Container(
-                margin: EdgeInsets.only(top: 200.sp),
+                margin: EdgeInsets.only(top: 210.sp),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,17 +45,19 @@ class sign_up_page extends StatelessWidget {
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
                         ),
-                        reusableTextField(
-                          FromLeft: 20,
-                          icon_name: 'b_user',
-                          hintText:
-                              AppLocalizations.of(context)!.typeYourFirstName,
-                          textType: 'first_name',
-                          onchange: (onchange) {
-                            context
-                                .read<SignupBloc>()
-                                .add(FNameEvent(onchange));
-                          },
+                        Center(
+                          child: reusableTextField(
+                            // FromLeft: 20,
+                            icon_name: 'b_user',
+                            hintText:
+                                AppLocalizations.of(context)!.typeYourFirstName,
+                            textType: 'first_name',
+                            onchange: (onchange) {
+                              context
+                                  .read<SignupBloc>()
+                                  .add(FNameEvent(onchange));
+                            },
+                          ),
                         ),
                         ReusableText(
                           FromTop: 10,
@@ -65,17 +67,19 @@ class sign_up_page extends StatelessWidget {
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
                         ),
-                        reusableTextField(
-                          FromLeft: 20,
-                          icon_name: 'b_user',
-                          hintText:
-                              AppLocalizations.of(context)!.typeYourLastName,
-                          textType: 'last_name',
-                          onchange: (onchange) {
-                            context
-                                .read<SignupBloc>()
-                                .add(LNameEvent(onchange));
-                          },
+                        Center(
+                          child: reusableTextField(
+                            // FromLeft: 20,
+                            icon_name: 'b_user',
+                            hintText:
+                                AppLocalizations.of(context)!.typeYourLastName,
+                            textType: 'last_name',
+                            onchange: (onchange) {
+                              context
+                                  .read<SignupBloc>()
+                                  .add(LNameEvent(onchange));
+                            },
+                          ),
                         ),
                         ReusableText(
                           FromTop: 10,
@@ -85,16 +89,18 @@ class sign_up_page extends StatelessWidget {
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
                         ),
-                        reusableTextField(
-                          FromLeft: 20,
-                          icon_name: 'mail',
-                          hintText: AppLocalizations.of(context)!.typeEmail,
-                          textType: 'email',
-                          onchange: (onchange) {
-                            context
-                                .read<SignupBloc>()
-                                .add(EmailEvent(onchange));
-                          },
+                        Center(
+                          child: reusableTextField(
+                            // FromLeft: 20,
+                            icon_name: 'mail',
+                            hintText: AppLocalizations.of(context)!.typeEmail,
+                            textType: 'email',
+                            onchange: (onchange) {
+                              context
+                                  .read<SignupBloc>()
+                                  .add(EmailEvent(onchange));
+                            },
+                          ),
                         ),
                         ReusableText(
                           FromTop: 10,
@@ -104,16 +110,19 @@ class sign_up_page extends StatelessWidget {
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
                         ),
-                        reusableTextField(
-                          FromLeft: 20,
-                          icon_name: 'lock',
-                          hintText: AppLocalizations.of(context)!.typePassword,
-                          textType: 'password',
-                          onchange: (onchange) {
-                            context
-                                .read<SignupBloc>()
-                                .add(PasswordEvent(onchange));
-                          },
+                        Center(
+                          child: reusableTextField(
+                            // FromLeft: 20,
+                            icon_name: 'lock',
+                            hintText:
+                                AppLocalizations.of(context)!.typePassword,
+                            textType: 'password',
+                            onchange: (onchange) {
+                              context
+                                  .read<SignupBloc>()
+                                  .add(PasswordEvent(onchange));
+                            },
+                          ),
                         ),
                         ReusableText(
                           FromTop: 10,
@@ -124,17 +133,19 @@ class sign_up_page extends StatelessWidget {
                           TextColor: ColorCollections.Black,
                           TextFontWeight: FontWeight.bold,
                         ),
-                        reusableTextField(
-                          FromLeft: 20,
-                          icon_name: 'lock',
-                          hintText:
-                              AppLocalizations.of(context)!.confirmPassword,
-                          textType: 'password',
-                          onchange: (onchange) {
-                            context
-                                .read<SignupBloc>()
-                                .add(PasswordConfirmationEvent(onchange));
-                          },
+                        Center(
+                          child: reusableTextField(
+                            // FromLeft: 20,
+                            icon_name: 'lock',
+                            hintText:
+                                AppLocalizations.of(context)!.confirmPassword,
+                            textType: 'password',
+                            onchange: (onchange) {
+                              context
+                                  .read<SignupBloc>()
+                                  .add(PasswordConfirmationEvent(onchange));
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -282,12 +293,12 @@ class sign_up_page extends StatelessWidget {
               Center(
                 child: Container(
                   margin: EdgeInsets.only(top: 0.sp),
-                  height: 200,
-                  width: 200,
+                  height: 250,
+                  width: 250,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
-                          'assets/logos/tlefli_app.jpg',
+                          'assets/logos/tlefli_logo.png',
                         ),
                         fit: BoxFit.fill),
                   ),

@@ -110,5 +110,13 @@
   "request":"طلب",
   "language":"لغة",
   "ourFuturePartner": "شركاؤنا المستقبليون",
-  "joinUsOnSocialMedia": "انضم إلينا على وسائل التواصل الاجتماعي"
+  "joinUsOnSocialMedia": "انضم إلينا على وسائل التواصل الاجتماعي",
+  "signal":"إشارة",
+  "found":"موجود",
+  "areYouSureLogout":"هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "apply":"يطبق"
+
+
+
+
 }

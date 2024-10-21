@@ -57,10 +57,10 @@ class _RebuildAppState extends State<RebuildApp> {
       onGenerateRoute: NamedRouteSettings.GenerateRouteSettings,
       debugShowCheckedModeBanner: false,
       title: 'TLEFLI APP',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      // theme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      //   useMaterial3: true,
+      // ),
       supportedLocales: L10n.all,
       locale: widget.locale,
       localizationsDelegates: const [

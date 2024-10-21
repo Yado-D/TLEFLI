@@ -27,12 +27,12 @@ class sign_in_page extends StatelessWidget {
                     Center(
                       child: Container(
                         margin: EdgeInsets.only(top: 0.sp),
-                        height: 200,
-                        width: 200,
+                        height: 250,
+                        width: 250,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(
-                                'assets/logos/tlefli_app.jpg',
+                                'assets/logos/tlefli_logo.png',
                               ),
                               fit: BoxFit.fill),
                         ),
@@ -63,17 +63,19 @@ class sign_in_page extends StatelessWidget {
                                 TextColor: ColorCollections.Black,
                                 TextFontWeight: FontWeight.bold,
                               ),
-                              reusableTextField(
-                                FromLeft: 20,
-                                icon_name: 'mail',
-                                hintText:
-                                    AppLocalizations.of(context)!.typeEmail,
-                                textType: 'email',
-                                onchange: (onchange) {
-                                  context
-                                      .read<SigninBloc>()
-                                      .add(EmailEvent(onchange));
-                                },
+                              Center(
+                                child: reusableTextField(
+                                  // FromLeft: 20,
+                                  icon_name: 'mail',
+                                  hintText:
+                                      AppLocalizations.of(context)!.typeEmail,
+                                  textType: 'email',
+                                  onchange: (onchange) {
+                                    context
+                                        .read<SigninBloc>()
+                                        .add(EmailEvent(onchange));
+                                  },
+                                ),
                               ),
                               ReusableText(
                                 FromTop: 20,
@@ -84,17 +86,19 @@ class sign_in_page extends StatelessWidget {
                                 TextColor: ColorCollections.Black,
                                 TextFontWeight: FontWeight.bold,
                               ),
-                              reusableTextField(
-                                FromLeft: 20,
-                                icon_name: 'lock',
-                                hintText:
-                                    AppLocalizations.of(context)!.typePassword,
-                                textType: 'password',
-                                onchange: (onchange) {
-                                  context
-                                      .read<SigninBloc>()
-                                      .add(PasswordEvent(onchange));
-                                },
+                              Center(
+                                child: reusableTextField(
+                                  // FromLeft: 20,
+                                  icon_name: 'lock',
+                                  hintText: AppLocalizations.of(context)!
+                                      .typePassword,
+                                  textType: 'password',
+                                  onchange: (onchange) {
+                                    context
+                                        .read<SigninBloc>()
+                                        .add(PasswordEvent(onchange));
+                                  },
+                                ),
                               ),
                             ],
                           ),
@@ -129,8 +133,8 @@ class sign_in_page extends StatelessWidget {
                                           email: state.email,
                                           password: state.password);
                                   if (res == "welcome back my friend") {
-                                    commonSnackBar(context,
-                                        'Welcome to TLEFLI! 🎉 Where your lost treasures reunite with you.\n Let\'s make some happy endings happen together!');
+                                    // commonSnackBar(context,
+                                    //     'Welcome to TLEFLI! 🎉 Where your lost treasures reunite with you.\n Let\'s make some happy endings happen together!');
                                     Navigator.of(context)
                                         .pushNamedAndRemoveUntil(
                                             '/home_page', (route) => false);
@@ -188,59 +192,59 @@ class sign_in_page extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(top: 15, bottom: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context)
-                                        .pushNamed('/partner_home');
-                                  },
-                                  child: Container(
-                                    margin:
-                                        EdgeInsets.only(left: 20, right: 10),
-                                    height: 40,
-                                    width: 150,
-                                    decoration: BoxDecoration(
-                                        color: ColorCollections.SecondaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Center(
-                                      child: ReusableText(
-                                        TextColor: ColorCollections.Black,
-                                        TextString: 'Partner Login',
-                                        FontSize: 18,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context)
-                                        .pushNamed('/admin_home_page');
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    width: 150,
-                                    decoration: BoxDecoration(
-                                        color: ColorCollections.TeritiaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Center(
-                                      child: ReusableText(
-                                        TextString: 'Admin Login',
-                                        FontSize: 18,
-                                        TextColor:
-                                            ColorCollections.PrimaryColor,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          // Container(
+                          //   margin: EdgeInsets.only(top: 15, bottom: 20),
+                          //   child: Row(
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: [
+                          //       GestureDetector(
+                          //         onTap: () {
+                          //           Navigator.of(context)
+                          //               .pushNamed('/partner_home');
+                          //         },
+                          //         child: Container(
+                          //           margin:
+                          //               EdgeInsets.only(left: 20, right: 10),
+                          //           height: 40,
+                          //           width: 150,
+                          //           decoration: BoxDecoration(
+                          //               color: ColorCollections.SecondaryColor,
+                          //               borderRadius:
+                          //                   BorderRadius.circular(10)),
+                          //           child: Center(
+                          //             child: ReusableText(
+                          //               TextColor: ColorCollections.Black,
+                          //               TextString: 'Partner Login',
+                          //               FontSize: 18,
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ),
+                          //       GestureDetector(
+                          //         onTap: () {
+                          //           Navigator.of(context)
+                          //               .pushNamed('/admin_home_page');
+                          //         },
+                          //         child: Container(
+                          //           height: 40,
+                          //           width: 150,
+                          //           decoration: BoxDecoration(
+                          //               color: ColorCollections.TeritiaryColor,
+                          //               borderRadius:
+                          //                   BorderRadius.circular(10)),
+                          //           child: Center(
+                          //             child: ReusableText(
+                          //               TextString: 'Admin Login',
+                          //               FontSize: 18,
+                          //               TextColor:
+                          //                   ColorCollections.PrimaryColor,
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

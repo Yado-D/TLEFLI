@@ -7,6 +7,7 @@ import 'package:tlefli_new_app_design/l10n/l10n.dart';
 import 'package:tlefli_new_app_design/services/providers/local_provider.dart';
 import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class language_page extends StatefulWidget {
   language_page({super.key});
@@ -23,7 +24,7 @@ class _language_pageState extends State<language_page> {
 
     return Scaffold(
         backgroundColor: ColorCollections.SecondaryColor,
-        appBar: SimpleAppBars(context, 'Language'),
+        appBar: SimpleAppBars(context, AppLocalizations.of(context)!.language),
         body: Column(
           children: [
             Container(
@@ -74,7 +75,7 @@ class _language_pageState extends State<language_page> {
                   ),
                   child: Center(
                     child: ReusableText(
-                      TextString: 'Apply',
+                      TextString: AppLocalizations.of(context)!.apply,
                       FontSize: 20,
                       TextColor: ColorCollections.PrimaryColor,
                     ),
@@ -89,6 +90,6 @@ class _language_pageState extends State<language_page> {
   List<String> language_items = [
     'English',
     'Arabic',
-    'French', // Fixed typo from 'France' to 'French'
+    'French',
   ];
 }

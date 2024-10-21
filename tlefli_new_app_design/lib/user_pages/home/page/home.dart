@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/user_pages/error_page/error_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/bloc/home_bloc.dart';
@@ -98,9 +99,9 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                       : home_widget(context, animation),
                   Positioned(
                     bottom: 0,
-                    height: 60.h,
+                    height: 57.h,
                     child: Container(
-                      padding: EdgeInsets.only(left: 4, right: 4),
+                      padding: EdgeInsets.only(left: 10, right: 10),
                       decoration: BoxDecoration(
                         color: ColorCollections.PrimaryColor,
                         border: Border.symmetric(
@@ -115,170 +116,188 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                       ),
                       width: MediaQuery.of(context).size.width,
                       height: 50.h,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Stack(
+                        alignment: Alignment.center,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<HomeBloc>()
-                                  .add(BottomNavBarEvent(SelectedIndex: 0));
-                            },
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 20.h,
-                                  width: 20.w,
-                                  margin: EdgeInsets.only(top: 13),
-                                  child: Image.asset(
-                                    'assets/icons/flat_icons/b_home.png',
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  context
+                                      .read<HomeBloc>()
+                                      .add(BottomNavBarEvent(SelectedIndex: 3));
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 15),
+                                  child: Column(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/icons/flat_icons/person.svg',
+                                        height: 25.h,
+                                        width: 25.w,
+                                        color: const Color.fromARGB(
+                                            255, 128, 128, 128),
+                                      ),
+                                      ReusableText(
+                                        FromTop: 5,
+                                        FromBottom: 0,
+                                        TextString:
+                                            AppLocalizations.of(context)!
+                                                .profile,
+                                        FontSize: 12,
+                                        TextColor: state is BottomNavBarState
+                                            ? state.SelectedIndex == 3
+                                                ? ColorCollections
+                                                    .TeritiaryColor
+                                                : ColorCollections.Black
+                                            : ColorCollections.Black,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                ReusableText(
-                                  TextString:
-                                      AppLocalizations.of(context)!.myMatches,
-                                  FontSize: 13,
-                                  TextColor: state is BottomNavBarState
-                                      ? state.SelectedIndex == 0
-                                          ? ColorCollections.TeritiaryColor
-                                          : ColorCollections.Black
-                                      : ColorCollections.Black,
-                                  FromBottom: 0,
-                                ),
-                              ],
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<HomeBloc>()
-                                  .add(BottomNavBarEvent(SelectedIndex: 1));
-                            },
-                            child: Container(
-                              margin: EdgeInsets.only(right: 5),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(top: 13),
-                                    height: 20.h,
-                                    width: 20.w,
-                                    child: Image.asset(
-                                      'assets/icons/flat_icons/my_matchs.png',
-                                    ),
-                                  ),
-                                  ReusableText(
-                                    FromTop: 5,
-                                    FromBottom: 0,
-                                    TextString:
-                                        AppLocalizations.of(context)!.myObject,
-                                    FontSize: 12,
-                                    TextColor: state is BottomNavBarState
-                                        ? state.SelectedIndex == 1
-                                            ? ColorCollections.TeritiaryColor
-                                            : ColorCollections.Black
-                                        : ColorCollections.Black,
-                                  ),
-                                ],
                               ),
-                            ),
+                              GestureDetector(
+                                onTap: () {
+                                  context
+                                      .read<HomeBloc>()
+                                      .add(BottomNavBarEvent(SelectedIndex: 1));
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(right: 5),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(top: 15),
+                                        height: 25.h,
+                                        width: 25.w,
+                                        child: Image.asset(
+                                            'assets/icons/flat_icons/my_matchs.png'),
+                                      ),
+                                      ReusableText(
+                                        FromTop: 5,
+                                        FromBottom: 0,
+                                        TextString:
+                                            AppLocalizations.of(context)!
+                                                .myObject,
+                                        FontSize: 12,
+                                        TextColor: state is BottomNavBarState
+                                            ? state.SelectedIndex == 1
+                                                ? ColorCollections
+                                                    .TeritiaryColor
+                                                : ColorCollections.Black
+                                            : ColorCollections.Black,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.05),
+                              GestureDetector(
+                                onTap: () {
+                                  context
+                                      .read<HomeBloc>()
+                                      .add(BottomNavBarEvent(SelectedIndex: 0));
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 25.h,
+                                        width: 25.w,
+                                        margin: EdgeInsets.only(top: 15),
+                                        child: SvgPicture.asset(
+                                          'assets/icons/flat_icons/holding.svg',
+                                          height: 20.h,
+                                          width: 20.w,
+                                          color: const Color.fromARGB(
+                                              255, 128, 128, 128),
+                                        ),
+                                      ),
+                                      ReusableText(
+                                        TextString:
+                                            AppLocalizations.of(context)!
+                                                .myMatches,
+                                        FontSize: 12,
+                                        TextColor: state is BottomNavBarState
+                                            ? state.SelectedIndex == 0
+                                                ? ColorCollections
+                                                    .TeritiaryColor
+                                                : ColorCollections.Black
+                                            : ColorCollections.Black,
+                                        FromBottom: 0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  context
+                                      .read<HomeBloc>()
+                                      .add(BottomNavBarEvent(SelectedIndex: 4));
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(right: 5, top: 15),
+                                  child: Column(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/icons/flat_icons/more.svg',
+                                        height: 25.h,
+                                        width: 25.w,
+                                        color: const Color.fromARGB(
+                                            255, 128, 128, 128),
+                                      ),
+                                      ReusableText(
+                                        FromTop: 5,
+                                        TextString:
+                                            AppLocalizations.of(context)!.more,
+                                        FontSize: 12,
+                                        TextColor: state is BottomNavBarState
+                                            ? state.SelectedIndex == 4
+                                                ? ColorCollections
+                                                    .TeritiaryColor
+                                                : ColorCollections.Black
+                                            : ColorCollections.Black,
+                                        FromBottom: 0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<HomeBloc>()
-                                  .add(BottomNavBarEvent(SelectedIndex: 2));
-                            },
-                            child: Container(
-                              margin: EdgeInsets.only(right: 0),
+                          Positioned(
+                            top: 5,
+                            child: GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<HomeBloc>()
+                                    .add(BottomNavBarEvent(SelectedIndex: 2));
+                              },
                               child: Column(
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.only(top: 3),
-                                    height: 29.h,
-                                    width: 28.w,
+                                    height: 32.h,
+                                    width: 34.w,
                                     child: Image.asset(
-                                      'assets/icons/flat_icons/tlefli_logo.png',
-                                    ),
+                                        fit: BoxFit.fill,
+                                        'assets/icons/flat_icons/tlefli_logo.png'),
                                   ),
                                   ReusableText(
                                     FromTop: 5,
                                     FromBottom: 0,
                                     TextString:
-                                        AppLocalizations.of(context)!.home,
+                                        AppLocalizations.of(context)!.found,
                                     FontSize: 12,
                                     TextColor: state is BottomNavBarState
                                         ? state.SelectedIndex == 2
                                             ? ColorCollections.TeritiaryColor
                                             : ColorCollections.Black
                                         : ColorCollections.TeritiaryColor,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<HomeBloc>()
-                                  .add(BottomNavBarEvent(SelectedIndex: 3));
-                            },
-                            child: Container(
-                              margin: EdgeInsets.only(),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(top: 13),
-                                    height: 20.h,
-                                    width: 20.w,
-                                    child: Image.asset(
-                                      'assets/icons/flat_icons/user.png',
-                                    ),
-                                  ),
-                                  ReusableText(
-                                    FromTop: 5,
-                                    FromBottom: 0,
-                                    TextString:
-                                        AppLocalizations.of(context)!.profile,
-                                    FontSize: 12,
-                                    TextColor: state is BottomNavBarState
-                                        ? state.SelectedIndex == 3
-                                            ? ColorCollections.TeritiaryColor
-                                            : ColorCollections.Black
-                                        : ColorCollections.Black,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<HomeBloc>()
-                                  .add(BottomNavBarEvent(SelectedIndex: 4));
-                            },
-                            child: Container(
-                              margin: EdgeInsets.only(right: 5),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(top: 13),
-                                    height: 20.h,
-                                    width: 20.w,
-                                    child: Image.asset(
-                                      'assets/icons/flat_icons/plus.png',
-                                    ),
-                                  ),
-                                  ReusableText(
-                                    FromTop: 5,
-                                    TextString:
-                                        AppLocalizations.of(context)!.more,
-                                    FontSize: 12,
-                                    TextColor: state is BottomNavBarState
-                                        ? state.SelectedIndex == 4
-                                            ? ColorCollections.TeritiaryColor
-                                            : ColorCollections.Black
-                                        : ColorCollections.Black,
-                                    FromBottom: 0,
                                   ),
                                 ],
                               ),

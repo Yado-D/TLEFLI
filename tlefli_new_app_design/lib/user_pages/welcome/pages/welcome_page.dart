@@ -14,30 +14,38 @@ class WelcomePage extends StatelessWidget {
       child: Scaffold(
         body: SafeArea(
           child: Container(
-            margin: const EdgeInsets.only(left: 25, top: 50),
+            margin: const EdgeInsets.only(top: 50),
             child: ListView(
               children: [
-                Text(
-                  "YOUR",
-                  style: GoogleFonts.quicksand(fontSize: 50.sp),
-                ),
-                Text(
-                  "LOST",
-                  style: GoogleFonts.quicksand(
-                      fontSize: 50.sp, fontWeight: FontWeight.w900),
-                ),
-                Text(
-                  "ITEMS,",
-                  style: GoogleFonts.quicksand(fontSize: 50.sp),
-                ),
-                Text(
-                  "OUR",
-                  style: GoogleFonts.quicksand(fontSize: 50.sp),
-                ),
-                Text(
-                  "PRIORITY!",
-                  style: GoogleFonts.quicksand(
-                      fontSize: 50.sp, fontWeight: FontWeight.w900),
+                Container(
+                  margin: const EdgeInsets.only(left: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "YOUR",
+                        style: GoogleFonts.quicksand(fontSize: 50.sp),
+                      ),
+                      Text(
+                        "LOST",
+                        style: GoogleFonts.quicksand(
+                            fontSize: 50.sp, fontWeight: FontWeight.w900),
+                      ),
+                      Text(
+                        "ITEMS,",
+                        style: GoogleFonts.quicksand(fontSize: 50.sp),
+                      ),
+                      Text(
+                        "OUR",
+                        style: GoogleFonts.quicksand(fontSize: 50.sp),
+                      ),
+                      Text(
+                        "PRIORITY!",
+                        style: GoogleFonts.quicksand(
+                            fontSize: 50.sp, fontWeight: FontWeight.w900),
+                      ),
+                    ],
+                  ),
                 ),
                 GestureDetector(
                   onTap: () {

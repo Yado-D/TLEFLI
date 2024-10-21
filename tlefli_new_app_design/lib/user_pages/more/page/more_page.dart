@@ -158,8 +158,8 @@ Widget more_page(BuildContext context) {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage(
-                            'assets/images/social_medias/telegram.jpeg'),
+                        image:
+                            AssetImage('assets/icons/flat_icons/twitter.png'),
                         fit: BoxFit.fill),
                   ),
                 ),
@@ -169,8 +169,8 @@ Widget more_page(BuildContext context) {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage(
-                            'assets/images/social_medias/instagram.jpeg'),
+                        image:
+                            AssetImage('assets/icons/flat_icons/instagram.png'),
                         fit: BoxFit.fill),
                   ),
                 ),
@@ -180,8 +180,7 @@ Widget more_page(BuildContext context) {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage(
-                            'assets/images/social_medias/tiktok.jpeg'),
+                        image: AssetImage('assets/icons/flat_icons/tiktok.png'),
                         fit: BoxFit.fill),
                   ),
                 ),

@@ -21,7 +21,8 @@ class home_widgets extends StatelessWidget {
         children: [
           Row(),
           Container(
-            height: 120,
+            margin: EdgeInsets.only(top: 30),
+            height: 150,
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: [
@@ -160,6 +161,7 @@ Widget home_widget(BuildContext context, Animation<Offset> animation) {
   return Column(
     children: [
       Container(
+        margin: EdgeInsets.only(top: 30),
         height: 120,
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -182,10 +184,10 @@ Widget home_widget(BuildContext context, Animation<Offset> animation) {
       ),
       Container(
         margin: EdgeInsets.only(top: 50),
-        height: 200,
-        width: 300,
+        height: 250,
+        width: 400,
         decoration: BoxDecoration(color: ColorCollections.SecondaryColor),
-        child: Lottie.asset('assets/images/find_lotti.json'),
+        child: Lottie.asset('assets/images/find_lotti.json', fit: BoxFit.fill),
       ),
       GestureDetector(
         onTap: () {
@@ -208,36 +210,38 @@ Widget home_widget(BuildContext context, Animation<Offset> animation) {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ReusableText(
-                      FromLeft: 30,
-                      TextString: AppLocalizations.of(context)!.iLost,
-                      TextColor: ColorCollections.PrimaryColor,
-                      FontSize: 24,
-                      TextFontWeight: FontWeight.bold,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(right: 15),
-                      child: Row(
-                        children: [
-                          SlideTransition(
-                            position: animation,
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: ColorCollections.PrimaryColor,
-                              size: 20,
-                            ),
-                          ),
-                          SlideTransition(
-                            position: animation,
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: ColorCollections.PrimaryColor,
-                              size: 20,
-                            ),
-                          )
-                        ],
+                    Center(
+                      child: ReusableText(
+                        // FromLeft: 30,
+                        TextString: AppLocalizations.of(context)!.iLost,
+                        TextColor: ColorCollections.PrimaryColor,
+                        FontSize: 24,
+                        TextFontWeight: FontWeight.bold,
                       ),
-                    )
+                    ),
+                    // Container(
+                    //   margin: EdgeInsets.only(right: 15),
+                    //   child: Row(
+                    //     children: [
+                    //       SlideTransition(
+                    //         position: animation,
+                    //         child: Icon(
+                    //           Icons.arrow_forward_ios,
+                    //           color: ColorCollections.PrimaryColor,
+                    //           size: 20,
+                    //         ),
+                    //       ),
+                    //       SlideTransition(
+                    //         position: animation,
+                    //         child: Icon(
+                    //           Icons.arrow_forward_ios,
+                    //           color: ColorCollections.PrimaryColor,
+                    //           size: 20,
+                    //         ),
+                    //       )
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
               ),
@@ -259,27 +263,29 @@ Widget home_widget(BuildContext context, Animation<Offset> animation) {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ReusableText(
-                        FromLeft: 30,
-                        TextString: AppLocalizations.of(context)!.iFound,
-                        TextColor: const Color.fromARGB(255, 255, 255, 255),
-                        FontSize: 24,
-                        TextFontWeight: FontWeight.bold,
+                      Center(
+                        child: ReusableText(
+                          // FromLeft: 30,
+                          TextString: AppLocalizations.of(context)!.iFound,
+                          TextColor: const Color.fromARGB(255, 255, 255, 255),
+                          FontSize: 24,
+                          TextFontWeight: FontWeight.bold,
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: ColorCollections.PrimaryColor,
-                            size: 20,
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: ColorCollections.PrimaryColor,
-                            size: 20,
-                          )
-                        ],
-                      )
+                      // Row(
+                      //   children: [
+                      //     Icon(
+                      //       Icons.arrow_forward_ios,
+                      //       color: ColorCollections.PrimaryColor,
+                      //       size: 20,
+                      //     ),
+                      //     Icon(
+                      //       Icons.arrow_forward_ios,
+                      //       color: ColorCollections.PrimaryColor,
+                      //       size: 20,
+                      //     )
+                      //   ],
+                      // )
                     ],
                   ),
                 ),
