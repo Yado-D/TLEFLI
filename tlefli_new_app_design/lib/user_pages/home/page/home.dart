@@ -100,6 +100,7 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                     bottom: 0,
                     height: 60.h,
                     child: Container(
+                      padding: EdgeInsets.only(left: 4, right: 4),
                       decoration: BoxDecoration(
                         color: ColorCollections.PrimaryColor,
                         border: Border.symmetric(
@@ -115,7 +116,7 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                       width: MediaQuery.of(context).size.width,
                       height: 50.h,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -192,7 +193,7 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                               child: Column(
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.only(left: 2.w, top: 3),
+                                    margin: EdgeInsets.only(top: 3),
                                     height: 29.h,
                                     width: 28.w,
                                     child: Image.asset(
@@ -222,11 +223,11 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                                   .add(BottomNavBarEvent(SelectedIndex: 3));
                             },
                             child: Container(
-                              margin: EdgeInsets.only(right: 8),
+                              margin: EdgeInsets.only(),
                               child: Column(
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.only(left: 5.w, top: 13),
+                                    margin: EdgeInsets.only(top: 13),
                                     height: 20.h,
                                     width: 20.w,
                                     child: Image.asset(
@@ -260,7 +261,7 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                               child: Column(
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.only(left: 5.w, top: 13),
+                                    margin: EdgeInsets.only(top: 13),
                                     height: 20.h,
                                     width: 20.w,
                                     child: Image.asset(
