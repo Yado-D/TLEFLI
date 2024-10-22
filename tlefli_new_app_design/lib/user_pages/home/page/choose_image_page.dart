@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_editor_plus/image_editor_plus.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
+import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/choose_main_catagory_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/pickImages.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
@@ -30,6 +31,18 @@ class _choose_image_pageState extends State<choose_image_page> {
   Uint8List? pickedImage;
   @override
   Widget build(BuildContext context) {
+    itemPickedModel item_model = itemPickedModel(
+      pickedImage: pickedImage,
+      main_catagory: '',
+      nested_item: '',
+      location_choosed: '',
+      date_picked: '',
+      time_picked: '',
+      item_description: '',
+      race: '',
+      item_color: '',
+      item_model: '',
+    );
     return Scaffold(
       backgroundColor: ColorCollections.SecondaryColor,
       appBar: SimpleAppBars(context, AppLocalizations.of(context)!.chooseImage),
@@ -69,6 +82,7 @@ class _choose_image_pageState extends State<choose_image_page> {
                                   onTap: () async {
                                     pickedImage =
                                         await pickedImages(ImageSource.gallery);
+                                    item_model.pickedImage = pickedImage;
                                     setState(() {});
                                   },
                                   child: Choose_image_widget(
@@ -81,6 +95,7 @@ class _choose_image_pageState extends State<choose_image_page> {
                                   onTap: () async {
                                     pickedImage =
                                         await pickedImages(ImageSource.camera);
+                                    item_model.pickedImage = pickedImage;
                                     setState(() {});
                                   },
                                   child: Choose_image_widget(
@@ -121,6 +136,7 @@ class _choose_image_pageState extends State<choose_image_page> {
                             if (editedImage != null) {
                               setState(() {
                                 pickedImage = editedImage;
+                                item_model.pickedImage = pickedImage;
                               });
                             } else {
                               print('error');
@@ -154,7 +170,9 @@ class _choose_image_pageState extends State<choose_image_page> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => choose_main_catagory_page(),
+                    builder: (context) => choose_main_catagory_page(
+                      item_model: item_model,
+                    ),
                   ));
                 },
                 child: Center(

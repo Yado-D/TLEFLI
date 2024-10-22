@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:tlefli_new_app_design/common/route_handler/pages.dart';
 import 'package:tlefli_new_app_design/controllers/language_controller.dart';
 import 'package:tlefli_new_app_design/l10n/l10n.dart';
+import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/services/providers/local_provider.dart';
 import 'package:tlefli_new_app_design/utils/app_constant.dart';
 import 'package:tlefli_new_app_design/utils/dep.dart' as dep;
@@ -16,6 +17,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
+  await Global.init();
   runApp(MyApp());
 }
 

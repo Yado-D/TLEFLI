@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
+import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/input_description_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class lost_when_page extends StatelessWidget {
-  lost_when_page({super.key});
+class lost_when_page extends StatefulWidget {
+  itemPickedModel item_model;
+  lost_when_page({super.key, required this.item_model});
 
+  @override
+  State<lost_when_page> createState() => _lost_when_pageState();
+}
+
+class _lost_when_pageState extends State<lost_when_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,10 +52,13 @@ class lost_when_page extends StatelessWidget {
                   TextColor: ColorCollections.Black,
                 ),
                 CommonDropdownButtons(
-                  items: date,
-                  // ignore: avoid_print
-                  onChanged: (value) => print(value),
-                ),
+                    items: date,
+                    // ignore: avoid_print
+                    onChanged: (value) {
+                      print(value);
+                      widget.item_model.date_picked = value;
+                      setState(() {});
+                    }),
                 ReusableText(
                   TextString: AppLocalizations.of(context)!.chooseTheTime,
                   FontSize: 15,
@@ -57,7 +67,11 @@ class lost_when_page extends StatelessWidget {
                 CommonDropdownButtons(
                   items: time,
                   // ignore: avoid_print
-                  onChanged: (value) => print(value),
+                  onChanged: (value) {
+                    print(value);
+                    widget.item_model.time_picked = value;
+                    setState(() {});
+                  },
                 ),
               ],
             ),
@@ -69,8 +83,8 @@ class lost_when_page extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) =>
-                        input_description_page(categorie: 'Pets'),
+                    builder: (context) => input_description_page(
+                        categorie: 'Pets', item_model: widget.item_model),
                   ),
                 );
               },
@@ -104,6 +118,7 @@ class lost_when_page extends StatelessWidget {
     '23:5',
     '23:6',
   ];
+
   List<String> date = [
     'oct,30,2024',
     'oct,30,2023',

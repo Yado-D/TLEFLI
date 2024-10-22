@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/Bottomsheets/widgets/map_of%20location.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
+import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/partner_location_choose_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/type_location.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/when_lost_page.dart';
@@ -9,7 +10,8 @@ import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class choose_location_page extends StatelessWidget {
-  const choose_location_page({super.key});
+  itemPickedModel item_model;
+  choose_location_page({super.key, required this.item_model});
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +65,12 @@ class choose_location_page extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => type_location_page()),
+                        builder: (context) => type_location_page(
+                          item_model: item_model,
+                        ),
+                      ),
                     );
+                    print(item_model.location_choosed);
                   },
                   child: Container(
                     height: 50,
@@ -106,11 +112,12 @@ class choose_location_page extends StatelessWidget {
                 ),
                 common_partner_location(
                   AppLocalizations.of(context)!.transport,
-                  Icons.car_crash_outlined,
+                  Icons.airport_shuttle,
                   () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
+                          item_model: item_model,
                           type: 'Transportaion',
                           map: transportaion,
                         ),
@@ -120,25 +127,28 @@ class choose_location_page extends StatelessWidget {
                 ),
                 common_partner_location(
                   AppLocalizations.of(context)!.airport,
-                  Icons.airport_shuttle,
+                  Icons.local_airport,
                   () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
+                          item_model: item_model,
                           type: 'Airport',
                           map: transportaion,
                         ),
                       ),
                     );
+                    print(item_model.location_choosed);
                   },
                 ),
                 common_partner_location(
                   AppLocalizations.of(context)!.townhallsPolice,
-                  Icons.two_mp_outlined,
+                  Icons.location_city,
                   () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
+                          item_model: item_model,
                           type: 'Town Halls',
                           map: transportaion,
                         ),
@@ -148,11 +158,12 @@ class choose_location_page extends StatelessWidget {
                 ),
                 common_partner_location(
                   AppLocalizations.of(context)!.shoppingCenters,
-                  Icons.abc_rounded,
+                  Icons.shopping_cart,
                   () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
+                          item_model: item_model,
                           type: 'Shopping Centers',
                           map: transportaion,
                         ),
@@ -168,7 +179,10 @@ class choose_location_page extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => lost_when_page()),
+                    MaterialPageRoute(
+                        builder: (context) => lost_when_page(
+                              item_model: item_model,
+                            )),
                   );
                 },
                 child: Container(

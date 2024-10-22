@@ -43,16 +43,18 @@ class home_widgets extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 50),
-            height: 200,
-            width: 300,
+            margin: EdgeInsets.only(),
+            height: 250,
+            width: 250,
             decoration: BoxDecoration(color: ColorCollections.SecondaryColor),
-            child: Lottie.asset('assets/images/find_lotti.json'),
+            child: Lottie.asset('assets/images/new.json'),
           ),
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => choose_image_page()),
+                MaterialPageRoute(
+                  builder: (context) => choose_image_page(),
+                ),
               );
             },
             child: Container(
@@ -183,11 +185,11 @@ Widget home_widget(BuildContext context, Animation<Offset> animation) {
         ),
       ),
       Container(
-        margin: EdgeInsets.only(top: 50),
+        margin: EdgeInsets.only(),
         height: 250,
-        width: 400,
+        width: 250,
         decoration: BoxDecoration(color: ColorCollections.SecondaryColor),
-        child: Lottie.asset('assets/images/find_lotti.json', fit: BoxFit.fill),
+        child: Lottie.asset('assets/images/new.json'),
       ),
       GestureDetector(
         onTap: () {
@@ -196,7 +198,7 @@ Widget home_widget(BuildContext context, Animation<Offset> animation) {
           );
         },
         child: Container(
-          margin: EdgeInsets.only(top: 90),
+          margin: EdgeInsets.only(top: 100),
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [

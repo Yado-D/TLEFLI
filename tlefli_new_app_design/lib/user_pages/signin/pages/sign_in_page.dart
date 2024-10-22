@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:tlefli_new_app_design/auth/signinAuth/signin_auth.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/common/CommonSnackBar.dart';
+import 'package:tlefli_new_app_design/services/constants.dart';
+import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/user_pages/signin/bloc/signin_bloc.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -133,6 +135,10 @@ class sign_in_page extends StatelessWidget {
                                           email: state.email,
                                           password: state.password);
                                   if (res == "welcome back my friend") {
+                                    Global.storageServices.setBool(
+                                        AppConstants
+                                            .STORAGE_DEVICE_OPENED_FIRST,
+                                        true);
                                     // commonSnackBar(context,
                                     //     'Welcome to TLEFLI! 🎉 Where your lost treasures reunite with you.\n Let\'s make some happy endings happen together!');
                                     Navigator.of(context)

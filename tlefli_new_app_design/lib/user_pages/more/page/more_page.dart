@@ -145,7 +145,7 @@ Widget more_page(BuildContext context) {
               TextString: AppLocalizations.of(context)!.joinUsOnSocialMedia,
               FontSize: 18,
               FromTop: 10,
-              FromBottom: 10,
+              FromBottom: 20,
               TextColor: const Color.fromARGB(255, 72, 72, 70),
               TextFontWeight: FontWeight.w600,
             ),

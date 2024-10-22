@@ -8,6 +8,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tlefli_new_app_design/main.dart';
+import 'package:tlefli_new_app_design/models/item_reported_model.dart';
+import 'package:tlefli_new_app_design/user_pages/my_object/my_object_page.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -293,192 +295,173 @@ AppBar ReusableAppBar(VoidCallback ontap, BuildContext context) {
   );
 }
 
-CustomShowDialoge(BuildContext context) {
+CustomShowDialoge(BuildContext context, itemPickedModel item_model) {
+  // String item_photo = item_model. ?? '';
+  // String item_cat = item_model.main_catagory ?? '';
+  // String item_cat = item_model.main_catagory ?? '';
   return showDialog(
+    // barrierDismissible: false,
     context: context,
     builder: (context) {
+      String item_cat = item_model.main_catagory ?? '';
+      String item_name = item_model.nested_item ?? '';
+      String item_description = item_model.item_description ?? '';
       return SimpleDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         backgroundColor: ColorCollections.PrimaryColor,
         children: [
-          Container(
-            height: 500,
-            width: 320,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: ReusableText(
-                    TextString:
-                        AppLocalizations.of(context)!.youHaveSuccessfully,
-                    FontSize: 20,
+          ConstrainedBox(
+            constraints: BoxConstraints.fromViewConstraints(
+              ViewConstraints(maxHeight: 500, maxWidth: 350),
+            ),
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: ReusableText(
+                      TextString:
+                          AppLocalizations.of(context)!.youHaveSuccessfully,
+                      FontSize: 20,
+                    ),
                   ),
-                ),
-                Center(
-                  child: ReusableText(
-                    TextString: AppLocalizations.of(context)!.submitted,
-                    FontSize: 24,
+                  Center(
+                    child: ReusableText(
+                      TextString: AppLocalizations.of(context)!.submitted,
+                      FontSize: 24,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    ReusableText(
-                      FromLeft: 15,
-                      TextString: AppLocalizations.of(context)!.category,
-                      FontSize: 15,
-                      TextColor: ColorCollections.Black,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 15),
-                      height: 30,
-                      width: 150,
-                      decoration: BoxDecoration(
-                          color: ColorCollections.SecondaryColor,
-                          borderRadius: BorderRadius.circular(5)),
-                      child: ReusableText(
-                          TextString: AppLocalizations.of(context)!.pets,
-                          FontSize: 16),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    ReusableText(
-                      FromLeft: 15,
-                      TextString: AppLocalizations.of(context)!.itemName,
-                      FontSize: 15,
-                      TextColor: ColorCollections.Black,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 15),
-                      height: 30,
-                      width: 150,
-                      decoration: BoxDecoration(
-                          color: ColorCollections.SecondaryColor,
-                          borderRadius: BorderRadius.circular(5)),
-                      child: ReusableText(
-                          TextString: AppLocalizations.of(context)!.cat,
-                          FontSize: 16),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ReusableText(
-                      FromLeft: 15,
-                      TextString: AppLocalizations.of(context)!.description,
-                      FontSize: 15,
-                      TextColor: ColorCollections.Black,
-                    ),
-                    ConstrainedBox(
-                      constraints: BoxConstraints.fromViewConstraints(
-                          ViewConstraints(maxWidth: 180)),
-                      child: Container(
-                        margin: EdgeInsets.only(left: 15),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      ReusableText(
+                        FromLeft: 15,
+                        TextString: AppLocalizations.of(context)!.category,
+                        FontSize: 15,
+                        TextColor: ColorCollections.Black,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 25),
+                        height: 35,
+                        width: 150,
                         decoration: BoxDecoration(
-                          color: ColorCollections.SecondaryColor,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: ReusableText(
-                            TextString:
-                                'my cat is amzing .he can do anything you say.',
-                            FontSize: 16),
+                            color: ColorCollections.SecondaryColor,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: ReusableText(TextString: item_cat, FontSize: 16),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      ReusableText(
+                        FromLeft: 15,
+                        TextString: AppLocalizations.of(context)!.itemName,
+                        FontSize: 15,
+                        TextColor: ColorCollections.Black,
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ReusableText(
-                      FromLeft: 15,
-                      TextString: AppLocalizations.of(context)!.photo,
-                      FontSize: 15,
-                      TextColor: ColorCollections.Black,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 15),
-                      height: 100,
-                      width: 150,
-                      decoration: BoxDecoration(
-                          color: ColorCollections.SecondaryColor,
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Image.asset(
-                        'assets/images/background.jpeg',
-                        fit: BoxFit.fill,
+                      Container(
+                        margin: EdgeInsets.only(left: 15),
+                        height: 35,
+                        width: 150,
+                        decoration: BoxDecoration(
+                            color: ColorCollections.SecondaryColor,
+                            borderRadius: BorderRadius.circular(5)),
+                        child:
+                            ReusableText(TextString: item_name, FontSize: 16),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ReusableText(
+                        FromLeft: 15,
+                        TextString: AppLocalizations.of(context)!.description,
+                        FontSize: 15,
+                        TextColor: ColorCollections.Black,
                       ),
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/request_page', (route) => false);
-                      },
-                      child: Center(
+                      ConstrainedBox(
+                        constraints: BoxConstraints.fromViewConstraints(
+                            ViewConstraints(maxWidth: 198)),
                         child: Container(
-                          margin: EdgeInsets.only(top: 30, right: 10),
-                          height: 50,
-                          width: 150,
+                          margin: EdgeInsets.only(left: 15),
                           decoration: BoxDecoration(
                             color: ColorCollections.SecondaryColor,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(5),
                           ),
-                          child: Center(
-                            child: ReusableText(
-                              TextString:
-                                  AppLocalizations.of(context)!.goToRequest,
+                          child: ReusableText(
+                              TextString: item_description, FontSize: 16),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  item_model.pickedImage != null
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ReusableText(
+                              FromLeft: 15,
+                              TextString: AppLocalizations.of(context)!.photo,
+                              FontSize: 15,
                               TextColor: ColorCollections.Black,
-                              FontSize: 20,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 57),
+                              height: 100,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  color: ColorCollections.SecondaryColor,
+                                  borderRadius: BorderRadius.circular(5),
+                                  image: DecorationImage(
+                                    image: MemoryImage(item_model.pickedImage!),
+                                  )),
+                            )
+                          ],
+                        )
+                      : SizedBox(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              '/home_page', (route) => false);
+                        },
+                        child: Center(
+                          child: Container(
+                            margin: EdgeInsets.only(top: 30),
+                            height: 50,
+                            width: 130,
+                            decoration: BoxDecoration(
+                              color: ColorCollections.TeritiaryColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: ReusableText(
+                                TextString:
+                                    AppLocalizations.of(context)!.goToHome,
+                                TextColor: ColorCollections.PrimaryColor,
+                                FontSize: 20,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/home_page', (route) => false);
-                      },
-                      child: Center(
-                        child: Container(
-                          margin: EdgeInsets.only(top: 30),
-                          height: 50,
-                          width: 130,
-                          decoration: BoxDecoration(
-                            color: ColorCollections.TeritiaryColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: ReusableText(
-                              TextString:
-                                  AppLocalizations.of(context)!.goToHome,
-                              TextColor: ColorCollections.PrimaryColor,
-                              FontSize: 20,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           )
         ],

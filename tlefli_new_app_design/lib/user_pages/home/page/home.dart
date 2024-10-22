@@ -9,8 +9,8 @@ import 'package:tlefli_new_app_design/user_pages/home/widget/home_widget.dart';
 import 'package:tlefli_new_app_design/user_pages/i%20found/page/i_found_page.dart';
 import 'package:tlefli_new_app_design/user_pages/i%20lost/page/i_lost_page.dart';
 import 'package:tlefli_new_app_design/user_pages/more/page/more_page.dart';
-import 'package:tlefli_new_app_design/user_pages/my_matchs/my_match_page.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/my_object_page.dart';
+import 'package:tlefli_new_app_design/user_pages/my_match/my_matchs_page.dart';
 import 'package:tlefli_new_app_design/user_pages/profile/page/profile_page.dart';
 import 'package:tlefli_new_app_design/user_pages/request/page/request_page.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
@@ -86,9 +86,9 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                 children: [
                   state is BottomNavBarState
                       ? state.SelectedIndex == 0
-                          ? my_match_page()
+                          ? my_match_page(animation: animation)
                           : state.SelectedIndex == 1
-                              ? my_object_page(animation: animation)
+                              ? my_object_page()
                               : state.SelectedIndex == 2
                                   ? home_widget(context, animation)
                                   : state.SelectedIndex == 3

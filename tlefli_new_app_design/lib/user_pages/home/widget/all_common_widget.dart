@@ -1,8 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
+import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
 Widget common_main_catagory_container(
+  String asset,
+  String text,
+  VoidCallback ontap,
+) {
+  return Container(
+    margin: EdgeInsets.all(5),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      color: ColorCollections.PrimaryColor,
+    ),
+    height: 250,
+    width: 170,
+    child: Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 20),
+          height: 100,
+          width: 100,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/categories/$asset.jpg'),
+                fit: BoxFit.fill),
+          ),
+        ),
+        Container(
+          height: 100,
+          child: Column(
+            children: [
+              Center(
+                child: ReusableText(
+                  FromTop: 12,
+                  FromBottom: 10,
+                  TextString: '$text',
+                  FontSize: 16,
+                  TextColor: ColorCollections.Black,
+                ),
+              ),
+              GestureDetector(
+                onTap: ontap,
+                child: Container(
+                  height: 25,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: ColorCollections.TeritiaryColor,
+                    borderRadius: BorderRadius.circular(7),
+                  ),
+                  child: Center(
+                    child: ReusableText(
+                      FromTop: 0,
+                      FromBottom: 0,
+                      TextString: 'Check',
+                      FontSize: 13,
+                      TextColor: ColorCollections.PrimaryColor,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget common_nested_catagory_container(
   String asset,
   String text,
   VoidCallback ontap,
@@ -72,6 +139,7 @@ void commonPartnerLocationClicked(
   BuildContext context,
   String type,
   Map<String, dynamic> map,
+  itemPickedModel item_model,
 ) {
   showBottomSheet(
     context: context,
@@ -100,12 +168,7 @@ void commonPartnerLocationClicked(
                     ],
                   ),
                   SizedBox(height: 15),
-                  LocationContainer(
-                    () {
-                      Navigator.pop(context);
-                    },
-                    map,
-                  ),
+                  LocationContainer(map, item_model, context),
                 ],
               ),
             );
@@ -116,45 +179,53 @@ void commonPartnerLocationClicked(
   );
 }
 
-LocationContainer(VoidCallback ontap, Map<String, dynamic> map) {
-  return Container(
-    height: 500,
-    child: ListView.builder(
-      itemCount: map['assets'].length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: ontap,
-          child: Container(
-            height: 70,
-            margin: EdgeInsets.only(top: 10, left: 20, right: 20),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ColorCollections.PrimaryColor),
-            child: Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.all(15),
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7),
-                    image: DecorationImage(
-                        image: AssetImage(
-                            'assets/images/partners/${map['assets'][index]}.jpg'),
-                        fit: BoxFit.fill),
+LocationContainer(Map<String, dynamic> map, itemPickedModel item_model,
+    BuildContext context) {
+  return GestureDetector(
+    onTap: () {},
+    child: Container(
+      height: 500,
+      child: ListView.builder(
+        itemCount: map['assets'].length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              item_model.location_choosed = map['txt'][index];
+              print(map['txt'][index]);
+              Navigator.pop(context);
+            },
+            child: Container(
+              height: 70,
+              margin: EdgeInsets.only(top: 10, left: 20, right: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: ColorCollections.PrimaryColor),
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(15),
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7),
+                      image: DecorationImage(
+                          image: AssetImage(
+                              'assets/images/partners/${map['assets'][index]}.jpg'),
+                          fit: BoxFit.fill),
+                    ),
                   ),
-                ),
-                ReusableText(
-                  FromLeft: 15,
-                  TextString: map['txt'][index],
-                  FontSize: 18,
-                  TextColor: ColorCollections.Black,
-                ),
-              ],
+                  ReusableText(
+                    FromLeft: 15,
+                    TextString: map['txt'][index],
+                    FontSize: 18,
+                    TextColor: ColorCollections.Black,
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     ),
   );
 }

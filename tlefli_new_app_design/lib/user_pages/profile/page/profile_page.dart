@@ -27,8 +27,8 @@ class _profile_pageState extends State<profile_page> {
                 Center(
                   child: Container(
                     margin: EdgeInsets.only(top: 20),
-                    height: 150,
-                    width: 320,
+                    height: 160,
+                    width: 360,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: DecorationImage(

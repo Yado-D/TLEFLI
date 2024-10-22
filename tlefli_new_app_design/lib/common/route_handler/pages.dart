@@ -9,6 +9,7 @@ import 'package:tlefli_new_app_design/partners_pages/home/pages/Partner_request_
 import 'package:tlefli_new_app_design/partners_pages/home/pages/partners_home.dart';
 import 'package:tlefli_new_app_design/partners_pages/rejected/page/rejected_items.dart';
 import 'package:tlefli_new_app_design/partners_pages/verified_item/pages/verified_item.dart';
+import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/user_pages/Help/page/help_page.dart';
 import 'package:tlefli_new_app_design/user_pages/about%20us/page/about_us_page.dart';
 import 'package:tlefli_new_app_design/user_pages/contact_us/page/contact_us_page.dart';
@@ -26,6 +27,7 @@ import 'package:tlefli_new_app_design/user_pages/signin/pages/sign_in_page.dart'
 import 'package:tlefli_new_app_design/user_pages/signup/bloc/signup_bloc.dart';
 import 'package:tlefli_new_app_design/user_pages/signup/page/sign_up_page.dart';
 import 'package:tlefli_new_app_design/user_pages/welcome/pages/welcome_page.dart';
+import 'package:tlefli_new_app_design/widgets/splash_screen.dart';
 
 class NamedRouteSettings {
   NamedRouteSettings({required BuildContext context});
@@ -57,13 +59,13 @@ class NamedRouteSettings {
           create: (_) => HomeBloc(),
         ),
       ),
-      pageEntity(
-        route: NamedRoutes.I_LOST_PAGE,
-        page: const i_lost_page(),
-        bloc: BlocProvider(
-          create: (_) => ILostBloc(),
-        ),
-      ),
+      // pageEntity(
+      //   route: NamedRoutes.I_LOST_PAGE,
+      //   page: const i_lost_page(),
+      //   bloc: BlocProvider(
+      //     create: (_) => ILostBloc(),
+      //   ),
+      // ),
       pageEntity(
         route: NamedRoutes.REQUEST_PAGE,
         page: const request_page(),
@@ -147,6 +149,17 @@ class NamedRouteSettings {
     if (settings.name != null) {
       var route = allPages().where((element) => element.route == settings.name);
       if (route.isNotEmpty) {
+        //check whether or not user is login or not
+
+        bool firstStartApp = Global.storageServices.GetDeviceFirstOpen();
+        if (route.first.route == NamedRoutes.WELCOCME_PAGE) {
+          print('the user already pass the welcome page 4');
+          return MaterialPageRoute(
+            builder: (_) => Splash(isUserLoggedIn: firstStartApp),
+            settings: settings,
+          );
+        }
+
         print('valid routes');
         return MaterialPageRoute(
             builder: (_) => route.first.page, settings: settings);

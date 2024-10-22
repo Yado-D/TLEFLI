@@ -12,7 +12,7 @@ class settings_page extends StatelessWidget {
       backgroundColor: ColorCollections.SecondaryColor,
       appBar: SimpleAppBars(context, AppLocalizations.of(context)!.settings),
       body: Container(
-        margin: EdgeInsets.all(20),
+        margin: EdgeInsets.only(left: 10, right: 10, top: 50),
         child: Column(
           children: [
             Center(
