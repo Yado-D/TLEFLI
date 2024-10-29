@@ -5,32 +5,35 @@ import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/choose_location_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
+import 'package:tlefli_new_app_design/user_pages/my_object/editDescription.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
 class nested_categorie_page extends StatelessWidget {
   final List<Map<String, dynamic>> list;
   final Uint8List? pickedImage;
+  String page;
   itemPickedModel item_model;
   nested_categorie_page({
     super.key,
     required this.list,
     this.pickedImage,
     required this.item_model,
+    required this.page,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorCollections.SecondaryColor,
+      backgroundColor: ColorCollections.PrimaryColor,
       appBar: SimpleAppBars(context, 'Choose Catagory'),
       body: Container(
         padding: EdgeInsets.only(top: 15),
-        color: ColorCollections.SecondaryColor,
+        color: ColorCollections.PrimaryColor,
         height: 700,
         child: ListView(
           children: [
             Container(
-              color: ColorCollections.SecondaryColor,
+              color: ColorCollections.PrimaryColor,
               height: 700,
               child: GridView.builder(
                 shrinkWrap: true,
@@ -48,11 +51,22 @@ class nested_categorie_page extends StatelessWidget {
                     () {
                       item_model.nested_item = list[0]['txt'][index];
                       print(item_model.nested_item);
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                choose_location_page(item_model: item_model)),
-                      );
+                      if (page == 'modifie') {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  EditDescription(item_model: item_model)),
+                          (route) => false,
+                        );
+                      } else {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => choose_location_page(
+                                    item_model: item_model,
+                                    page: 'report',
+                                  )),
+                        );
+                      }
                     },
                   );
                 },

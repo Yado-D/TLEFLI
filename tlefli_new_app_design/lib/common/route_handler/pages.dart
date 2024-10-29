@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tlefli_new_app_design/admin_pages/add_partners/pages/add_partner_page.dart';
 import 'package:tlefli_new_app_design/admin_pages/home/pages/admin_home.dart';
 import 'package:tlefli_new_app_design/admin_pages/remove_partners/pages/remove_partners_page.dart';
+import 'package:tlefli_new_app_design/admin_pages/signin/bloc/signin_bloc.dart';
 import 'package:tlefli_new_app_design/common/route_handler/name.dart';
 import 'package:tlefli_new_app_design/partners_pages/agreement/page/agreement_page.dart';
 import 'package:tlefli_new_app_design/partners_pages/home/pages/Partner_request_details.dart';
@@ -16,8 +17,7 @@ import 'package:tlefli_new_app_design/user_pages/contact_us/page/contact_us_page
 import 'package:tlefli_new_app_design/user_pages/faq/page/faq_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/bloc/home_bloc.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/home.dart';
-import 'package:tlefli_new_app_design/user_pages/i%20lost/bloc/i_lost_bloc.dart';
-import 'package:tlefli_new_app_design/user_pages/i%20lost/page/i_lost_page.dart';
+
 import 'package:tlefli_new_app_design/user_pages/language/page/language_page.dart';
 import 'package:tlefli_new_app_design/user_pages/request/page/request_page.dart';
 import 'package:tlefli_new_app_design/user_pages/setting/page/settings.dart';
@@ -59,13 +59,13 @@ class NamedRouteSettings {
           create: (_) => HomeBloc(),
         ),
       ),
-      // pageEntity(
-      //   route: NamedRoutes.I_LOST_PAGE,
-      //   page: const i_lost_page(),
-      //   bloc: BlocProvider(
-      //     create: (_) => ILostBloc(),
-      //   ),
-      // ),
+      pageEntity(
+        route: NamedRoutes.ADMIN_HOME_PAGE,
+        page: const admin_home_page(),
+        bloc: BlocProvider(
+          create: (_) => AdminSigninBloc(),
+        ),
+      ),
       pageEntity(
         route: NamedRoutes.REQUEST_PAGE,
         page: const request_page(),
@@ -151,13 +151,10 @@ class NamedRouteSettings {
       if (route.isNotEmpty) {
         //check whether or not user is login or not
 
-        bool firstStartApp = Global.storageServices.GetDeviceFirstOpen();
-        if (route.first.route == NamedRoutes.WELCOCME_PAGE) {
+        bool alreadyMember = Global.storageServices.GetDeviceFirstOpen();
+        if (route.first.route == NamedRoutes.WELCOCME_PAGE && alreadyMember) {
           print('the user already pass the welcome page 4');
-          return MaterialPageRoute(
-            builder: (_) => Splash(isUserLoggedIn: firstStartApp),
-            settings: settings,
-          );
+          return MaterialPageRoute(builder: (_) => home_page());
         }
 
         print('valid routes');

@@ -50,7 +50,7 @@ class _TypeLocationPageState extends State<type_location_page> {
                   locationWrite = value;
                   setState(() {
                     matchedLocations = listOfCity
-                        .where((city) => city.contains(locationWrite))
+                        .where((city) => city == locationWrite)
                         .toList();
                   });
                 },
@@ -71,7 +71,7 @@ class _TypeLocationPageState extends State<type_location_page> {
             : matchedLocations
                 .map((location) => GestureDetector(
                       onTap: () {
-                        widget.item_model.location_choosed = location;
+                        widget.item_model.city = location;
                         Navigator.pop(context);
                         // Add logic to navigate or handle the chosen location
                       },

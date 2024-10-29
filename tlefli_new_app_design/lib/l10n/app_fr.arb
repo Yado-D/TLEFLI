@@ -114,6 +114,15 @@
   "signal": "Signal",
   "found": "Trouvé",
   "areYouSureLogout": "Êtes-vous sûr de vouloir vous déconnecter ?",
-  "apply":"appliquer" 
+  "apply":"appliquer" ,
+  "contactSupport": "Support de contact",
+  "userManual": "Manuel de l'utilisateur",
+  "ifYouHaveQuestion": "Si vous avez des questions, des préoccupations\n ou besoin d'assistance, n'hésitez pas\n à contacter notre équipe de support :",
+  "supportHours:": "Heures de support :",
+  "supportHour1": "Lundi - Vendredi : de 9h00 à 18h00",
+  "supportHour2": "Samedi : de 10h00 à 16h00",
+  "supportHour3": "Dimanche : Fermé",
+  "userManualDescripton": "Bienvenue dans notre application! Voici un \n manuel de l'utilisateur pour vous aider à démarrer :"
+
 
 }

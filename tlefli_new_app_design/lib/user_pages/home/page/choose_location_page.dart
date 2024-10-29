@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/Bottomsheets/widgets/map_of%20location.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
+import 'package:tlefli_new_app_design/common/CommonSnackBar.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/partner_location_choose_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/type_location.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/when_lost_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
+import 'package:tlefli_new_app_design/user_pages/my_object/editDescription.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class choose_location_page extends StatelessWidget {
+class choose_location_page extends StatefulWidget {
+  String page;
   itemPickedModel item_model;
-  choose_location_page({super.key, required this.item_model});
+  choose_location_page({
+    super.key,
+    required this.item_model,
+    required this.page,
+  });
 
+  @override
+  State<choose_location_page> createState() => _choose_location_pageState();
+}
+
+class _choose_location_pageState extends State<choose_location_page> {
+  String? street;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,8 +33,8 @@ class choose_location_page extends StatelessWidget {
           SimpleAppBars(context, AppLocalizations.of(context)!.addANewLocation),
       body: Container(
         padding: EdgeInsets.only(top: 30),
-        color: ColorCollections.SecondaryColor,
-        child: Stack(
+        color: ColorCollections.PrimaryColor,
+        child: ListView(
           children: [
             Column(
               children: [
@@ -66,28 +79,44 @@ class choose_location_page extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => type_location_page(
-                          item_model: item_model,
+                          item_model: widget.item_model,
                         ),
                       ),
                     );
-                    print(item_model.location_choosed);
+                    print(widget.item_model.city);
                   },
                   child: Container(
                     height: 50,
-                    width: 290,
+                    width: MediaQuery.of(context).size.width,
                     margin: EdgeInsets.only(left: 20, right: 20, top: 20),
                     // width: 200,
                     decoration: BoxDecoration(
-                        color: ColorCollections.PrimaryColor,
-                        borderRadius: BorderRadius.circular(7)),
+                      color: ColorCollections.PrimaryColor,
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 219, 219, 219)),
+                    ),
                     // margin: EdgeInsets.only(left: 30),
                     child: ReusableText(
                       FromLeft: 20,
                       FromTop: 15,
-                      TextString: AppLocalizations.of(context)!.typeTheLocation,
+                      TextString: widget.item_model.city ?? 'cities',
                       FontSize: 16,
-                      TextColor: const Color.fromARGB(255, 104, 104, 103),
+                      TextColor: const Color.fromARGB(255, 174, 174, 174),
                     ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                  width: MediaQuery.of(context).size.width,
+                  child: reusableTextField(
+                    hintText: 'address',
+                    textType: 'textType',
+                    onchange: (onchange) {
+                      setState(() {
+                        widget.item_model.address = onchange;
+                      });
+                    },
                   ),
                 ),
                 Row(
@@ -117,7 +146,7 @@ class choose_location_page extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
-                          item_model: item_model,
+                          item_model: widget.item_model,
                           type: 'Transportaion',
                           map: transportaion,
                         ),
@@ -132,13 +161,13 @@ class choose_location_page extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
-                          item_model: item_model,
+                          item_model: widget.item_model,
                           type: 'Airport',
                           map: transportaion,
                         ),
                       ),
                     );
-                    print(item_model.location_choosed);
+                    print(widget.item_model.city);
                   },
                 ),
                 common_partner_location(
@@ -148,7 +177,7 @@ class choose_location_page extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
-                          item_model: item_model,
+                          item_model: widget.item_model,
                           type: 'Town Halls',
                           map: transportaion,
                         ),
@@ -163,7 +192,7 @@ class choose_location_page extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => partner_location_page_(
-                          item_model: item_model,
+                          item_model: widget.item_model,
                           type: 'Shopping Centers',
                           map: transportaion,
                         ),
@@ -173,32 +202,43 @@ class choose_location_page extends StatelessWidget {
                 ),
               ],
             ),
-            Positioned(
-              bottom: 30,
-              left: 20,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => lost_when_page(
-                              item_model: item_model,
-                            )),
-                  );
-                },
-                child: Container(
-                  margin: EdgeInsets.only(top: 100, left: 30, right: 30),
-                  height: 40,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    color: ColorCollections.PrimaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: ReusableText(
-                      TextString: AppLocalizations.of(context)!.next,
-                      FontSize: 20,
-                      TextColor: ColorCollections.Black,
-                    ),
+            GestureDetector(
+              onTap: () {
+                if (widget.item_model.address == '') {
+                  commonSnackBar(context, 'location is required!');
+                } else {
+                  if (widget.page == 'modifie') {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => EditDescription(
+                          item_model: widget.item_model,
+                        ),
+                      ),
+                      (route) => false,
+                    );
+                  } else {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => lost_when_page(
+                                item_model: widget.item_model,
+                              )),
+                    );
+                  }
+                }
+              },
+              child: Container(
+                margin: EdgeInsets.only(top: 100, left: 30, right: 30),
+                height: 40,
+                width: 250,
+                decoration: BoxDecoration(
+                  color: ColorCollections.TeritiaryColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: ReusableText(
+                    TextString: AppLocalizations.of(context)!.next,
+                    FontSize: 20,
+                    TextColor: ColorCollections.PrimaryColor,
                   ),
                 ),
               ),
@@ -219,8 +259,10 @@ class choose_location_page extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(top: 15, left: 15, right: 15),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: ColorCollections.PrimaryColor),
+          borderRadius: BorderRadius.circular(10),
+          color: ColorCollections.PrimaryColor,
+          border: Border.all(color: const Color.fromARGB(255, 224, 225, 224)),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

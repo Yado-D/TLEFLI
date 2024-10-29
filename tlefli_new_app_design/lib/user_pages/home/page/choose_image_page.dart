@@ -14,14 +14,18 @@ import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class choose_image_page extends StatefulWidget {
-  const choose_image_page({super.key});
+  String lostOrFound;
+  choose_image_page({
+    super.key,
+    required this.lostOrFound,
+  });
 
   @override
   State<choose_image_page> createState() => _choose_image_pageState();
 }
 
 class _choose_image_pageState extends State<choose_image_page> {
-  Color _buttonColor = ColorCollections.PrimaryColor;
+  Color _buttonColor = ColorCollections.TeritiaryColor;
   void _onMouseEnter(bool hover) {
     setState(() {
       _buttonColor = hover ? Colors.red : Colors.blue;
@@ -32,19 +36,22 @@ class _choose_image_pageState extends State<choose_image_page> {
   @override
   Widget build(BuildContext context) {
     itemPickedModel item_model = itemPickedModel(
+      address: '',
+      city: '',
       pickedImage: pickedImage,
       main_catagory: '',
       nested_item: '',
-      location_choosed: '',
       date_picked: '',
       time_picked: '',
       item_description: '',
       race: '',
       item_color: '',
       item_model: '',
+      owner: '',
+      lostOrFound: widget.lostOrFound,
     );
     return Scaffold(
-      backgroundColor: ColorCollections.SecondaryColor,
+      backgroundColor: ColorCollections.PrimaryColor,
       appBar: SimpleAppBars(context, AppLocalizations.of(context)!.chooseImage),
       body: Container(
         padding: EdgeInsets.only(top: 80),
@@ -55,6 +62,7 @@ class _choose_image_pageState extends State<choose_image_page> {
                 Center(
                   child: Container(
                     child: ReusableText(
+                      FromTop: 80,
                       TextString:
                           AppLocalizations.of(context)!.whatHaveYouLostFound,
                       FontSize: 20,
@@ -68,8 +76,10 @@ class _choose_image_pageState extends State<choose_image_page> {
                     height: 200,
                     width: 320,
                     decoration: BoxDecoration(
-                      color: ColorCollections.PrimaryColor,
+                      color: const Color.fromARGB(255, 244, 244, 244),
                       borderRadius: BorderRadius.circular(10),
+                      border:
+                          Border.all(color: ColorCollections.SecondaryColor),
                     ),
                     child: pickedImage == null
                         ? Container(
@@ -109,7 +119,7 @@ class _choose_image_pageState extends State<choose_image_page> {
                         : Column(
                             children: [
                               Container(
-                                height: 200,
+                                height: 198,
                                 width: 300,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
@@ -171,6 +181,7 @@ class _choose_image_pageState extends State<choose_image_page> {
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => choose_main_catagory_page(
+                      page: 'report',
                       item_model: item_model,
                     ),
                   ));
@@ -187,13 +198,13 @@ class _choose_image_pageState extends State<choose_image_page> {
                       width: 300,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: _buttonColor,
+                        color: ColorCollections.TeritiaryColor,
                       ),
                       child: Center(
                         child: ReusableText(
                           TextString: AppLocalizations.of(context)!.next,
                           FontSize: 26,
-                          TextColor: ColorCollections.Black,
+                          TextColor: ColorCollections.PrimaryColor,
                         ),
                       ),
                     ),

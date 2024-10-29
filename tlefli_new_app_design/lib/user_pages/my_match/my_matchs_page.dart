@@ -12,20 +12,21 @@ class my_match_page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorCollections.SecondaryColor,
+      backgroundColor: ColorCollections.PrimaryColor,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
             child: ReusableText(
               TextString: AppLocalizations.of(context)!.yourFirstMatch,
               FontSize: 20,
               TextColor: ColorCollections.Black,
+              FromTop: 100,
             ),
           ),
           Container(
             margin: EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 15),
-            height: 250,
+            height: 300,
             width: 300,
             // color: ColorCollections.PrimaryColor,
             child: Lottie.asset('assets/images/report.json'),
@@ -40,11 +41,11 @@ class my_match_page extends StatelessWidget {
               );
             },
             child: Container(
-              margin: EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 15),
+              margin: EdgeInsets.only(left: 15, right: 15, top: 28, bottom: 15),
               height: 50,
               width: 180,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 38, 194, 134),
+                color: Color(0xFF003540),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Center(

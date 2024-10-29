@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
 Widget partnersContainer(String partnerOne, String partnerTwo) {
   return Column(
@@ -11,6 +12,7 @@ Widget partnersContainer(String partnerOne, String partnerTwo) {
             height: 150,
             width: 170,
             decoration: BoxDecoration(
+              border: Border.all(color: ColorCollections.SecondaryColor),
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
                 image: AssetImage('assets/images/partners/$partnerOne.jpg'),
@@ -23,6 +25,7 @@ Widget partnersContainer(String partnerOne, String partnerTwo) {
             height: 150,
             width: 170,
             decoration: BoxDecoration(
+              border: Border.all(color: ColorCollections.SecondaryColor),
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
                 image: AssetImage('assets/images/partners/$partnerTwo.jpg'),

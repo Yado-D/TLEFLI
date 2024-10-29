@@ -9,9 +9,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tlefli_new_app_design/main.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
+import 'package:tlefli_new_app_design/services/constants.dart';
+import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/my_object_page.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tlefli_new_app_design/utils/app_constant.dart';
 
 class FullPageContainer extends StatelessWidget {
   const FullPageContainer({super.key});
@@ -134,7 +137,7 @@ class AppButton extends StatelessWidget {
 //reusable text field
 
 Widget reusableTextField({
-  required String icon_name,
+  String? icon_name,
   String suffix_icon_name = '',
   required String hintText,
   required String textType,
@@ -147,7 +150,7 @@ Widget reusableTextField({
   double FromLeft = 0,
 }) {
   return Container(
-    height: 50.h,
+    height: 45.h,
     width: WidthOfContainer.w,
     margin: EdgeInsets.only(
       top: FromTop.w,
@@ -162,14 +165,16 @@ Widget reusableTextField({
     ),
     child: Row(
       children: [
-        Container(
-          height: 16.w,
-          width: 16.w,
-          margin: const EdgeInsets.only(left: 17),
-          child: Image.asset("assets/icons/flat_icons/$icon_name.png"),
-        ),
+        icon_name != null
+            ? Container(
+                height: 16.w,
+                width: 16.w,
+                margin: const EdgeInsets.only(left: 17),
+                child: Image.asset("assets/icons/flat_icons/$icon_name.png"),
+              )
+            : SizedBox(),
         SizedBox(
-          height: 50.h,
+          height: 45.h,
           width: widthOfTextField.h,
           child: TextField(
             onChanged: (value) => onchange!(value),
@@ -237,6 +242,15 @@ AppBar SimpleAppBars(BuildContext context, String title) {
     backgroundColor: ColorCollections.PrimaryColor,
     automaticallyImplyLeading: false,
     flexibleSpace: Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: const Color.fromARGB(
+                255, 203, 203, 203), // Change to your desired color
+            width: 1.0, // Change to your desired width
+          ),
+        ),
+      ),
       height: 120,
       padding: EdgeInsets.only(top: 35, left: 10, right: 30),
       child: Row(
@@ -261,10 +275,21 @@ AppBar SimpleAppBars(BuildContext context, String title) {
 
 AppBar ReusableAppBar(VoidCallback ontap, BuildContext context) {
   return AppBar(
+    flexibleSpace: Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: const Color.fromARGB(
+                255, 203, 203, 203), // Change to your desired color
+            width: 1.0, // Change to your desired width
+          ),
+        ),
+      ),
+    ),
     automaticallyImplyLeading: false,
     backgroundColor: ColorCollections.PrimaryColor,
     title: Container(
-      margin: const EdgeInsets.only(left: 10, right: 10),
+      margin: const EdgeInsets.only(left: 0, right: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -300,7 +325,7 @@ CustomShowDialoge(BuildContext context, itemPickedModel item_model) {
   // String item_cat = item_model.main_catagory ?? '';
   // String item_cat = item_model.main_catagory ?? '';
   return showDialog(
-    // barrierDismissible: false,
+    barrierDismissible: false,
     context: context,
     builder: (context) {
       String item_cat = item_model.main_catagory ?? '';
@@ -314,154 +339,151 @@ CustomShowDialoge(BuildContext context, itemPickedModel item_model) {
             constraints: BoxConstraints.fromViewConstraints(
               ViewConstraints(maxHeight: 500, maxWidth: 350),
             ),
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: ReusableText(
-                      TextString:
-                          AppLocalizations.of(context)!.youHaveSuccessfully,
-                      FontSize: 20,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: ReusableText(
+                    TextString:
+                        AppLocalizations.of(context)!.youHaveSuccessfully,
+                    FontSize: 20,
+                  ),
+                ),
+                Center(
+                  child: ReusableText(
+                    TextString: AppLocalizations.of(context)!.submitted,
+                    FontSize: 24,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    ReusableText(
+                      FromLeft: 15,
+                      TextString: AppLocalizations.of(context)!.category,
+                      FontSize: 15,
+                      TextColor: ColorCollections.Black,
                     ),
-                  ),
-                  Center(
-                    child: ReusableText(
-                      TextString: AppLocalizations.of(context)!.submitted,
-                      FontSize: 24,
+                    Container(
+                      margin: EdgeInsets.only(left: 25),
+                      height: 35,
+                      width: 150,
+                      decoration: BoxDecoration(
+                          color: ColorCollections.SecondaryColor,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: ReusableText(TextString: item_cat, FontSize: 16),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    ReusableText(
+                      FromLeft: 15,
+                      TextString: AppLocalizations.of(context)!.itemName,
+                      FontSize: 15,
+                      TextColor: ColorCollections.Black,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      ReusableText(
-                        FromLeft: 15,
-                        TextString: AppLocalizations.of(context)!.category,
-                        FontSize: 15,
-                        TextColor: ColorCollections.Black,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 25),
-                        height: 35,
-                        width: 150,
-                        decoration: BoxDecoration(
-                            color: ColorCollections.SecondaryColor,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: ReusableText(TextString: item_cat, FontSize: 16),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      ReusableText(
-                        FromLeft: 15,
-                        TextString: AppLocalizations.of(context)!.itemName,
-                        FontSize: 15,
-                        TextColor: ColorCollections.Black,
-                      ),
-                      Container(
+                    Container(
+                      margin: EdgeInsets.only(left: 15),
+                      height: 35,
+                      width: 150,
+                      decoration: BoxDecoration(
+                          color: ColorCollections.SecondaryColor,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: ReusableText(TextString: item_name, FontSize: 16),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ReusableText(
+                      FromLeft: 15,
+                      TextString: AppLocalizations.of(context)!.description,
+                      FontSize: 15,
+                      TextColor: ColorCollections.Black,
+                    ),
+                    ConstrainedBox(
+                      constraints: BoxConstraints.fromViewConstraints(
+                          ViewConstraints(maxWidth: 198)),
+                      child: Container(
                         margin: EdgeInsets.only(left: 15),
-                        height: 35,
-                        width: 150,
                         decoration: BoxDecoration(
-                            color: ColorCollections.SecondaryColor,
-                            borderRadius: BorderRadius.circular(5)),
-                        child:
-                            ReusableText(TextString: item_name, FontSize: 16),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ReusableText(
-                        FromLeft: 15,
-                        TextString: AppLocalizations.of(context)!.description,
-                        FontSize: 15,
-                        TextColor: ColorCollections.Black,
-                      ),
-                      ConstrainedBox(
-                        constraints: BoxConstraints.fromViewConstraints(
-                            ViewConstraints(maxWidth: 198)),
-                        child: Container(
-                          margin: EdgeInsets.only(left: 15),
-                          decoration: BoxDecoration(
-                            color: ColorCollections.SecondaryColor,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: ReusableText(
-                              TextString: item_description, FontSize: 16),
+                          color: ColorCollections.SecondaryColor,
+                          borderRadius: BorderRadius.circular(5),
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  item_model.pickedImage != null
-                      ? Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ReusableText(
-                              FromLeft: 15,
-                              TextString: AppLocalizations.of(context)!.photo,
-                              FontSize: 15,
-                              TextColor: ColorCollections.Black,
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 57),
-                              height: 100,
-                              width: 150,
-                              decoration: BoxDecoration(
-                                  color: ColorCollections.SecondaryColor,
-                                  borderRadius: BorderRadius.circular(5),
-                                  image: DecorationImage(
-                                    image: MemoryImage(item_model.pickedImage!),
-                                  )),
-                            )
-                          ],
-                        )
-                      : SizedBox(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/home_page', (route) => false);
-                        },
-                        child: Center(
-                          child: Container(
-                            margin: EdgeInsets.only(top: 30),
-                            height: 50,
-                            width: 130,
+                        child: ReusableText(
+                            TextString: item_description, FontSize: 16),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                item_model.pickedImage != null
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ReusableText(
+                            FromLeft: 15,
+                            TextString: AppLocalizations.of(context)!.photo,
+                            FontSize: 15,
+                            TextColor: ColorCollections.Black,
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 57),
+                            height: 100,
+                            width: 150,
                             decoration: BoxDecoration(
-                              color: ColorCollections.TeritiaryColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: ReusableText(
-                                TextString:
-                                    AppLocalizations.of(context)!.goToHome,
-                                TextColor: ColorCollections.PrimaryColor,
-                                FontSize: 20,
-                              ),
+                                color: ColorCollections.SecondaryColor,
+                                borderRadius: BorderRadius.circular(5),
+                                image: DecorationImage(
+                                  image: MemoryImage(item_model.pickedImage!),
+                                )),
+                          )
+                        ],
+                      )
+                    : SizedBox(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/home_page', (route) => false);
+                      },
+                      child: Center(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 30),
+                          height: 50,
+                          width: 130,
+                          decoration: BoxDecoration(
+                            color: ColorCollections.TeritiaryColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: ReusableText(
+                              TextString:
+                                  AppLocalizations.of(context)!.goToHome,
+                              TextColor: ColorCollections.PrimaryColor,
+                              FontSize: 20,
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           )
         ],
@@ -494,9 +516,9 @@ Drawer CustomDrowerElement(
           Container(
             child: Column(
               children: [
-                DrowerWidget(Icons.shopping_bag_rounded,
-                    AppLocalizations.of(context)!.request, () {
-                  Navigator.of(context).pushNamed('/request_page');
+                DrowerWidget(
+                    Icons.settings, AppLocalizations.of(context)!.settings, () {
+                  Navigator.of(context).pushNamed('/settings_page');
                 }),
                 DrowerWidget(Icons.language_outlined,
                     AppLocalizations.of(context)!.language, () {
@@ -510,6 +532,8 @@ Drawer CustomDrowerElement(
                 DrowerWidget(
                     Icons.logout_outlined, AppLocalizations.of(context)!.logOut,
                     () {
+                  Global.storageServices
+                      .setBool(AppConstants.STORAGE_DEVICE_OPENED_FIRST, false);
                   LogoutShowDialogue(context);
                 }),
                 Container(

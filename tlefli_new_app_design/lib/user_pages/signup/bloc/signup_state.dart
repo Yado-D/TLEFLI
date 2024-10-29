@@ -16,7 +16,7 @@ class SignupState {
     this.lName = "",
     this.email = "",
     this.password = "",
-    this.passwordComfirmation = '0900000000',
+    this.passwordComfirmation = '',
     this.phoneNumber = '0900000000',
   });
   SignupState copyWith({

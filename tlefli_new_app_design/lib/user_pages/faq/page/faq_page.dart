@@ -270,7 +270,7 @@ class UserManualSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('User Manual')),
+        title: Center(child: Text(AppLocalizations.of(context)!.userManual)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -300,7 +300,7 @@ class UserManualSection extends StatelessWidget {
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'Welcome to our app! Here is a user manual to help you get started:',
+                          AppLocalizations.of(context)!.userManualDescripton,
                           style: TextStyle(fontSize: 16),
                         ),
                       ],

@@ -39,6 +39,16 @@ dependencies:
   shared_preferences:
   provider:
   image_editor_plus:
+  shimmer: ^3.0.0
+  easy_stepper: ^0.8.5+1
+  im_stepper: ^1.0.1+1
+  enhance_stepper: ^1.0.1
+  flutter_stepper: ^0.0.1
+  tuple: ^2.0.2
+  http:
+  flutter_dotenv:
+  flutter_paypal_payment: 
+  # flutter_stripe:
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +92,7 @@ flutter:
     - assets/logos/
     - assets/Language/
     - assets/logos/tlefli_app.png
+    - assets/.env
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

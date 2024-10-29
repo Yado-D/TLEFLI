@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactSupportSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Contact Support')),
+        title:
+            Center(child: Text(AppLocalizations.of(context)!.contactSupport)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -34,11 +36,11 @@ class ContactSupportSection extends StatelessWidget {
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'If you have any questions, concerns, or need assistance, feel free to reach out to our support team:',
+                          AppLocalizations.of(context)!.ifYouHaveQuestion,
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
-                          'Email: support@example.com',
+                          'Email: TLEFLI@example.com',
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
@@ -66,21 +68,21 @@ class ContactSupportSection extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Support Hours:',
+                          AppLocalizations.of(context)!.supportHours,
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'Monday - Friday: 9:00 AM to 6:00 PM',
+                          AppLocalizations.of(context)!.supportHourOne,
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
-                          'Saturday: 10:00 AM to 4:00 PM',
+                          AppLocalizations.of(context)!.supportHourTwo,
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
-                          'Sunday: Closed',
+                          AppLocalizations.of(context)!.supportHourThree,
                           style: TextStyle(fontSize: 16),
                         ),
                       ],

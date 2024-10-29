@@ -6,13 +6,10 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'package:tlefli_new_app_design/common/route_handler/pages.dart';
-import 'package:tlefli_new_app_design/controllers/language_controller.dart';
 import 'package:tlefli_new_app_design/l10n/l10n.dart';
 import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/services/providers/local_provider.dart';
-import 'package:tlefli_new_app_design/utils/app_constant.dart';
-import 'package:tlefli_new_app_design/utils/dep.dart' as dep;
-import 'package:tlefli_new_app_design/utils/messages.dart';
+import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -56,13 +53,17 @@ class _RebuildAppState extends State<RebuildApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.light(
+          primary: ColorCollections.TeritiaryColor,
+          onPrimary: Colors.white,
+          secondary: ColorCollections.TeritiaryColor,
+          onSecondary: Colors.white,
+        ),
+      ),
       onGenerateRoute: NamedRouteSettings.GenerateRouteSettings,
       debugShowCheckedModeBanner: false,
       title: 'TLEFLI APP',
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      //   useMaterial3: true,
-      // ),
       supportedLocales: L10n.all,
       locale: widget.locale,
       localizationsDelegates: const [

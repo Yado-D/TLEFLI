@@ -9,6 +9,7 @@ part 'signup_state.dart';
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   SignupBloc() : super(SignupState()) {
     on<EmailEvent>(emailEvent);
+    on<PhoneEvent>(phoneEvent);
     on<PasswordEvent>(passwordEvent);
     on<PasswordConfirmationEvent>(passwordConfirmationEvent);
     on<FNameEvent>(fNameEvent);
@@ -39,7 +40,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     PasswordConfirmationEvent event,
     Emitter emit,
   ) async {
-    emit(state.copyWith(password: event.confirmPassword));
+    emit(state.copyWith(passwordComfirmation: event.confirmPassword));
     print(state.email);
     print(state.password);
   }

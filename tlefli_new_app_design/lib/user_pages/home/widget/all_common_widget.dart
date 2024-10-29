@@ -11,9 +11,9 @@ Widget common_main_catagory_container(
   return Container(
     margin: EdgeInsets.all(5),
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
-      color: ColorCollections.PrimaryColor,
-    ),
+        borderRadius: BorderRadius.circular(10),
+        color: ColorCollections.PrimaryColor,
+        border: Border.all(color: const Color.fromARGB(255, 218, 218, 218))),
     height: 250,
     width: 170,
     child: Column(
@@ -79,6 +79,9 @@ Widget common_nested_catagory_container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       color: ColorCollections.PrimaryColor,
+      border: Border.all(
+        color: const Color.fromARGB(255, 208, 208, 208),
+      ),
     ),
     height: 250,
     width: 170,
@@ -190,7 +193,7 @@ LocationContainer(Map<String, dynamic> map, itemPickedModel item_model,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              item_model.location_choosed = map['txt'][index];
+              item_model.city = map['txt'][index];
               print(map['txt'][index]);
               Navigator.pop(context);
             },
@@ -199,6 +202,8 @@ LocationContainer(Map<String, dynamic> map, itemPickedModel item_model,
               margin: EdgeInsets.only(top: 10, left: 20, right: 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                      color: const Color.fromARGB(255, 213, 213, 213)),
                   color: ColorCollections.PrimaryColor),
               child: Row(
                 children: [
@@ -356,7 +361,7 @@ class CommonDropdownButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 0, right: 30),
+      margin: EdgeInsets.only(left: 0, right: 20),
       decoration: BoxDecoration(
         color: Colors.white, // Replace with your actual color
         borderRadius: BorderRadius.circular(7),

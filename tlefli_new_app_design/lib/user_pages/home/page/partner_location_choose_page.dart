@@ -19,7 +19,7 @@ class partner_location_page_ extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SimpleAppBars(context, type),
-      backgroundColor: ColorCollections.SecondaryColor,
+      backgroundColor: ColorCollections.PrimaryColor,
       body: Container(
         padding: EdgeInsets.only(top: 40),
         child: ListView(

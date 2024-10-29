@@ -49,7 +49,7 @@
   "hamster": "Hamster",
   "addANewLocation": "Add a new location",
   "indicateTheLossArea": "Indicate the loss area",
-  "youCanMatchWith": "You can match with an individual\nor in one of our partner locations",
+  "youCanMatchWith": "You can match with an individual or in one of \nour partner locations",
   "typeTheLocation": "Type the location",
   "selectAPartner": "Select a partner location directly",
   "transport": "Transport",
@@ -114,7 +114,17 @@
   "signal":"Signal",
   "found":"Found",
   "apply":"Apply",
-  "areYouSureLogout":"Are you sure you\n want to log out ?"
+  "areYouSureLogout":"Are you sure you\n want to log out ?",
+   "contactSupport":"Contact Support",
+   "userManual":"User Manual",
+   "ifYouHaveQuestion":"If you have any questions, concerns,\n or need assistance, feel free to reach out to\n our support team:",
+   "supportHours":"Support Hours:",
+   "supportHourOne":"Monday - Friday: 9:00 AM to 6:00 PM",
+   "supportHourTwo":"Saturday: 10:00 AM to 4:00 PM",
+   "supportHourThree":"Sunday: Closed",
+   "userManualDescripton":"Welcome to our app! Here is a user manual\n to help you get started:"
+
+
   
 
   }

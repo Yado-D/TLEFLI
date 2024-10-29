@@ -6,8 +6,7 @@ import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/user_pages/error_page/error_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/bloc/home_bloc.dart';
 import 'package:tlefli_new_app_design/user_pages/home/widget/home_widget.dart';
-import 'package:tlefli_new_app_design/user_pages/i%20found/page/i_found_page.dart';
-import 'package:tlefli_new_app_design/user_pages/i%20lost/page/i_lost_page.dart';
+
 import 'package:tlefli_new_app_design/user_pages/more/page/more_page.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/my_object_page.dart';
 import 'package:tlefli_new_app_design/user_pages/my_match/my_matchs_page.dart';
@@ -70,7 +69,7 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
           globKey.currentState!.closeDrawer();
         }, context, animation),
         key: globKey,
-        backgroundColor: ColorCollections.SecondaryColor,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         appBar: ReusableAppBar(() {
           print("cliked1");
 
@@ -99,7 +98,7 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                       : home_widget(context, animation),
                   Positioned(
                     bottom: 0,
-                    height: 57.h,
+                    height: 65.h,
                     child: Container(
                       padding: EdgeInsets.only(left: 10, right: 10),
                       decoration: BoxDecoration(
@@ -136,8 +135,12 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                                         'assets/icons/flat_icons/person.svg',
                                         height: 25.h,
                                         width: 25.w,
-                                        color: const Color.fromARGB(
-                                            255, 128, 128, 128),
+                                        color: state is BottomNavBarState
+                                            ? state.SelectedIndex == 3
+                                                ? ColorCollections
+                                                    .TeritiaryColor
+                                                : Color(0xFF003540)
+                                            : Color(0xFF003540),
                                       ),
                                       ReusableText(
                                         FromTop: 5,
@@ -150,8 +153,8 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                                             ? state.SelectedIndex == 3
                                                 ? ColorCollections
                                                     .TeritiaryColor
-                                                : ColorCollections.Black
-                                            : ColorCollections.Black,
+                                                : Color(0xFF003540)
+                                            : Color(0xFF003540),
                                       ),
                                     ],
                                   ),
@@ -171,8 +174,17 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                                         margin: EdgeInsets.only(top: 15),
                                         height: 25.h,
                                         width: 25.w,
-                                        child: Image.asset(
-                                            'assets/icons/flat_icons/my_matchs.png'),
+                                        child: SvgPicture.asset(
+                                          'assets/icons/flat_icons/my_object.svg',
+                                          height: 20.h,
+                                          width: 20.w,
+                                          color: state is BottomNavBarState
+                                              ? state.SelectedIndex == 1
+                                                  ? ColorCollections
+                                                      .TeritiaryColor
+                                                  : Color(0xFF003540)
+                                              : Color(0xFF003540),
+                                        ),
                                       ),
                                       ReusableText(
                                         FromTop: 5,
@@ -185,8 +197,8 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                                             ? state.SelectedIndex == 1
                                                 ? ColorCollections
                                                     .TeritiaryColor
-                                                : ColorCollections.Black
-                                            : ColorCollections.Black,
+                                                : Color(0xFF003540)
+                                            : Color(0xFF003540),
                                       ),
                                     ],
                                   ),
@@ -213,8 +225,12 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                                           'assets/icons/flat_icons/holding.svg',
                                           height: 20.h,
                                           width: 20.w,
-                                          color: const Color.fromARGB(
-                                              255, 128, 128, 128),
+                                          color: state is BottomNavBarState
+                                              ? state.SelectedIndex == 0
+                                                  ? ColorCollections
+                                                      .TeritiaryColor
+                                                  : Color(0xFF003540)
+                                              : Color(0xFF003540),
                                         ),
                                       ),
                                       ReusableText(
@@ -226,8 +242,8 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                                             ? state.SelectedIndex == 0
                                                 ? ColorCollections
                                                     .TeritiaryColor
-                                                : ColorCollections.Black
-                                            : ColorCollections.Black,
+                                                : Color(0xFF003540)
+                                            : Color(0xFF003540),
                                         FromBottom: 0,
                                       ),
                                     ],
@@ -248,8 +264,12 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                                         'assets/icons/flat_icons/more.svg',
                                         height: 25.h,
                                         width: 25.w,
-                                        color: const Color.fromARGB(
-                                            255, 128, 128, 128),
+                                        color: state is BottomNavBarState
+                                            ? state.SelectedIndex == 4
+                                                ? ColorCollections
+                                                    .TeritiaryColor
+                                                : Color(0xFF003540)
+                                            : Color(0xFF003540),
                                       ),
                                       ReusableText(
                                         FromTop: 5,
@@ -260,8 +280,8 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                                             ? state.SelectedIndex == 4
                                                 ? ColorCollections
                                                     .TeritiaryColor
-                                                : ColorCollections.Black
-                                            : ColorCollections.Black,
+                                                : Color(0xFF003540)
+                                            : Color(0xFF003540),
                                         FromBottom: 0,
                                       ),
                                     ],
@@ -296,7 +316,7 @@ class _homeState extends State<home_page> with SingleTickerProviderStateMixin {
                                     TextColor: state is BottomNavBarState
                                         ? state.SelectedIndex == 2
                                             ? ColorCollections.TeritiaryColor
-                                            : ColorCollections.Black
+                                            : Color(0xFF003540)
                                         : ColorCollections.TeritiaryColor,
                                   ),
                                 ],

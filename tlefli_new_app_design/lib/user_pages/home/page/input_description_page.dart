@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:tlefli_new_app_design/auth/API/api_services.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
+import 'package:tlefli_new_app_design/common/CommonSnackBar.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
+import 'package:tlefli_new_app_design/models/user_data_model.dart';
 import 'package:tlefli_new_app_design/partners_pages/partner_darta/partners_data.dart';
+import 'package:tlefli_new_app_design/services/constants.dart';
+import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/list_of_my_object.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tlefli_new_app_design/utils/app_constant.dart';
 
 class input_description_page extends StatefulWidget {
   final String categorie;
@@ -21,10 +27,27 @@ class input_description_page extends StatefulWidget {
 }
 
 class _input_description_pageState extends State<input_description_page> {
+  UserData? userData;
+  bool isFinished = true;
+  @override
+  void initState() {
+    userData = Global.storageServices.getData(AppConstants.USER_DATA);
+    if (userData != null) {
+      // Use userData properties, e.g.
+      print('User First Name: ${userData!.userFname}');
+      print('User Last Name: ${userData!.userLname}');
+      print('User Last enail: ${userData!.userEmail}');
+    } else {
+      print('the data is null');
+    }
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorCollections.SecondaryColor,
+      backgroundColor: ColorCollections.PrimaryColor,
       appBar: SimpleAppBars(
         context,
         AppLocalizations.of(context)!.description,
@@ -141,19 +164,33 @@ class _input_description_pageState extends State<input_description_page> {
             Positioned(
               bottom: 20,
               child: GestureDetector(
-                onTap: () {
-                  partner1.add(
-                    partnerRequestModel(
-                      status: 'in delicery',
-                      image_url:
-                          'https://ultra-pet.co.za/wp-content/uploads/2020/08/socialising-800x630.jpg',
-                      item_name: 'dog',
-                      date: '22/12/2023',
-                      description: 'this is my dog',
-                    ),
-                  );
-                  my_object.add(widget.item_model);
-                  CustomShowDialoge(context, widget.item_model);
+                onTap: () async {
+                  if (widget.item_model.item_description == '' &&
+                      widget.item_model.item_color == '') {
+                    commonSnackBar(context, 'Input fields are required.');
+                  } else {
+                    setState(() {
+                      isFinished = false;
+                    });
+
+                    widget.item_model.owner =
+                        userData!.userFname + " " + userData!.userLname;
+
+                    String report = await ApiService()
+                        .PostLostOrFoundItems(widget.item_model, userData!);
+                    if (report == 'posted!') {
+                      setState(() {
+                        isFinished = true;
+                      });
+                      CustomShowDialoge(context, widget.item_model);
+                      commonSnackBar(context, report);
+                    } else {
+                      setState(() {
+                        isFinished = true;
+                      });
+                      commonSnackBar(context, report);
+                    }
+                  }
                 },
                 child: Center(
                   child: Container(
@@ -164,20 +201,37 @@ class _input_description_pageState extends State<input_description_page> {
                     height: 40,
                     width: 300,
                     decoration: BoxDecoration(
-                      color: ColorCollections.PrimaryColor,
+                      color: ColorCollections.TeritiaryColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
                       child: ReusableText(
                         TextString: AppLocalizations.of(context)!.submit,
                         FontSize: 20,
-                        TextColor: ColorCollections.Black,
+                        TextColor: ColorCollections.PrimaryColor,
                       ),
                     ),
                   ),
                 ),
               ),
             ),
+            if (!isFinished)
+              ModalBarrier(
+                color: const Color.fromARGB(
+                    137, 255, 255, 255), // Semi-transparent background
+                dismissible: false,
+                // Makes it indismisable
+              ),
+            if (!isFinished)
+              Center(
+                child: Container(
+                  height: 60,
+                  width: 60,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
