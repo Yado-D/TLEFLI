@@ -11,6 +11,7 @@ import 'package:tlefli_new_app_design/main.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/services/constants.dart';
 import 'package:tlefli_new_app_design/services/global.dart';
+import 'package:tlefli_new_app_design/user_pages/home/page/home.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/my_object_page.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -219,7 +220,94 @@ Widget reusableTextField({
   );
 }
 
-AppBar SimpleAppBars(BuildContext context, String title) {
+Widget reusableTextFieldForCountryCode({
+  String? icon_name,
+  String suffix_icon_name = '',
+  required String hintText,
+  required String textType,
+  required void Function(String values)? onchange,
+  double WidthOfContainer = 300,
+  double widthOfTextField = 150,
+  double FromTop = 0,
+  double FromBottom = 0,
+  double FromRight = 0,
+  double FromLeft = 0,
+}) {
+  return Container(
+    height: 45.h,
+    width: WidthOfContainer.w,
+    margin: EdgeInsets.only(
+      top: FromTop.w,
+      bottom: FromBottom.w,
+      left: FromLeft.w,
+      right: FromRight.w,
+    ),
+    decoration: BoxDecoration(
+      color: ColorCollections.PrimaryColor,
+      borderRadius: BorderRadius.only(
+        topRight: Radius.circular(10),
+        bottomRight: Radius.circular(10),
+      ),
+      border: Border.all(color: const Color.fromARGB(255, 192, 190, 190)),
+    ),
+    child: Row(
+      children: [
+        icon_name != null
+            ? Container(
+                height: 16.w,
+                width: 16.w,
+                margin: const EdgeInsets.only(left: 17),
+                child: Image.asset("assets/icons/flat_icons/$icon_name.png"),
+              )
+            : SizedBox(),
+        SizedBox(
+          height: 45.h,
+          width: widthOfTextField.h,
+          child: TextField(
+            onChanged: (value) => onchange!(value),
+            keyboardType: TextInputType.multiline,
+            decoration: InputDecoration(
+              // suffixIcon: suffixIcon,
+              hintText: hintText,
+              hintStyle: TextStyle(color: Colors.grey.withOpacity(0.5)),
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                ),
+              ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                ),
+              ),
+              disabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                ),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                ),
+              ),
+            ),
+            obscureText: textType == "password" ? true : false,
+          ),
+        ),
+        if (!(suffix_icon_name == ''))
+          Container(
+            height: 16.w,
+            width: 16.w,
+            margin: const EdgeInsets.only(left: 17),
+            child: Image.asset("assets/icons/$suffix_icon_name.png"),
+          ),
+      ],
+    ),
+  );
+}
+
+AppBar SimpleAppBars(BuildContext context, String title,
+    {bool? isDescription = false}) {
   return AppBar(
     leading: Container(
       margin: EdgeInsets.only(left: 15, bottom: 10),
@@ -234,7 +322,7 @@ AppBar SimpleAppBars(BuildContext context, String title) {
         icon: Icon(
           Icons.arrow_back_ios,
           size: 26,
-          color: Colors.blue,
+          color: Color(0xFF003540),
         ),
       ),
     ),
@@ -262,7 +350,7 @@ AppBar SimpleAppBars(BuildContext context, String title) {
                 FromLeft: 40,
                 TextString: title,
                 FontSize: 26,
-                TextColor: Colors.blue,
+                TextColor: Color(0xFF003540),
                 TextFontWeight: FontWeight.bold,
               ),
             ),
@@ -270,6 +358,25 @@ AppBar SimpleAppBars(BuildContext context, String title) {
         ],
       ),
     ),
+    actions: [
+      isDescription == true
+          ? InkWell(
+              onTap: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => home_page(),
+                    ),
+                    (predicate) => false);
+              },
+              child: Container(
+                margin: EdgeInsets.only(bottom: 10, right: 15),
+                child: Icon(
+                  Icons.cancel,
+                ),
+              ),
+            )
+          : SizedBox(),
+    ],
   );
 }
 

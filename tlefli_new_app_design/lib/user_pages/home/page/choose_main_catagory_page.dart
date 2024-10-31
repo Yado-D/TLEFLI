@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:tlefli_new_app_design/Bottomsheets/widgets/map_of_categories.dart';
+import 'package:tlefli_new_app_design/common_category_model/widgets/map_of_categories.dart';
 import 'package:tlefli_new_app_design/auth/API/api_services.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';

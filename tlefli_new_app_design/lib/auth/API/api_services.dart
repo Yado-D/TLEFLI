@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 // import 'package:http/http.dart' as http;
+import 'package:flutter/cupertino.dart';
+import 'package:http_auth/http_auth.dart';
 import 'package:tlefli_new_app_design/auth/API/defoultImage.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/models/user_data_model.dart';
@@ -8,6 +10,7 @@ import 'package:tlefli_new_app_design/services/constants.dart';
 import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'dart:convert' as convert;
 
 class ApiService {
   final String baseUrl = 'https://hammerhead-app-ksgtg.ondigitalocean.app';
@@ -254,7 +257,7 @@ class ApiService {
       }
     } catch (e) {
       return {
-        'Error': 'Something went wrong.check your internet connection',
+        'Error': e.toString(),
       };
     }
   }
@@ -436,18 +439,36 @@ class ApiService {
 
   //gets a list of all items reported as found by all users
 
-  Future<String> GetAllUserFoundItem() async {
+  Future<Map<String, dynamic>> GetAllUserFoundItem() async {
     try {
-      final response = await http.get(
-        Uri.parse('$baseUrl/api/found-items'),
+      final Foundresponse = await http.post(
+        Uri.parse('$baseUrl/api/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'email': 'yared4@gmail.com',
+          'password': '12345',
+        }),
       );
+      Map<String, dynamic> tokenString = json.decode(Foundresponse.body);
+      print(tokenString);
+      String token = tokenString['accessToken'];
+
+      final response = await http.get(
+          Uri.parse(
+            '$baseUrl/api/admin/items',
+          ),
+          headers: {
+            'Authorization': 'Bearer $token',
+          });
+
+      print(response.body);
       if (response.statusCode == 200) {
-        final lostItems = json.decode(response.body);
-        return lostItems; // Convert the decoded JSON to a string
+        final FoundItems = json.decode(response.body);
+        return FoundItems; // Convert the decoded JSON to a string
       }
-      return "Some error occurred, please try again later";
+      return {"message": "Some error occurred, please try again later"};
     } catch (e) {
-      return 'Error: ${e.toString()}';
+      return {"message": 'Error: ${e.toString()}'};
     }
   }
 
@@ -625,11 +646,83 @@ class ApiService {
     }
   }
 
-//payment methodes
+// payment methodes
+  String domain = "https//api.sandbox.paypal.com";
 
-  // Future<Map> StripePayment() async {
-  //   try {
-  //     Map<String, dynamic> body = {"amount": 10000, "currency": "USD"};
-  //   } catch (e) {}
-  // }
+  Future<String> GetAccessToken(String clientId, String secretId) async {
+    try {
+      // Map<String, dynamic> body = {"amount": 10000, "currency": "USD"};
+      var client = BasicAuthClient(clientId, secretId);
+
+      var response = await client.post(
+          Uri.parse('$domain/v1/oauth2/token?grant_type=client_credentials'));
+
+      if (response.statusCode == 200) {
+        final body = convert.jsonDecode(response.body);
+        return body["access_token"];
+      }
+      return "0";
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> createPaypalPayment(
+      transactions, accessToken) async {
+    try {
+      var response =
+          await http.post(Uri.parse("$domain/v1/payments/payment"), headers: {
+        "Authorization": "Bearer $accessToken",
+        "content-type": "application/json",
+      });
+      final body = convert.jsonDecode(response.body);
+      if (response.statusCode == 201) {
+        if (body['links'] != null && body['links'].length > 0) {
+          List links = body['links'];
+          String excuteUrl = "";
+          String approvalUrl = "";
+
+          final item = links.firstWhere((o) => o['rel'] == "approval.url",
+              orElse: () => null);
+          if (item != null) {
+            approvalUrl = item['hreff'];
+          }
+          final item1 = links.firstWhere((o) => o['rel'] == "execute",
+              orElse: () => null);
+          if (item != null) {
+            excuteUrl = item1['hreff'];
+          }
+          return {
+            "executeUrl": excuteUrl,
+            "approvalUrl": approvalUrl,
+          };
+        }
+        throw Exception("0");
+      } else {
+        throw Exception(body['message']);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<String> executePayment(url, payerId, accessToken) async {
+    try {
+      var response = await http.post(url,
+          body: convert.jsonEncode({
+            "payerId": payerId,
+          }),
+          headers: {
+            "Authorization": "Bearer $accessToken",
+            "content-type": "application/json"
+          });
+      final body = convert.jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        return body['id'];
+      }
+      return "0";
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

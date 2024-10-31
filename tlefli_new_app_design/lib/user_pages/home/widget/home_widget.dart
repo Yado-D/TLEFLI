@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:tlefli_new_app_design/Bottomsheets/pages/bottom_sheet.dart';
+import 'package:tlefli_new_app_design/common_category_model/pages/bottom_sheet.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/choose_image_page.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';

@@ -38,15 +38,16 @@ class nested_categorie_page extends StatelessWidget {
               child: GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.75,
+                  crossAxisCount: 1,
+                  childAspectRatio: 5,
                 ),
                 itemCount: list[0]['assets'].length,
                 itemBuilder: (context, index) {
-                  String assets = list[0]['assets'][index];
+                  // String assets = list[0]['assets'][index];
                   String txt = list[0]['txt'][index];
                   return common_nested_catagory_container(
-                    assets,
+                    // assets,
+                    context,
                     txt,
                     () {
                       item_model.nested_item = list[0]['txt'][index];

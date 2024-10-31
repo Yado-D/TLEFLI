@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:tlefli_new_app_design/Bottomsheets/widgets/map_of%20location.dart';
+import 'package:tlefli_new_app_design/common_category_model/widgets/map_of%20location.dart';
 import 'package:tlefli_new_app_design/admin_pages/home/widgets/admin_common_widget.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/partners_pages/common_p/partner_common_widgets.dart';

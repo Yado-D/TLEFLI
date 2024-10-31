@@ -39,15 +39,21 @@ dependencies:
   shared_preferences:
   provider:
   image_editor_plus:
-  shimmer: ^3.0.0
-  easy_stepper: ^0.8.5+1
-  im_stepper: ^1.0.1+1
-  enhance_stepper: ^1.0.1
-  flutter_stepper: ^0.0.1
-  tuple: ^2.0.2
+  shimmer: 
+  easy_stepper: 
+  im_stepper:
+  enhance_stepper: 
+  flutter_stepper: 
+  tuple:
   http:
-  flutter_dotenv:
-  flutter_paypal_payment: 
+  http_auth: 
+  webview_flutter: 
+  flutter_stripe: 
+  csc_picker: 
+  intl_phone_field: 
+  dio: ^5.7.0
+  # flutter_dotenv:
+  # flutter_paypal_payment: 
   # flutter_stripe:
 
 dev_dependencies:
@@ -86,6 +92,7 @@ flutter:
     - assets/images/partners/
     - assets/images/social_medias/
     - assets/images/categories/
+    - assets/images/newCategory/
     - assets/icons/
     - assets/icons/flat_icons/
     - assets/icons/normals/

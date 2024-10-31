@@ -89,42 +89,25 @@ class _my_object_pageState extends State<my_object_page> {
                     ),
                     child: Column(
                       children: [
-                        Stack(
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 100,
-                              margin: EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(snap['itemImage']),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        ReusableText(
-                          FromBottom: 2,
-                          TextColor: ColorCollections.Black,
-                          TextString: snap['subcategory'],
-                          FontSize: 20,
-                        ),
-                        ReusableText(
-                          FromBottom: 2,
-                          TextColor: ColorCollections.Black,
-                          TextString: formattedDate(snap['dateLost']),
-                          FontSize: 20,
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ReusableText(
-                              FromBottom: 2,
-                              TextColor: ColorCollections.Black,
-                              TextString: userData!.userFname ?? "",
-                              FontSize: 20,
+                            Stack(
+                              children: [
+                                Container(
+                                  height: 100,
+                                  width: 100,
+                                  margin: EdgeInsets.only(top: 10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(snap['itemImage']),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                             GestureDetector(
                               onTap: () {
@@ -135,10 +118,10 @@ class _my_object_pageState extends State<my_object_page> {
                                   nested_item: snap['subcategory'],
                                   address: location[0],
                                   city: location[1],
-                                  date_picked: formattedDate(snap['dateLost']),
+                                  date_picked: formattedDate(snap['date']),
                                   time_picked: '',
                                   item_description: snap['description'],
-                                  race: '',
+                                  bread: '',
                                   item_color: '',
                                   item_model: '',
                                   owner:
@@ -158,9 +141,9 @@ class _my_object_pageState extends State<my_object_page> {
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
-                                    right: 10, left: 20, bottom: 5),
-                                height: 42,
-                                width: 100,
+                                    right: 10, left: 35, bottom: 5, top: 5),
+                                height: 40,
+                                width: 97,
                                 decoration: BoxDecoration(
                                   color: ColorCollections.TeritiaryColor,
                                   borderRadius: BorderRadius.circular(10),
@@ -176,6 +159,29 @@ class _my_object_pageState extends State<my_object_page> {
                                 ),
                               ),
                             )
+                          ],
+                        ),
+                        ReusableText(
+                          FromBottom: 2,
+                          TextColor: ColorCollections.Black,
+                          TextString: snap['subcategory'],
+                          FontSize: 20,
+                        ),
+                        ReusableText(
+                          FromBottom: 2,
+                          TextColor: ColorCollections.Black,
+                          TextString: formattedDate(snap['date']),
+                          FontSize: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ReusableText(
+                              FromBottom: 2,
+                              TextColor: ColorCollections.Black,
+                              TextString: userData!.userFname ?? "",
+                              FontSize: 20,
+                            ),
                           ],
                         ),
                       ],

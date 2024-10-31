@@ -6,7 +6,7 @@ import 'package:flutter_stepper/flutter_stepper.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
-import 'package:tlefli_new_app_design/services/paymentIntegration/paypal_payment.dart';
+import 'package:tlefli_new_app_design/user_pages/my_object/choosePaymentMethode.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/editDescription.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:enhance_stepper/enhance_stepper.dart';
@@ -208,7 +208,9 @@ class _MyObjectPageState extends State<MyObjectDetailPage> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => PaypalPayment(),
+                          builder: (context) => choosePaymentMethode(
+                            item_model: widget.item_model,
+                          ),
                         ),
                       );
                     },

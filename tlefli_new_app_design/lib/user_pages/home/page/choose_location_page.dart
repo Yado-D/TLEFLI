@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tlefli_new_app_design/Bottomsheets/widgets/map_of%20location.dart';
+import 'package:tlefli_new_app_design/common_category_model/widgets/map_of%20location.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/common/CommonSnackBar.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';

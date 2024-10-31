@@ -24,7 +24,7 @@ Widget common_main_catagory_container(
           width: 100,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/categories/$asset.jpg'),
+                image: AssetImage('assets/images/newCategory/$asset'),
                 fit: BoxFit.fill),
           ),
         ),
@@ -70,70 +70,44 @@ Widget common_main_catagory_container(
 }
 
 Widget common_nested_catagory_container(
-  String asset,
+  // String asset,
+  BuildContext context,
   String text,
   VoidCallback ontap,
 ) {
-  return Container(
-    margin: EdgeInsets.all(5),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
-      color: ColorCollections.PrimaryColor,
-      border: Border.all(
-        color: const Color.fromARGB(255, 208, 208, 208),
-      ),
-    ),
-    height: 250,
-    width: 170,
-    child: Column(
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: 20),
-          height: 100,
-          width: 100,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/categories/$asset.jpeg'),
-                fit: BoxFit.fill),
-          ),
+  return GestureDetector(
+    onTap: ontap,
+    child: Container(
+      margin: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: ColorCollections.PrimaryColor,
+        border: Border.all(
+          color: const Color.fromARGB(255, 208, 208, 208),
         ),
-        Container(
-          height: 100,
-          child: Column(
-            children: [
-              Center(
+      ),
+      height: 50,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Container(
+              // height: 100,
+              child: Center(
                 child: ReusableText(
                   FromTop: 12,
                   FromBottom: 10,
                   TextString: '$text',
-                  FontSize: 16,
+                  TextFontWeight: FontWeight.bold,
+                  FontSize: 18,
                   TextColor: ColorCollections.Black,
                 ),
               ),
-              GestureDetector(
-                onTap: ontap,
-                child: Container(
-                  height: 25,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    color: ColorCollections.TeritiaryColor,
-                    borderRadius: BorderRadius.circular(7),
-                  ),
-                  child: Center(
-                    child: ReusableText(
-                      FromTop: 0,
-                      FromBottom: 0,
-                      TextString: 'Check',
-                      FontSize: 13,
-                      TextColor: ColorCollections.PrimaryColor,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }

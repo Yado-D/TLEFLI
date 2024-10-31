@@ -417,11 +417,11 @@ class _EditDescriptionState extends State<EditDescription> {
                                       const Color.fromARGB(255, 219, 219, 219)),
                             ),
                             child: reusableTextField(
-                              hintText: widget.item_model.race ?? 'breed',
+                              hintText: widget.item_model.bread ?? 'breed',
                               textType: 'textType',
                               onchange: (onchange) {
                                 setState(() {
-                                  widget.item_model.race = onchange;
+                                  widget.item_model.bread = onchange;
                                 });
                               },
                             ),

@@ -51,6 +51,7 @@ class _input_description_pageState extends State<input_description_page> {
       appBar: SimpleAppBars(
         context,
         AppLocalizations.of(context)!.description,
+        isDescription: true,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -92,7 +93,7 @@ class _input_description_pageState extends State<input_description_page> {
                                   // ignore: avoid_print
                                   onChanged: (value) {
                                     setState(() {
-                                      widget.item_model.race = value;
+                                      widget.item_model.bread = value;
                                     });
                                   },
                                 ),

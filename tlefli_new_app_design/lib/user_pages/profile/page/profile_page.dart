@@ -216,11 +216,16 @@ class _profile_pageState extends State<profile_page> {
                           ),
                         )
                       : SmallshimmerEffect(),
-                  ReusableText(
-                    FromLeft: 25,
-                    TextString: 'Phone Number',
-                    FontSize: 13,
-                    TextColor: ColorCollections.Black,
+                  InkWell(
+                    onTap: () async {
+                      await ApiService().GetAllUserFoundItem();
+                    },
+                    child: ReusableText(
+                      FromLeft: 25,
+                      TextString: 'Phone Number',
+                      FontSize: 13,
+                      TextColor: ColorCollections.Black,
+                    ),
                   ),
                   userData?.userPhone != null
                       ? Container(

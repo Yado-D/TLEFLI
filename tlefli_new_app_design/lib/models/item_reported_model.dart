@@ -11,7 +11,7 @@ class itemPickedModel {
   String? date_picked;
   String? time_picked;
   String? item_description;
-  String? race;
+  String? bread;
   String? item_color;
   String? item_model;
   String? owner;
@@ -39,7 +39,7 @@ class itemPickedModel {
     this.date_picked,
     this.time_picked,
     this.item_description,
-    this.race,
+    this.bread,
     this.item_color,
     this.item_model,
     this.owner,
