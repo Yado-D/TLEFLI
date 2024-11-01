@@ -1,12 +1,7 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/auth/API/api_services.dart';
-import 'package:tlefli_new_app_design/models/user_data_model.dart';
 import 'package:tlefli_new_app_design/services/constants.dart';
 import 'package:tlefli_new_app_design/services/global.dart';
-import 'package:http/http.dart' as http;
 
 class SigninAuth {
   static Future<String> SigninAuthentication({

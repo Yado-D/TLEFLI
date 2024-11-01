@@ -4,18 +4,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tlefli_new_app_design/main.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/services/constants.dart';
 import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/home.dart';
-import 'package:tlefli_new_app_design/user_pages/my_object/my_object_page.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tlefli_new_app_design/utils/app_constant.dart';
 
 class FullPageContainer extends StatelessWidget {
   const FullPageContainer({super.key});
@@ -171,7 +167,11 @@ Widget reusableTextField({
                 height: 16.w,
                 width: 16.w,
                 margin: const EdgeInsets.only(left: 17),
-                child: Image.asset("assets/icons/flat_icons/$icon_name.png"),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/icons/flat_icons/$icon_name.png"),
+                  ),
+                ),
               )
             : SizedBox(),
         SizedBox(

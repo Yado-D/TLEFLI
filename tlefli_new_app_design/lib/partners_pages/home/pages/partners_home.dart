@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tlefli_new_app_design/common_category_model/pages/bottom_sheet.dart';
-import 'package:tlefli_new_app_design/common_category_model/widgets/map_of_categories.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/partners_pages/common_p/partner_common_widgets.dart';
 import 'package:tlefli_new_app_design/partners_pages/home/pages/Partner_request_details.dart';

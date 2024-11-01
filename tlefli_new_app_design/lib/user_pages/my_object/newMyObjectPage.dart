@@ -1,15 +1,14 @@
 import 'dart:typed_data';
 
-import 'package:easy_stepper/easy_stepper.dart';
+import 'package:enhance_stepper/enhance_stepper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_stepper/flutter_stepper.dart';
-import 'package:im_stepper/stepper.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/choosePaymentMethode.dart';
+import 'package:tlefli_new_app_design/user_pages/my_object/deliverdUserInfo.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/editDescription.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
-import 'package:enhance_stepper/enhance_stepper.dart';
 
 class MyObjectDetailPage extends StatefulWidget {
   itemPickedModel item_model;
@@ -21,9 +20,15 @@ class MyObjectDetailPage extends StatefulWidget {
 
 class _MyObjectPageState extends State<MyObjectDetailPage> {
   int currentStep = 0;
-  void _currentStep() {
+  void _IcurrentStep() {
     setState(() {
       currentStep + 1;
+    });
+  }
+
+  void _DcurrentStep() {
+    setState(() {
+      currentStep - 1;
     });
   }
 
@@ -111,17 +116,40 @@ class _MyObjectPageState extends State<MyObjectDetailPage> {
             ),
           ),
           Container(
-            height: 400,
-            child: Stepper(
+            margin: EdgeInsets.only(left: 10, right: 10),
+            child: EnhanceStepper(
               currentStep: currentStep,
-              onStepTapped: (value) => setState(() => currentStep = value),
+              onStepTapped: (value) {
+                setState(() {
+                  currentStep = value;
+                });
+              },
+              controlsBuilder: (BuildContext context, ControlsDetails details) {
+                return Container(); // This removes the default buttons
+              },
+              // controlsBuilder: (context, details) {},
+              stepIconSize: 60,
+              stepIconBuilder: (stepIndex, stepState) {
+                return Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: ColorCollections.PrimaryColor,
+                    border: Border.all(
+                      color: ColorCollections.SecondaryColor,
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                    image: DecorationImage(
+                      image: AssetImage(listIcons[stepIndex]),
+                    ),
+                  ),
+                );
+              },
               steps: [
-                Step(
-                  isActive: currentStep == 0 ? true : false,
+                EnhanceStep(
                   title: ReusableText(
-                    FromTop: 10,
                     TextString: 'Item Added',
-                    FontSize: 18,
+                    FontSize: 20,
                     TextColor: ColorCollections.Black,
                   ),
                   content: GestureDetector(
@@ -135,7 +163,7 @@ class _MyObjectPageState extends State<MyObjectDetailPage> {
                     },
                     child: Container(
                       width: 250,
-                      height: 40,
+                      height: 35,
                       decoration: BoxDecoration(
                         color: ColorCollections.TeritiaryColor,
                         borderRadius: BorderRadius.circular(20),
@@ -151,57 +179,30 @@ class _MyObjectPageState extends State<MyObjectDetailPage> {
                     ),
                   ),
                 ),
-                Step(
-                  isActive: currentStep == 1 ? true : false,
+                EnhanceStep(
                   title: ReusableText(
-                    FromTop: 10,
                     TextString: 'Match Found',
-                    FontSize: 18,
+                    FontSize: 20,
                     TextColor: ColorCollections.Black,
                   ),
-                  content: ReusableText(
-                    FromTop: 10,
-                    TextString: widget.item_model.city ?? "",
-                    FontSize: 18,
-                    TextColor: ColorCollections.Black,
+                  content: Icon(
+                    Icons.ac_unit_rounded,
                   ),
                 ),
-                Step(
-                  isActive: currentStep == 2 ? true : false,
+                EnhanceStep(
                   title: ReusableText(
-                    FromTop: 10,
-                    TextString: "Authentication in progress",
-                    FontSize: 18,
+                    TextString: 'Authentication in progress',
+                    FontSize: 20,
                     TextColor: ColorCollections.Black,
                   ),
-                  content: ReusableText(
-                    FromTop: 10,
-                    TextString: widget.item_model.city ?? "",
-                    FontSize: 18,
-                    TextColor: ColorCollections.Black,
+                  content: Icon(
+                    Icons.ac_unit_rounded,
                   ),
                 ),
-                Step(
-                  isActive: currentStep == 3 ? true : false,
+                EnhanceStep(
                   title: ReusableText(
-                    FromTop: 10,
-                    TextString: "Authentication Validated",
-                    FontSize: 18,
-                    TextColor: ColorCollections.Black,
-                  ),
-                  content: ReusableText(
-                    FromTop: 10,
-                    TextString: widget.item_model.city ?? "",
-                    FontSize: 18,
-                    TextColor: ColorCollections.Black,
-                  ),
-                ),
-                Step(
-                  isActive: currentStep == 4 ? true : false,
-                  title: ReusableText(
-                    FromTop: 10,
-                    TextString: "Restitiution in Progress",
-                    FontSize: 18,
+                    TextString: 'Authentication Validated',
+                    FontSize: 20,
                     TextColor: ColorCollections.Black,
                   ),
                   content: GestureDetector(
@@ -216,7 +217,7 @@ class _MyObjectPageState extends State<MyObjectDetailPage> {
                     },
                     child: Container(
                       width: 250,
-                      height: 40,
+                      height: 35,
                       decoration: BoxDecoration(
                         color: ColorCollections.TeritiaryColor,
                         borderRadius: BorderRadius.circular(20),
@@ -224,7 +225,7 @@ class _MyObjectPageState extends State<MyObjectDetailPage> {
                       child: Center(
                         child: ReusableText(
                           FromTop: 0,
-                          TextString: 'Check Payment',
+                          TextString: 'Complete payment',
                           FontSize: 18,
                           TextColor: ColorCollections.PrimaryColor,
                         ),
@@ -232,25 +233,27 @@ class _MyObjectPageState extends State<MyObjectDetailPage> {
                     ),
                   ),
                 ),
-                Step(
-                  isActive: currentStep == 5 ? true : false,
+                EnhanceStep(
                   title: ReusableText(
-                    FromTop: 10,
-                    TextString: "Returned item",
-                    FontSize: 18,
+                    TextString: 'Restitiution in Progress',
+                    FontSize: 20,
                     TextColor: ColorCollections.Black,
                   ),
-                  content: ReusableText(
-                    FromTop: 10,
-                    TextString: widget.item_model.city ?? "",
-                    FontSize: 18,
+                  content: Icon(
+                    Icons.ac_unit_rounded,
+                  ),
+                ),
+                EnhanceStep(
+                  title: ReusableText(
+                    TextString: 'Returned item',
+                    FontSize: 20,
                     TextColor: ColorCollections.Black,
+                  ),
+                  content: Icon(
+                    Icons.ac_unit_rounded,
                   ),
                 )
               ],
-              controlsBuilder: (BuildContext, ControlsDetails) {
-                return Container();
-              },
             ),
           ),
         ],
@@ -352,4 +355,13 @@ class _MyObjectPageState extends State<MyObjectDetailPage> {
       ],
     );
   }
+
+  List<String> listIcons = [
+    'assets/icons/steppers/verified.png',
+    'assets/icons/steppers/item.png',
+    'assets/icons/steppers/progress.png',
+    'assets/icons/steppers/validate.png',
+    'assets/icons/steppers/shipping.png',
+    'assets/icons/steppers/pass.png',
+  ];
 }

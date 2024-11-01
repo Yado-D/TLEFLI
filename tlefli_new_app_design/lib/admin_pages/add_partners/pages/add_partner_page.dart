@@ -122,7 +122,7 @@ class _add_partners_pageState extends State<add_partners_page> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (type == null || type.isEmpty) {
+                    if (type.isEmpty) {
                       commonSnackBar(context, 'form should not be null');
                       print(type);
                     } else {

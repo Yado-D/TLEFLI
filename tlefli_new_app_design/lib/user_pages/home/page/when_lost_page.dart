@@ -3,7 +3,6 @@ import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/common/CommonSnackBar.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/input_description_page.dart';
-import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

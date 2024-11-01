@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
-import 'package:tlefli_new_app_design/services/paymentIntegration/paymentSystemPage.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/newMyObjectPage.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/deliverdUserInfo.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
@@ -80,7 +79,7 @@ class _choosePaymentMethodeState extends State<choosePaymentMethode> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ReusableText(
-                          TextString: 'Pay using payment',
+                          TextString: 'Pay using Credit card',
                           FontSize: 18,
                           TextColor: isInstant
                               ? ColorCollections.PrimaryColor

@@ -27,7 +27,6 @@ import 'package:tlefli_new_app_design/user_pages/signin/pages/sign_in_page.dart'
 import 'package:tlefli_new_app_design/user_pages/signup/bloc/signup_bloc.dart';
 import 'package:tlefli_new_app_design/user_pages/signup/page/sign_up_page.dart';
 import 'package:tlefli_new_app_design/user_pages/welcome/pages/welcome_page.dart';
-import 'package:tlefli_new_app_design/widgets/splash_screen.dart';
 
 class NamedRouteSettings {
   NamedRouteSettings({required BuildContext context});

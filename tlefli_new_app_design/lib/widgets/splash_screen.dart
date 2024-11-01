@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
-import 'package:tlefli_new_app_design/user_pages/home/page/home.dart';
-import 'package:tlefli_new_app_design/user_pages/welcome/pages/welcome_page.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
 class Splash extends StatefulWidget {

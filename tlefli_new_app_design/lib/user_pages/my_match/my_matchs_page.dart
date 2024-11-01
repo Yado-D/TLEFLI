@@ -22,46 +22,14 @@ class _my_match_pageState extends State<my_match_page> {
 
   UserData? userData = Global.storageServices.getData(AppConstants.USER_DATA);
 
-  Future<List<Map<String, dynamic>>> findMatchingItems() async {
-    try {
-      Map<String, dynamic> foundItemsResponse =
-          await ApiService().GetAllUserFoundItem();
-      Map<String, dynamic> userItemsResponse =
-          await ApiService().GetLostOrFoundItemsForUser(
-        userData!,
-        userData!.token['refreshToken'],
-      );
-
-      List<Map<String, dynamic>> foundItems = foundItemsResponse['items'];
-      List<Map<String, dynamic>> userItems = userItemsResponse['items'];
-
-      List<Map<String, dynamic>> matchingItems = [];
-
-      for (var foundItem in foundItems) {
-        for (var userItem in userItems) {
-          if (foundItem['itemName'] == userItem['itemName'] &&
-              foundItem['location'] == userItem['location'] &&
-              foundItem['category'] == userItem['category'] &&
-              foundItem['subcategory'] == userItem['subcategory']) {
-            matchingItems.add(foundItem);
-          }
-        }
-      }
-
-      return matchingItems;
-    } catch (e) {
-      return [
-        {"Error": 'Error: ${e.toString()}'}
-      ];
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final res = ApiService().getUserMatch(userData!);
+    // print(res);
     return Scaffold(
       backgroundColor: ColorCollections.PrimaryColor,
       body: FutureBuilder(
-          future: findMatchingItems(),
+          future: res,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Column(

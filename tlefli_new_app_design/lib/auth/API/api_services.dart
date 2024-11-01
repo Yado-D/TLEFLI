@@ -1,9 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 // import 'package:http/http.dart' as http;
-import 'package:flutter/cupertino.dart';
 import 'package:http_auth/http_auth.dart';
-import 'package:tlefli_new_app_design/auth/API/defoultImage.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/models/user_data_model.dart';
 import 'package:tlefli_new_app_design/services/constants.dart';
@@ -41,7 +40,6 @@ class ApiService {
     String password,
     String phone,
   ) async {
-    String res = 'Something went wrong';
     try {
       var request =
           http.MultipartRequest('POST', Uri.parse('$baseUrl/api/register'));
@@ -50,15 +48,12 @@ class ApiService {
       request.fields['email'] = email;
       request.fields['password'] = password;
       request.fields['phone'] = phone;
-      // request.files.add(http.MultipartFile.fromBytes(
-      //   'profilePhoto',
-      //   profilePhoto,
-      // ));
+      request.files
+          .add(http.MultipartFile.fromBytes('profilePhoto', profilePhoto));
 
       var response = await request.send();
-      response.stream.transform(utf8.decoder).listen((value) {
-        print('Response body: $value');
-      });
+      String responseBody = await response.stream.bytesToString();
+      print('Response body: $responseBody');
 
       if (response.statusCode == 201) {
         final loginResponse = await http.post(
@@ -72,48 +67,52 @@ class ApiService {
           final userResponse = await GetUserProfileDetail(token['accessToken']);
 
           if (userResponse.isNotEmpty) {
-            final userData = userResponse;
             UserData userInfo = UserData(
-              userFname: userData['profile']['firstName'],
-              userLname: userData['profile']['lastName'],
-              userEmail: userData['profile']['email'],
-              userPhone: userData['profile']['phone'],
-              userPassword: userData['profile']['_id'],
-              userImage: userData['profile']['profilePhoto'],
+              userFname: userResponse['profile']['firstName'],
+              userLname: userResponse['profile']['lastName'],
+              userEmail: userResponse['profile']['email'],
+              userPhone: userResponse['profile']['phone'],
+              userPassword: userResponse['profile']['_id'],
+              userImage: userResponse['profile']['profilePhoto'],
               token: token,
             );
 
-            Global.storageServices.setData(AppConstants.USER_DATA, userInfo);
+            await Global.storageServices
+                .setData(AppConstants.USER_DATA, userInfo);
             return 'User verified';
           } else {
-            return 'Failed to load user profile: ${userResponse}';
+            return 'Failed to load user profile. Please try again.';
           }
         } else {
-          return 'Login failed: ${loginResponse.statusCode}';
+          return 'Login failed. Please check your credentials and try again.';
         }
       } else {
-        return 'Registration failed: ${response.statusCode}';
+        return 'Registration failed. Please ensure all fields are correctly filled out and try again.';
       }
+    } on TimeoutException catch (_) {
+      return 'Request timed out. Please check your internet connection and try again.';
     } catch (e) {
-      return 'Error: ${e.toString()}';
+      print('Error: $e');
+      return 'An error occurred: ${e.toString()}. Please try again.';
     }
   }
 
   Future<String?> login(String email, String password) async {
     try {
-      print(email);
-      print(password);
-      final response = await http.post(
+      print('Login attempt with email: $email');
+      final response = await http
+          .post(
         Uri.parse('$baseUrl/api/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'email': email, 'password': password}),
-      );
-
-      print(response.body);
+      )
+          .timeout(const Duration(seconds: 5), onTimeout: () {
+        throw TimeoutException('Connection timeout');
+      });
 
       if (response.statusCode == 200) {
         Map<String, dynamic> token = json.decode(response.body);
-        print(token); // User token
+        print('Token received: $token');
 
         final userResponse = await http.get(
           Uri.parse('$baseUrl/api/user/profile'),
@@ -123,28 +122,36 @@ class ApiService {
           },
         );
 
-        print(userResponse.statusCode);
         if (userResponse.statusCode == 200) {
           final userData = jsonDecode(userResponse.body);
-          UserData userInfo = UserData(
-            userFname: userData['profile']['firstName'],
-            userLname: userData['profile']['lastName'],
-            userEmail: userData['profile']['email'],
-            userPhone: userData['profile']['phone'],
-            userPassword: userData['profile']['_id'],
-            userImage: userData['profile']['profilePhoto'],
-            token: token, // Ensure this is handled appropriately
-          );
-
-          print(userInfo);
-          Global.storageServices.setData(AppConstants.USER_DATA, userInfo);
-          return 'User verified';
+          if (userData.containsKey('profile')) {
+            UserData userInfo = UserData(
+              userFname: userData['profile']['firstName'],
+              userLname: userData['profile']['lastName'],
+              userEmail: userData['profile']['email'],
+              userPhone: userData['profile']['phone'],
+              userPassword: userData['profile']['_id'],
+              userImage: userData['profile']['profilePhoto'],
+              token: token,
+            );
+            await Global.storageServices
+                .setData(AppConstants.USER_DATA, userInfo);
+            return 'User verified';
+          } else {
+            return 'Unexpected response structure.';
+          }
+        } else if (userResponse.statusCode == 401) {
+          return 'Unauthorized: Invalid credentials!';
         } else {
-          return 'Failed to load user profile: ${userResponse.statusCode}';
+          return 'please,Login as an admin: ${userResponse.statusCode}';
         }
+      } else if (response.statusCode == 401) {
+        return 'Login failed: Invalid email or password.';
       } else {
-        return 'Login failed: ${response.body}';
+        return 'Login failed: try again';
       }
+    } on TimeoutException catch (_) {
+      return 'Request timed out. Please try again.';
     } catch (e) {
       print('Error: $e');
       return 'An error occurred: ${e.toString()}';
@@ -163,6 +170,8 @@ class ApiService {
         },
       );
 
+      print(userResponse.body);
+
       if (userResponse.statusCode == 200) {
         final userJson = json.decode(userResponse.body);
         return userJson;
@@ -179,50 +188,51 @@ class ApiService {
   Future<String> PostLostOrFoundItems(
       itemPickedModel item_model, UserData userData) async {
     try {
-      print(userData.token);
       var request =
           http.MultipartRequest('POST', Uri.parse('$baseUrl/api/user/item'));
 
       request.headers.addAll({
         'Authorization': 'Bearer ${userData.token['accessToken']}',
-        // 'Content-Type': 'multipart/form-data', // Remove this line
       });
 
-      request.fields['itemName'] = item_model.nested_item!;
-      request.fields['category'] = item_model.main_catagory!;
-      request.fields['subcategory'] = item_model.nested_item!;
-      request.fields['location'] = '${item_model.address!} ${item_model.city!}';
-      request.fields['dateLost'] = item_model.date_picked!;
-      request.fields['description'] = item_model.item_description!;
-      request.fields['type'] = item_model.lostOrFound!;
+      request.fields['itemName'] = item_model.nested_item ?? '';
+      request.fields['category'] = item_model.main_catagory ?? '';
+      request.fields['subcategory'] = item_model.nested_item ?? '';
+      request.fields['location'] =
+          '${item_model.address ?? ''} ${item_model.city ?? ''}';
+      request.fields['date'] = item_model.date_picked ?? '';
+      request.fields['description'] = item_model.item_description ?? '';
+      request.fields['type'] = item_model.lostOrFound ?? '';
 
-      request.files.add(http.MultipartFile.fromBytes(
-        'itemImage',
-        item_model.pickedImage!,
-        filename: 'profile.jpg',
-        contentType:
-            MediaType('image', 'jpeg'), // Adjust content type if needed
-      ));
+      if (item_model.pickedImage != null) {
+        request.files.add(http.MultipartFile.fromBytes(
+          'itemImage',
+          item_model.pickedImage!,
+          filename: 'profile.jpg',
+          contentType: MediaType('image', 'jpeg'),
+        ));
+      }
 
       var response = await request.send();
-
-      response.stream.transform(utf8.decoder).listen((value) {
-        print('Response body: $value');
-      });
+      var responseBody = await response.stream.bytesToString();
+      print('Response body: $responseBody');
 
       if (response.statusCode == 201) {
-        return 'posted!';
+        return 'Item successfully posted!';
       } else if (response.statusCode == 401 || response.statusCode == 403) {
         final newAccessToken =
             await refreshAccessToken(userData.token['refreshToken']);
         userData.token['accessToken'] = newAccessToken;
-        Global.storageServices.setData(AppConstants.USER_DATA, userData);
+        await Global.storageServices.setData(AppConstants.USER_DATA, userData);
         return await PostLostOrFoundItems(item_model, userData);
       } else {
-        return 'Error: when posting. Status code: ${response.statusCode}';
+        return 'Error posting item: ${response.statusCode}. Please try again.';
       }
+    } on TimeoutException catch (_) {
+      return 'Request timed out. Please check your internet connection and try again.';
     } catch (e) {
-      return 'Error: ${e.toString()}';
+      print('Error: $e');
+      return 'An error occurred: ${e.toString()}. Please try again.';
     }
   }
 
@@ -231,34 +241,43 @@ class ApiService {
   Future<Map<String, dynamic>> GetLostOrFoundItemsForUser(
       UserData userData, String refreshToken) async {
     try {
-      //get token from somewhere until backend developer finishs
-
       final response = await http.get(
-        Uri.parse("${baseUrl}/api/user/items"),
+        Uri.parse('$baseUrl/api/user/items'),
         headers: {
           'Authorization': 'Bearer ${userData.token['accessToken']}',
           'Content-Type': 'application/json',
         },
-      );
-      print(response.body);
+      ).timeout(const Duration(seconds: 5), onTimeout: () {
+        throw TimeoutException('Connection timeout');
+      });
+
       if (response.statusCode == 200) {
+        print('Access granted');
         var res = jsonDecode(response.body);
         return res;
       } else if (response.statusCode == 401 || response.statusCode == 403) {
-        final newAccessToken =
-            await refreshAccessToken(userData.token['refreshToken']);
+        print('Status code: ${response.statusCode}');
+        if (refreshToken.isEmpty) {
+          return {'Error': 'Unauthorized. Please login again.'};
+        }
+        final newAccessToken = await refreshAccessToken(refreshToken);
+        if (newAccessToken == null) {
+          return {'Error': 'Failed to refresh token. Please login again.'};
+        }
         userData.token['accessToken'] = newAccessToken;
-        Global.storageServices.setData(AppConstants.USER_DATA, userData);
-        return await GetLostOrFoundItemsForUser(userData, newAccessToken!);
+        await Global.storageServices.setData(AppConstants.USER_DATA, userData);
+        return await GetLostOrFoundItemsForUser(userData, newAccessToken);
       } else {
-        return {
-          'Error': response.body,
-        };
+        return {'Error': 'Error: ${response.body}. Please try again.'};
       }
-    } catch (e) {
+    } on TimeoutException catch (_) {
       return {
-        'Error': e.toString(),
+        'Error':
+            'Request timed out. Please check your internet connection and try again.'
       };
+    } catch (e) {
+      print('Error: $e');
+      return {'Error': 'An error occurred: ${e.toString()}. Please try again.'};
     }
   }
 
@@ -276,6 +295,7 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
+      print("refreshed");
       final data = jsonDecode(response.body);
       return data['accessToken'];
     } else {
@@ -495,13 +515,28 @@ class ApiService {
         print('Admin Response Body: ${response.body}');
 
         if (response.statusCode == 200) {
-          final lostItems = json.decode(response.body);
+          // get admin profile and assign to user data
+          // Map<String, dynamic> userMap =
+          //     await GetUserProfileDetail(token['accessToken']);
+
+          // print(userMap);
+          UserData? userData = UserData(
+              userFname: 'Admin',
+              userLname: 'access',
+              userEmail: 'admin@gmail.com',
+              userPhone: 'unknown',
+              userImage: 'unknown',
+              userPassword: '_id',
+              token: token);
+
+          await Global.storageServices
+              .setData(AppConstants.USER_DATA, userData);
           return 'Authenticated';
         } else {
           return 'NotAuthenticated: ${response.statusCode}';
         }
       } else {
-        return 'Cant login: ${loginResponse.statusCode}';
+        return 'Can\'t login: ${loginResponse.statusCode}';
       }
     } catch (e) {
       return 'Error: ${e.toString()}';
@@ -559,7 +594,7 @@ class ApiService {
 
   //delete specific user
 
-  Future<Map<String, dynamic>> AdminDeleteUser(String token, String id) async {
+  Future<String> AdminDeleteUser(String token, String id) async {
     try {
       final response = await http.delete(
         Uri.parse('$baseUrl/api/admin/user/$id'),
@@ -569,15 +604,15 @@ class ApiService {
       );
       print(response.body);
       if (response.statusCode == 200) {
-        final allUsers = json.decode(response.body);
-        return allUsers;
+        // final allUsers = json.decode(response.body);
+        return 'User Deleted!';
       } else {
-        return {'message': 'unAuthorized'};
+        return 'unAuthorized';
       }
 
       // return "Some error occurred, please try again later";
     } catch (e) {
-      return {"message": e.toString()};
+      return e.toString();
     }
   }
 
@@ -585,7 +620,7 @@ class ApiService {
 
   Future<String> AdminPromoteUser(String token, String id) async {
     try {
-      final response = await http.delete(
+      final response = await http.get(
         Uri.parse('$baseUrl/api/admin/user/$id/toAdmin'),
         headers: {
           'Authorization': "Bearer ${token}",
@@ -723,6 +758,23 @@ class ApiService {
       return "0";
     } catch (e) {
       rethrow;
+    }
+  }
+
+  Future<void> getUserMatch(UserData userData) async {
+    try {
+      final response = await http.get(
+          Uri.parse(
+            '$baseUrl/api/user/item/${userData.token['accessToken']}/matches',
+          ),
+          headers: {
+            "Authorization": "Bearer ${userData.token['accessToken']}",
+            "content-type": "application/json"
+          });
+
+      print(response.body);
+    } catch (e) {
+      print(e);
     }
   }
 }

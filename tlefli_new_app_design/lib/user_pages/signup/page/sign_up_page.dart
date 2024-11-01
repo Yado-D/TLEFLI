@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tlefli_new_app_design/auth/signinAuth/signin_auth.dart';
 import 'package:tlefli_new_app_design/auth/signupAuth/signup_auth.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/common/CommonSnackBar.dart';
-import 'package:tlefli_new_app_design/models/user_data_model.dart';
-import 'package:tlefli_new_app_design/services/constants.dart';
-import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/user_pages/signup/bloc/signup_bloc.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

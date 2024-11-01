@@ -11,7 +11,6 @@ import 'package:tlefli_new_app_design/user_pages/more/page/more_page.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/my_object_page.dart';
 import 'package:tlefli_new_app_design/user_pages/my_match/my_matchs_page.dart';
 import 'package:tlefli_new_app_design/user_pages/profile/page/profile_page.dart';
-import 'package:tlefli_new_app_design/user_pages/request/page/request_page.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

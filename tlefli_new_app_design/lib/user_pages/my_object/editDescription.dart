@@ -11,9 +11,9 @@ import 'package:tlefli_new_app_design/services/constants.dart';
 import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/choose_location_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/choose_main_catagory_page.dart';
+import 'package:tlefli_new_app_design/user_pages/home/page/home.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/pickImages.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditDescription extends StatefulWidget {
   itemPickedModel item_model;
@@ -350,6 +350,7 @@ class _EditDescriptionState extends State<EditDescription> {
                           margin: EdgeInsets.only(left: 10, right: 10, top: 5),
                           height: 50,
                           decoration: BoxDecoration(
+                            color: ColorCollections.TeritiaryColor,
                             borderRadius: BorderRadius.circular(30),
                             border: Border.all(
                               color: const Color.fromARGB(255, 224, 225, 224),
@@ -359,7 +360,7 @@ class _EditDescriptionState extends State<EditDescription> {
                             child: ReusableText(
                               TextString: 'Edit location',
                               FontSize: 20,
-                              TextColor: ColorCollections.Black,
+                              TextColor: ColorCollections.PrimaryColor,
                             ),
                           ),
                         ),
@@ -591,7 +592,29 @@ class _EditDescriptionState extends State<EditDescription> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () async {
+                          setState(() {
+                            isFinished = false;
+                          });
+                          String res = await ApiService()
+                              .DeleteUserPostedItemsById(widget.item_model,
+                                  userData!, widget.item_model.defoultId!);
+
+                          print(res);
+                          setState(() {
+                            isFinished = true;
+                          });
+                          if (res == '200') {
+                            print(res);
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => home_page()),
+                                (route) => false);
+                          } else {
+                            print(res);
+                            commonSnackBar(context, res);
+                          }
+                        },
                         child: Container(
                           margin: EdgeInsets.only(right: 10),
                           height: 50,

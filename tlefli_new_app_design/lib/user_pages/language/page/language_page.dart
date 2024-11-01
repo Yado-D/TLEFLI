@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
-import 'package:tlefli_new_app_design/controllers/language_controller.dart';
 import 'package:tlefli_new_app_design/l10n/l10n.dart';
 import 'package:tlefli_new_app_design/services/providers/local_provider.dart';
-import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

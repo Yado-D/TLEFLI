@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -39,7 +38,7 @@ class SignupAuth {
     // add the data to database
     photo = await loadAsset('assets/images/background.jpeg');
 
-    String? loginVerification = await ApiService().register(
+    String? signupVerification = await ApiService().register(
       fName,
       lName,
       photo,
@@ -48,8 +47,8 @@ class SignupAuth {
       phone,
     );
 
-    if (loginVerification != 'User verified') {
-      return loginVerification!;
+    if (signupVerification != 'User verified') {
+      return signupVerification!;
     } else {
       Global.storageServices
           .setBool(AppConstants.STORAGE_DEVICE_OPENED_FIRST, true);

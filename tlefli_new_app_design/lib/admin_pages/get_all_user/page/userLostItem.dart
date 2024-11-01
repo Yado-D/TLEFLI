@@ -4,30 +4,31 @@ import 'package:tlefli_new_app_design/auth/API/api_services.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/models/user_data_model.dart';
-import 'package:tlefli_new_app_design/services/constants.dart';
-import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/newMyObjectPage.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
-class my_object_page extends StatefulWidget {
-  const my_object_page({super.key});
+class AdminUserLostItems extends StatefulWidget {
+  UserData? userData;
+
+  AdminUserLostItems({
+    super.key,
+    required this.userData,
+  });
 
   @override
-  State<my_object_page> createState() => _my_object_pageState();
+  State<AdminUserLostItems> createState() => _AdminUserLostItemsState();
 }
 
-class _my_object_pageState extends State<my_object_page> {
+class _AdminUserLostItemsState extends State<AdminUserLostItems> {
   Future<Map<String, dynamic>>? userPosts;
-  UserData? userData;
   @override
   void initState() {
     //featch the data from database in the itemPickedModel
     //  Future<void> getMyObjectValue()async{
     //     my_object
     //  }
-    userData = Global.storageServices.getData(AppConstants.USER_DATA)!;
-    userPosts = ApiService()
-        .GetLostOrFoundItemsForUser(userData!, userData!.token['refreshToken']);
+    userPosts = ApiService().GetLostOrFoundItemsForUser(
+        widget.userData!, widget.userData!.token['refreshToken']);
 
     print(userPosts);
     super.initState();
@@ -120,8 +121,8 @@ class _my_object_pageState extends State<my_object_page> {
                                   bread: '',
                                   item_color: '',
                                   item_model: '',
-                                  owner:
-                                      userData!.userFname + userData!.userLname,
+                                  owner: widget.userData!.userFname +
+                                      widget.userData!.userLname,
                                   lostOrFound: '',
                                   pickedImage: snap['itemImage'],
                                   defoultId: snap['_id'],
@@ -175,7 +176,7 @@ class _my_object_pageState extends State<my_object_page> {
                             ReusableText(
                               FromBottom: 2,
                               TextColor: ColorCollections.Black,
-                              TextString: userData!.userFname ?? "",
+                              TextString: widget.userData!.userFname ?? "",
                               FontSize: 20,
                             ),
                           ],
@@ -193,10 +194,7 @@ class _my_object_pageState extends State<my_object_page> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    child: ReusableText(
-                      TextString: 'No Item\'s reported yet ',
-                      FontSize: 20,
-                    ),
+                    child: Text('${snapshot.data!}'),
                   ),
                 ],
               ),

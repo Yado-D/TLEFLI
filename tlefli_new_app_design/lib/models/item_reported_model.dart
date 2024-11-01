@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'dart:typed_data';
 
 class itemPickedModel {
   String? itemName;

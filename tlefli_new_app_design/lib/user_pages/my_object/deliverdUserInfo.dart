@@ -1,10 +1,6 @@
-import 'package:csc_picker/csc_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_editor_plus/image_editor_plus.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
-import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/choiceOfCarrier.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/commons.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';

@@ -6,7 +6,6 @@ import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/partner_location_choose_page.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/type_location.dart';
 import 'package:tlefli_new_app_design/user_pages/home/page/when_lost_page.dart';
-import 'package:tlefli_new_app_design/user_pages/home/widget/all_common_widget.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/editDescription.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

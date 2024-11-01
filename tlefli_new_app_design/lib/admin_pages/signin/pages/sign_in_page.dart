@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:tlefli_new_app_design/admin_pages/signin/bloc/signin_bloc.dart';
 import 'package:tlefli_new_app_design/auth/API/api_services.dart';
-import 'package:tlefli_new_app_design/auth/signinAuth/signin_auth.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/common/CommonSnackBar.dart';
 import 'package:tlefli_new_app_design/models/user_data_model.dart';
 import 'package:tlefli_new_app_design/services/constants.dart';
 import 'package:tlefli_new_app_design/services/global.dart';
-import 'package:tlefli_new_app_design/user_pages/signin/bloc/signin_bloc.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -208,106 +205,9 @@ class _Adminsign_in_pageState extends State<Adminsign_in_page> {
                                   );
                                 },
                               ),
-                              // Container(
-                              //   margin: const EdgeInsets.only(top: 30),
-                              //   child: Row(
-                              //     mainAxisAlignment: MainAxisAlignment.center,
-                              //     children: [
-                              //       ReusableText(
-                              //         TextString: AppLocalizations.of(context)!
-                              //             .dontHaveAccount,
-                              //         FontSize: 15,
-                              //         TextColor: const Color.fromARGB(
-                              //             255, 147, 150, 147),
-                              //         TextFontWeight: FontWeight.w500,
-                              //       ),
-                              //       GestureDetector(
-                              //         onTap: () {
-                              //           Navigator.of(context)
-                              //               .pushNamed('/sign_up_page');
-                              //         },
-                              //         child: ReusableText(
-                              //           TextString:
-                              //               AppLocalizations.of(context)!
-                              //                   .signup,
-                              //           FontSize: 18,
-                              //           TextFontWeight: FontWeight.w900,
-                              //           TextColor: ColorCollections.Black,
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                              // Container(
-                              //   margin: EdgeInsets.only(top: 15, bottom: 20),
-                              //   child: Row(
-                              //     mainAxisAlignment: MainAxisAlignment.center,
-                              //     children: [
-                              //       GestureDetector(
-                              //         onTap: () {
-                              //           Navigator.of(context)
-                              //               .pushNamed('/partner_home');
-                              //         },
-                              //         child: Container(
-                              //           margin:
-                              //               EdgeInsets.only(left: 20, right: 10),
-                              //           height: 40,
-                              //           width: 150,
-                              //           decoration: BoxDecoration(
-                              //               color: ColorCollections.SecondaryColor,
-                              //               borderRadius:
-                              //                   BorderRadius.circular(10)),
-                              //           child: Center(
-                              //             child: ReusableText(
-                              //               TextColor: ColorCollections.Black,
-                              //               TextString: 'Partner Login',
-                              //               FontSize: 18,
-                              //             ),
-                              //           ),
-                              //         ),
-                              //       ),
-                              //       GestureDetector(
-                              //         onTap: () {
-                              //           Navigator.of(context)
-                              //               .pushNamed('/admin_home_page');
-                              //         },
-                              //         child: Container(
-                              //           height: 40,
-                              //           width: 150,
-                              //           decoration: BoxDecoration(
-                              //               color: ColorCollections.TeritiaryColor,
-                              //               borderRadius:
-                              //                   BorderRadius.circular(10)),
-                              //           child: Center(
-                              //             child: ReusableText(
-                              //               TextString: 'Admin Login',
-                              //               FontSize: 18,
-                              //               TextColor:
-                              //                   ColorCollections.PrimaryColor,
-                              //             ),
-                              //           ),
-                              //         ),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),
-                        // Center(
-                        //   child: Container(
-                        //     margin: EdgeInsets.only(top: 0.sp),
-                        //     height: 200,
-                        //     width: 200,
-                        //     decoration: BoxDecoration(
-                        //       image: DecorationImage(
-                        //           image: AssetImage(
-                        //             'assets/logos/tlefli_app.jpg',
-                        //           ),
-                        //           fit: BoxFit.fill),
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ],

@@ -153,7 +153,7 @@ List<List<Map<String, dynamic>>> CategoriesList = [
     {
       //this is for First categories
       'txt': 'Cloths',
-      'assets': 'cloths.jpg'
+      'assets': 'cloths.jpeg'
     },
   ],
   [

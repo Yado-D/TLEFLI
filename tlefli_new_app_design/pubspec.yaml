@@ -94,6 +94,7 @@ flutter:
     - assets/images/categories/
     - assets/images/newCategory/
     - assets/icons/
+    - assets/icons/steppers/
     - assets/icons/flat_icons/
     - assets/icons/normals/
     - assets/logos/

@@ -9,14 +9,14 @@ import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/newMyObjectPage.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
-class my_object_page extends StatefulWidget {
-  const my_object_page({super.key});
+class GetAllReportedItems extends StatefulWidget {
+  const GetAllReportedItems({super.key});
 
   @override
-  State<my_object_page> createState() => _my_object_pageState();
+  State<GetAllReportedItems> createState() => _GetAllReportedItemsState();
 }
 
-class _my_object_pageState extends State<my_object_page> {
+class _GetAllReportedItemsState extends State<GetAllReportedItems> {
   Future<Map<String, dynamic>>? userPosts;
   UserData? userData;
   @override
@@ -26,8 +26,7 @@ class _my_object_pageState extends State<my_object_page> {
     //     my_object
     //  }
     userData = Global.storageServices.getData(AppConstants.USER_DATA)!;
-    userPosts = ApiService()
-        .GetLostOrFoundItemsForUser(userData!, userData!.token['refreshToken']);
+    userPosts = ApiService().GetAllReportedItem(userData!.token['accessToken']);
 
     print(userPosts);
     super.initState();
@@ -42,6 +41,7 @@ class _my_object_pageState extends State<my_object_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: SimpleAppBars(context, 'All user reports'),
       backgroundColor: ColorCollections.PrimaryColor,
       body: FutureBuilder(
         future: userPosts,
@@ -175,7 +175,7 @@ class _my_object_pageState extends State<my_object_page> {
                             ReusableText(
                               FromBottom: 2,
                               TextColor: ColorCollections.Black,
-                              TextString: userData!.userFname ?? "",
+                              TextString: snap['reported_by']['userName'] ?? "",
                               FontSize: 20,
                             ),
                           ],
@@ -193,10 +193,7 @@ class _my_object_pageState extends State<my_object_page> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    child: ReusableText(
-                      TextString: 'No Item\'s reported yet ',
-                      FontSize: 20,
-                    ),
+                    child: Text('${snapshot.data!}'),
                   ),
                 ],
               ),

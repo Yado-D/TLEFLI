@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:tlefli_new_app_design/admin_pages/getAllReportedItems/getallReportedItems.dart';
+import 'package:tlefli_new_app_design/admin_pages/get_all_user/page/get_all_user_page.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
@@ -17,7 +20,7 @@ Drawer AdminDrawer(BuildContext context) {
             },
             child: Container(
               margin:
-                  EdgeInsets.only(top: 30, left: 20, right: 10, bottom: 100),
+                  EdgeInsets.only(top: 50, left: 20, right: 10, bottom: 100),
               child: Icon(
                 Icons.arrow_back_ios,
               ),
@@ -31,9 +34,16 @@ Drawer AdminDrawer(BuildContext context) {
               margin: EdgeInsets.only(top: 20),
               child: Row(
                 children: [
-                  Icon(Icons.verified),
+                  Container(
+                    height: 40,
+                    width: 40,
+                    child: SvgPicture.asset(
+                      'assets/icons/partners.svg',
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                   ReusableText(
-                    FromLeft: 30,
+                    FromLeft: 15,
                     TextString: 'Add Partners',
                     FontSize: 20,
                     TextColor: ColorCollections.Black,
@@ -42,25 +52,6 @@ Drawer AdminDrawer(BuildContext context) {
               ),
             ),
           ),
-          // GestureDetector(
-          //   onTap: () {
-          //     Navigator.of(context).pushNamed('/remove_partners_page');
-          //   },
-          //   child: Container(
-          //     margin: EdgeInsets.only(top: 20),
-          //     child: Row(
-          //       children: [
-          //         Icon(Icons.remove_circle_outline),
-          //         ReusableText(
-          //           FromLeft: 30,
-          //           TextString: 'Remove Partners',
-          //           FontSize: 20,
-          //           TextColor: ColorCollections.Black,
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
           GestureDetector(
             onTap: () {
               Navigator.of(context).pushNamed('/agreement_page');
@@ -69,10 +60,77 @@ Drawer AdminDrawer(BuildContext context) {
               margin: EdgeInsets.only(top: 20),
               child: Row(
                 children: [
-                  Icon(Icons.contrast_outlined),
+                  Container(
+                    height: 40,
+                    width: 40,
+                    child: SvgPicture.asset(
+                      'assets/icons/agreement.svg',
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                   ReusableText(
-                    FromLeft: 30,
+                    FromLeft: 15,
                     TextString: 'Agreements',
+                    FontSize: 20,
+                    TextColor: ColorCollections.Black,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => getAllUsers(),
+                ),
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.only(top: 20),
+              child: Row(
+                children: [
+                  Container(
+                    height: 40,
+                    width: 40,
+                    child: SvgPicture.asset(
+                      'assets/icons/users.svg',
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  ReusableText(
+                    FromLeft: 15,
+                    TextString: 'Get all user',
+                    FontSize: 20,
+                    TextColor: ColorCollections.Black,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => GetAllReportedItems(),
+                ),
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.only(top: 20),
+              child: Row(
+                children: [
+                  Container(
+                    height: 40,
+                    width: 40,
+                    child: SvgPicture.asset(
+                      'assets/icons/report.svg',
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  ReusableText(
+                    FromLeft: 15,
+                    TextString: 'Get all reported item',
                     FontSize: 20,
                     TextColor: ColorCollections.Black,
                   ),
@@ -88,9 +146,12 @@ Drawer AdminDrawer(BuildContext context) {
               margin: EdgeInsets.only(top: 20),
               child: Row(
                 children: [
-                  Icon(Icons.logout_outlined),
+                  Icon(
+                    Icons.logout_outlined,
+                    size: 40,
+                  ),
                   ReusableText(
-                    FromLeft: 30,
+                    FromLeft: 15,
                     TextString: 'Log Out',
                     FontSize: 20,
                     TextColor: ColorCollections.Black,

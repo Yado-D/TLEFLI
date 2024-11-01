@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/l10n/l10n.dart';
 
