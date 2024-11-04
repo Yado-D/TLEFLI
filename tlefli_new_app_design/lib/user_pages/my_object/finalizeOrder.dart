@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
+import 'package:tlefli_new_app_design/models/item_reported_model.dart';
+import 'package:tlefli_new_app_design/models/user_data_model.dart';
+import 'package:tlefli_new_app_design/services/constants.dart';
+import 'package:tlefli_new_app_design/services/global.dart';
 import 'package:tlefli_new_app_design/services/paymentIntegration/Stripe/stripe_services.dart';
+import 'package:tlefli_new_app_design/services/paymentIntegration/paypal/flutter_paypal.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/commons.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
 class finalizeOrder extends StatefulWidget {
-  const finalizeOrder({super.key});
+  itemPickedModel item_model;
+
+  finalizeOrder({
+    super.key,
+    required this.item_model,
+  });
 
   @override
   State<finalizeOrder> createState() => _finalizeOrderState();
 }
 
 class _finalizeOrderState extends State<finalizeOrder> {
+  UserData? userData = Global.storageServices.getData(AppConstants.USER_DATA);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +61,7 @@ class _finalizeOrderState extends State<finalizeOrder> {
           //THE STRIPE INTEGRATION HERE
           GestureDetector(
             onTap: () {
-              StripeServices.instance.makePayment();
+              choose_services();
             },
             child: Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -62,7 +74,7 @@ class _finalizeOrderState extends State<finalizeOrder> {
               ),
               child: Center(
                 child: ReusableText(
-                  TextString: 'Wallet, Purse €16.00',
+                  TextString: 'Pay 16.00\$',
                   FontSize: 20,
                   TextColor: ColorCollections.PrimaryColor,
                 ),
@@ -71,6 +83,84 @@ class _finalizeOrderState extends State<finalizeOrder> {
           ),
         ],
       ),
+    );
+  }
+
+  choose_services() {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          children: [
+            Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    StripeServices.instance.makePayment();
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(top: 10, bottom: 10),
+                    height: 45,
+                    width: 230,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: ColorCollections.TeritiaryColor,
+                    ),
+                    child: Center(
+                      child: ReusableText(
+                        TextString: 'Credit Card Payment',
+                        FontSize: 20,
+                        TextColor: ColorCollections.PrimaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PaypalPaymentPage(
+                        title: 'Paypal',
+                        amount: 3,
+                        nameOfItem: widget.item_model.main_catagory! +
+                            " " +
+                            widget.item_model.nested_item!,
+                        recipientCity: 'Rabat',
+                        recipientPostalCode: '1234',
+                        shipping: 5,
+                        quantity: 2,
+                        recipientName: 'Marouane',
+                        recipientPhone: '0993157092',
+                        recipientState: 'Moroco',
+                        countryCode: 'US',
+                        currency: 'USD',
+                        payerEmail: userData!.userEmail,
+                        payerFirstName: userData!.userFname,
+                        payerLastName: userData!.userLname,
+                        payerId: userData!.userPassword,
+                      ),
+                    ),
+                  ),
+                  child: Container(
+                    height: 45,
+                    width: 230,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: ColorCollections.TeritiaryColor,
+                    ),
+                    child: Center(
+                      child: ReusableText(
+                        TextString: 'Paypal Payment',
+                        FontSize: 20,
+                        TextColor: ColorCollections.PrimaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -34,6 +34,7 @@ class _MyObjectPageState extends State<MyObjectDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    print('${widget.item_model.main_catagory}+++++++++++++++++');
     return Scaffold(
       appBar: SimpleAppBars(context, widget.item_model.nested_item ?? ''),
       backgroundColor: ColorCollections.PrimaryColor,

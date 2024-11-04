@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
+import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/commons.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/finalizeOrder.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
 class chooseCarriers extends StatefulWidget {
-  const chooseCarriers({super.key});
+  itemPickedModel item_model;
+  chooseCarriers({
+    super.key,
+    required this.item_model,
+  });
 
   @override
   State<chooseCarriers> createState() => _chooseCarriersState();
 }
 
 class _chooseCarriersState extends State<chooseCarriers> {
+  bool isMaroc = false;
+  bool isAmana = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,22 +83,49 @@ class _chooseCarriersState extends State<chooseCarriers> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                height: 90,
-                width: 120,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/logos/poste_moroc.png'),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isAmana = false;
+                    isMaroc = true;
+                  });
+                },
+                child: Container(
+                  height: 90,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: isMaroc
+                          ? ColorCollections.TeritiaryColor
+                          : ColorCollections.PrimaryColor,
+                      width: 3,
+                    ),
+                    image: DecorationImage(
+                      image: AssetImage('assets/logos/poste_moroc.png'),
+                    ),
                   ),
                 ),
               ),
-              Container(
-                height: 90,
-                width: 120,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage('assets/logos/amana.jpg'),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isAmana = true;
+                    isMaroc = false;
+                  });
+                },
+                child: Container(
+                  height: 90,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: isAmana
+                            ? ColorCollections.TeritiaryColor
+                            : ColorCollections.PrimaryColor,
+                        width: 3),
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage('assets/logos/amana.jpg'),
+                    ),
                   ),
                 ),
               ),
@@ -157,7 +192,9 @@ class _chooseCarriersState extends State<chooseCarriers> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => finalizeOrder(),
+                  builder: (context) => finalizeOrder(
+                    item_model: widget.item_model,
+                  ),
                 ),
               );
             },

@@ -40,7 +40,13 @@ class _admin_home_pageState extends State<admin_home_page> {
         child: ListView(
           children: [
             Container(
-              margin: EdgeInsets.only(top: 20, left: 15, right: 15),
+              margin: EdgeInsets.only(top: 20, left: 7, right: 7),
+              padding: EdgeInsets.only(top: 20, left: 7, right: 7),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: ColorCollections.TeritiaryColor,
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

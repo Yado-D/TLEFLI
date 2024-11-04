@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:tlefli_new_app_design/utils/consts.dart';
+import 'package:tlefli_new_app_design/services/global.dart';
 
 class StripeServices {
   StripeServices._();
@@ -30,6 +31,10 @@ class StripeServices {
   }
 
   Future<String> _createPaymentIntent(int amount, String currency) async {
+    // final stripePublishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'];
+    // final stripeSecretKey = dotenv.env['STRIPE_SECRET_KEY'];
+    print(
+        '${Global.stripeSecretKey}++++++++++++++++++++++++++++++++++++++++++++');
     try {
       final Dio dio = Dio();
       Map<String, dynamic> data = {
@@ -41,7 +46,7 @@ class StripeServices {
         data: data,
         options:
             Options(contentType: Headers.formUrlEncodedContentType, headers: {
-          "Authorization": "Bearer ${stripeSecretKey}",
+          "Authorization": "Bearer ${Global.stripeSecretKey}",
           "Content-Type": "applications/x-www-form-urlencoded",
         }),
       );
@@ -55,7 +60,6 @@ class StripeServices {
       return 'error';
     } catch (e) {
       return e.toString();
-      print(e);
     }
   }
 

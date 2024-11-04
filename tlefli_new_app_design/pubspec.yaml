@@ -46,12 +46,13 @@ dependencies:
   flutter_stepper: 
   tuple:
   http:
-  http_auth: 
-  webview_flutter: 
+  http_auth: ^1.0.4 
   flutter_stripe: 
   csc_picker: 
   intl_phone_field: 
   dio: ^5.7.0
+  flutter_paypal: ^0.2.1
+  flutter_dotenv: ^5.2.1
   # flutter_dotenv:
   # flutter_paypal_payment: 
   # flutter_stripe:
@@ -100,7 +101,7 @@ flutter:
     - assets/logos/
     - assets/Language/
     - assets/logos/tlefli_app.png
-    - assets/.env
+    - .env
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

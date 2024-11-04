@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tlefli_new_app_design/common/AllCommonWidget.dart';
+import 'package:tlefli_new_app_design/models/item_reported_model.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/choiceOfCarrier.dart';
 import 'package:tlefli_new_app_design/user_pages/my_object/commons.dart';
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 
 class paymentDescription extends StatefulWidget {
-  const paymentDescription({super.key});
+  itemPickedModel item_model;
+  paymentDescription({
+    super.key,
+    required this.item_model,
+  });
 
   @override
   State<paymentDescription> createState() => _paymentDescriptionState();
@@ -132,7 +137,9 @@ class _paymentDescriptionState extends State<paymentDescription> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => chooseCarriers(),
+                  builder: (context) => chooseCarriers(
+                    item_model: widget.item_model,
+                  ),
                 ),
               );
             },
