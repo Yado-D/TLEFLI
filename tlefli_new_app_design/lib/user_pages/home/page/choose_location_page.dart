@@ -25,8 +25,15 @@ class choose_location_page extends StatefulWidget {
 
 class _choose_location_pageState extends State<choose_location_page> {
   String? street;
+
   @override
   Widget build(BuildContext context) {
+    @override
+    void initState() {
+      setState(() {});
+      super.initState();
+    }
+
     return Scaffold(
       appBar:
           SimpleAppBars(context, AppLocalizations.of(context)!.addANewLocation),
@@ -75,13 +82,18 @@ class _choose_location_pageState extends State<choose_location_page> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
+                    Navigator.of(context)
+                        .push(
                       MaterialPageRoute(
                         builder: (context) => type_location_page(
                           item_model: widget.item_model,
                         ),
                       ),
-                    );
+                    )
+                        .then((_) {
+                      (context as Element).markNeedsBuild();
+                    });
+
                     print(widget.item_model.city);
                   },
                   child: Container(

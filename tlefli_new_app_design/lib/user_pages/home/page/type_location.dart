@@ -20,81 +20,43 @@ class _TypeLocationPageState extends State<type_location_page> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorCollections.SecondaryColor,
-      appBar: AppBar(
-        backgroundColor: ColorCollections.TeritiaryColor,
-        automaticallyImplyLeading: false,
-        flexibleSpace: Container(
-          height: 120,
-          padding: EdgeInsets.only(top: 35),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: ColorCollections.PrimaryColor,
+      appBar: SimpleAppBars(context, 'Choose City\'s'),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        child: ListView.builder(
+          itemCount: listOfCity.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  widget.item_model.city = listOfCity[index];
+                });
+                Navigator.pop(context);
+                // Add logic to navigate or handle the chosen location
+              },
+              child: Container(
+                color: const Color.fromARGB(255, 249, 249, 249),
+                padding: EdgeInsets.only(top: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ReusableText(
+                      FromLeft: 20,
+                      TextString: listOfCity[index],
+                      FontSize: 20,
+                      TextColor: ColorCollections.Black,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 10, bottom: 3),
+                      height: 1,
+                      color: const Color.fromARGB(255, 179, 179, 178),
+                    ),
+                  ],
                 ),
               ),
-              reusableTextField(
-                FromBottom: 5,
-                WidthOfContainer: 280,
-                icon_name: 'item_name',
-                hintText: 'type the location',
-                textType: 'location',
-                onchange: (value) {
-                  locationWrite = value;
-                  setState(() {
-                    matchedLocations = listOfCity
-                        .where((city) => city == locationWrite)
-                        .toList();
-                  });
-                },
-              )
-            ],
-          ),
+            );
+          },
         ),
-      ),
-      body: ListView(
-        children: matchedLocations.isEmpty
-            ? [
-                Center(
-                    child: ReusableText(
-                        FromTop: 250,
-                        TextString: 'No match location.',
-                        FontSize: 16))
-              ]
-            : matchedLocations
-                .map((location) => GestureDetector(
-                      onTap: () {
-                        widget.item_model.city = location;
-                        Navigator.pop(context);
-                        // Add logic to navigate or handle the chosen location
-                      },
-                      child: Container(
-                        color: const Color.fromARGB(255, 249, 249, 249),
-                        padding: EdgeInsets.only(top: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ReusableText(
-                              FromLeft: 20,
-                              TextString: location,
-                              FontSize: 20,
-                              TextColor: ColorCollections.Black,
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10, bottom: 3),
-                              height: 1,
-                              color: const Color.fromARGB(255, 179, 179, 178),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ))
-                .toList(),
       ),
     );
   }

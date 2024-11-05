@@ -5,277 +5,108 @@ import 'package:tlefli_new_app_design/user_pages/home/page/choose_image_page.dar
 import 'package:tlefli_new_app_design/utils/AppColorCollections.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class home_widgets extends StatelessWidget {
-  final Animation<Offset> animation;
-  const home_widgets(BuildContext context,
-      {super.key, required this.animation});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: SimpleAppBars(context, ''),
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: Column(
-        children: [
-          Row(),
-          Container(
-            margin: EdgeInsets.only(top: 30),
-            height: 150,
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              children: [
-                ReusableText(
-                  FromTop: 20,
-                  TextString: AppLocalizations.of(context)!.lostOrFound,
-                  FontSize: 28,
-                  TextColor: ColorCollections.Black,
-                  TextFontWeight: FontWeight.bold,
-                ),
-                ReusableText(
-                  TextString: AppLocalizations.of(context)!.letsReconnect,
-                  FontSize: 19,
-                  TextColor: ColorCollections.Black,
-                  TextFontWeight: FontWeight.w600,
-                ),
-              ],
+Widget home_widget(BuildContext context, Animation<Offset> animation) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Center(
+        child: Container(
+          margin: EdgeInsets.only(top: 0),
+          height: 150,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              ReusableText(
+                FromTop: 20,
+                TextString: 'Have you lost or found an item?',
+                FontSize: 23,
+                TextColor: Color(0xFF003540),
+                TextFontWeight: FontWeight.bold,
+              ),
+              ReusableText(
+                TextString: AppLocalizations.of(context)!.letsReconnect,
+                FontSize: 19,
+                TextColor: Color(0xFF003540),
+                TextFontWeight: FontWeight.w600,
+              ),
+            ],
+          ),
+        ),
+      ),
+      GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => choose_image_page(
+                lostOrFound: 'lost',
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(),
-            height: 250,
-            width: 250,
-            decoration: BoxDecoration(color: ColorCollections.SecondaryColor),
-            child: Lottie.asset('assets/images/home_front.json'),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => choose_image_page(
-                    lostOrFound: 'lost',
-                  ),
+          );
+        },
+        child: Container(
+          margin: EdgeInsets.only(top: 50, bottom: 60),
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              Container(
+                height: 45,
+                width: 250,
+                decoration: BoxDecoration(
+                  color: ColorCollections.TeritiaryColor,
+                  borderRadius: BorderRadius.circular(30),
                 ),
-              );
-            },
-            child: Container(
-              margin: EdgeInsets.only(top: 90),
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  Container(
-                    height: 50,
-                    width: 250,
-                    decoration: BoxDecoration(
-                      color: ColorCollections.TeritiaryColor,
-                      borderRadius: BorderRadius.circular(30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Center(
+                      child: ReusableText(
+                        // FromLeft: 30,
+                        TextString: AppLocalizations.of(context)!.iLost,
+                        TextColor: ColorCollections.PrimaryColor,
+                        FontSize: 24,
+                        TextFontWeight: FontWeight.bold,
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ReusableText(
-                          FromLeft: 30,
-                          TextString: AppLocalizations.of(context)!.iLost,
-                          TextColor: ColorCollections.PrimaryColor,
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => choose_image_page(
+                        lostOrFound: 'found',
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: 10),
+                  height: 45,
+                  width: 250,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 36, 174, 89),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Center(
+                        child: ReusableText(
+                          // FromLeft: 30,
+                          TextString: AppLocalizations.of(context)!.iFound,
+                          TextColor: const Color.fromARGB(255, 255, 255, 255),
                           FontSize: 24,
                           TextFontWeight: FontWeight.bold,
                         ),
-                        Container(
-                          margin: EdgeInsets.only(right: 15),
-                          child: Row(
-                            children: [
-                              SlideTransition(
-                                position: animation,
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: ColorCollections.PrimaryColor,
-                                  size: 20,
-                                ),
-                              ),
-                              SlideTransition(
-                                position: animation,
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: ColorCollections.PrimaryColor,
-                                  size: 20,
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => choose_image_page(
-                            lostOrFound: 'found',
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(top: 15),
-                      height: 50,
-                      width: 250,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 36, 174, 89),
-                        borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ReusableText(
-                            FromLeft: 30,
-                            TextString: AppLocalizations.of(context)!.iFound,
-                            TextColor: const Color.fromARGB(255, 255, 255, 255),
-                            FontSize: 24,
-                            TextFontWeight: FontWeight.bold,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color: ColorCollections.PrimaryColor,
-                                size: 20,
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color: ColorCollections.PrimaryColor,
-                                size: 20,
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
-    );
-    ;
-  }
-}
-
-Widget home_widget(BuildContext context, Animation<Offset> animation) {
-  return Column(
-    children: [
-      Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 50),
-            height: 150,
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              children: [
-                ReusableText(
-                  FromTop: 20,
-                  TextString: 'Have you lost or found an item?',
-                  FontSize: 23,
-                  TextColor: Color(0xFF003540),
-                  TextFontWeight: FontWeight.bold,
-                ),
-                ReusableText(
-                  TextString: AppLocalizations.of(context)!.letsReconnect,
-                  FontSize: 19,
-                  TextColor: Color(0xFF003540),
-                  TextFontWeight: FontWeight.w600,
-                ),
-              ],
-            ),
-          ),
-          Center(
-            child: Container(
-              margin: EdgeInsets.only(top: 150),
-              height: 280,
-              width: 280,
-              decoration: BoxDecoration(color: ColorCollections.SecondaryColor),
-              child: Lottie.asset('assets/images/home_front.json',
-                  fit: BoxFit.fill),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => choose_image_page(
-                    lostOrFound: 'lost',
-                  ),
-                ),
-              );
-            },
-            child: Container(
-              margin: EdgeInsets.only(top: 450),
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  Container(
-                    height: 45,
-                    width: 250,
-                    decoration: BoxDecoration(
-                      color: ColorCollections.TeritiaryColor,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Center(
-                          child: ReusableText(
-                            // FromLeft: 30,
-                            TextString: AppLocalizations.of(context)!.iLost,
-                            TextColor: ColorCollections.PrimaryColor,
-                            FontSize: 24,
-                            TextFontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => choose_image_page(
-                            lostOrFound: 'found',
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(top: 10),
-                      height: 45,
-                      width: 250,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 36, 174, 89),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Center(
-                            child: ReusableText(
-                              // FromLeft: 30,
-                              TextString: AppLocalizations.of(context)!.iFound,
-                              TextColor:
-                                  const Color.fromARGB(255, 255, 255, 255),
-                              FontSize: 24,
-                              TextFontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     ],
   );
